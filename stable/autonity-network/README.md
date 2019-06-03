@@ -1,4 +1,4 @@
-## Autonity helm chart
+## Autonity-network helm chart
 
 [![Join the chat at https://gitter.im/clearmatics/autonity](https://badges.gitter.im/clearmatics/autonity.svg)](https://gitter.im/clearmatics/autonity?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -22,11 +22,11 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
    ```
 1. Download `autonity-helm` chart:
    ```bash
-   git clone https://github.com/clearmatics/autonity-helm.git
+   git clone https://github.com/clearmatics/charts-ose.git
    ```
 1. Deploy it
    ```bash
-   helm install -n autonity ./autonity-helm/charts/autonity
+   helm install -n autonity-network ./charts-ose/stable/autonity-network
    ```
 ## Prerequisites
 
