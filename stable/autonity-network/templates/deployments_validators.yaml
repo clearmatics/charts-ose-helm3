@@ -1,0 +1,127 @@
+{{- $imageAutonity := .Values.imageAutonity -}}
+{{- $imageAutonity_init := .Values.imageAutonity_init -}}
+{{- $imagePrometheusExporter := .Values.image_prometheus_exporter -}}
+{{- $namespace := .Release.Namespace -}}
+
+{{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
+{{- $prometheusEnabled :=  .Values.global.prometheus.enabled -}}
+
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators))) }}
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: validator-{{ $i }}
+  namespace: {{ $namespace }}
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: validator-{{ $i }}
+    spec:
+      initContainers:
+      - name: init
+        image: {{ $imageAutonity_init.repository }}:{{ $imageAutonity_init.tag }}
+        volumeMounts:
+        - name: blockchain
+          mountPath: /autonity/blockchain
+        - name: keys
+          mountPath: /autonity/keys
+        - name: cm-genesis
+          mountPath: /autonity/cm-genesis
+        - name: sec-account-pwd
+          mountPath: /autonity/sec-account-pwd
+        - name: sec-peers
+          mountPath: /autonity/sec-peers
+      containers:
+      - name: autonity
+        image: {{ $imageAutonity.repository }}:{{ $imageAutonity.tag }}
+        ports:
+        - containerPort: 8545
+          name: rpc
+        - containerPort: 30303
+          name: p2p
+        args:
+          - "--datadir"
+          - "/autonity/blockchain"
+          - "--keystore"
+          - "/autonity/keys/keystore"
+          - "--nodekey"
+          - "/autonity/sec-peers/private_key"
+          - "--gcmode"
+          - "archive"          
+          - "--syncmode"
+          - "full"
+          - "--cache"
+          - "1024"
+          - "--rpc"
+          - "--rpcapi"
+          - "eth,web3,net,txpool,debug"
+          - "--rpcaddr"
+          - "0.0.0.0"
+          - "--rpcvhosts"
+          - "*"
+          - "--ws"
+          - "--wsaddr"
+          - "0.0.0.0"
+          - "--wsapi"
+          - "eth,web3,net"
+          - "--wsorigins"
+          - "*"
+          - "--metrics"
+          - "--mine"
+          - "--minerthreads"
+          - "1"
+          - "--debug"
+          - "--verbosity"
+          - "4"
+{{ if $ethstatsEnabled }}
+          - "--ethstats"
+          - "validator-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
+        env:
+        - name: ETHSTATS_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ethstats
+              key: WS_SECRET
+{{ end }}
+        volumeMounts:
+        - name: blockchain
+          mountPath: /autonity/blockchain
+        - name: keys
+          mountPath: /autonity/keys
+        - name: sec-peers
+          mountPath: /autonity/sec-peers
+{{ if $prometheusEnabled }}
+      - name: prometheus-exporter
+        image: {{ $imagePrometheusExporter.repository }}:{{ $imagePrometheusExporter.tag }}
+        ports:
+        - containerPort: 9200
+          name: metrics
+        command: ['geth_exporter', '-ipc', '/autonity/blockchain/autonity.ipc']
+        volumeMounts:
+        - name: blockchain
+          mountPath: /autonity/blockchain
+{{ end }}
+      volumes:
+        - name: blockchain
+          emptyDir: {}
+        - name: keys
+          emptyDir:
+            medium: Memory
+            sizeLimit: "1M"
+        - name: cm-genesis
+          configMap:
+            name: genesis
+        - name: sec-account-pwd
+          secret:
+            secretName: account-pwd
+        - name: sec-peers
+          secret:
+            secretName: validators
+            items:
+              - key: {{ $i }}.private_key
+                path: private_key
+{{- end}}

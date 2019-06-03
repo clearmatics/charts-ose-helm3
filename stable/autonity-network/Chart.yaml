@@ -1,0 +1,14 @@
+name: autonity-network
+version: 0.2.8
+kubeVersion: ">=1.10.0-0"
+description: private Autonity network Helm chart for Kubernetes
+keywords:
+- autonity
+- blockchain
+home: https://www.autonity.io/
+sources:
+- https://github.com/clearmatics/autonity
+maintainers:
+- name: eastata
+  email: aleksandr.poliakov@clearmatics.com
+appVersion: 1.8.20

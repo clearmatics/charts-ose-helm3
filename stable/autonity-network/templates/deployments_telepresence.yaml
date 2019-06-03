@@ -1,0 +1,40 @@
+{{ if .Values.global.telepresence.enabled }}
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: telepresence
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: telepresence
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: telepresence
+  template:
+    metadata:
+      labels:
+        app: telepresence
+    spec:
+      containers:
+      - name: telepresence
+        image: ubuntu:latest
+        command:
+          - /bin/sh
+          - "-c"
+          - "sleep 60m"
+        volumeMounts:
+          - name: cm-validators
+            mountPath: /autonity/cm-validators
+          - name: sec-validators
+            mountPath: /autonity/sec-validators
+      volumes:
+        - name: cm-validators
+          configMap:
+            name: validators
+        - name: sec-validators
+          secret:
+            secretName: validators
+{{ end }}
