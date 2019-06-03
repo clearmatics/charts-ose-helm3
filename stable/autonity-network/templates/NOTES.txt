@@ -1,0 +1,19 @@
+==== Autonity ====
+
+# To get autonity validators account password type:
+kubectl -n {{ .Release.Namespace }} get secrets account-pwd -o 'go-template={{ "{{" }}index .data "account.pwd"{{ "}}" }}' | base64 --decode; echo ""
+
+# Get private key of first observer (id == 0)
+kubectl -n {{ .Release.Namespace }} get secrets observers -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
+
+# Get list of addresses for each validator
+kubectl -n {{ .Release.Namespace }} get configmap validators -o yaml |grep .address
+
+# Get genesis.json
+kubectl -n {{ .Release.Namespace }} get configmap genesis -o yaml --export=true
+
+# Forward JSON-RPC validator-0 to localhost
+kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8545:8545
+
+# Example  JSON-RPC request
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545
