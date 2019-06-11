@@ -1,31 +1,16 @@
 #!/usr/bin/env bash
 
 # helm installed and configured
-# kubectl instaled and configured
 # aws cli instaled and configured
+# Usage:
+# ./ci/deploy_to_repo.sh S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION
 
-CHART_NAME=autonity-network
-S3_BUCKET_NAME=charts-ose.clearmatics.com
-RELEASE=0.2.8
+
+S3_BUCKET_NAME=$1
+CHART_NAME=$2
+RELEASE=$3
 
 echo "INFO: Build "${CHART_NAME}-${RELEASE}
-
-cd ./stable/${CHART_NAME}
-
-if [ $(cat Chart.yaml |grep version: |cut -d" " -f2) != ${RELEASE} ]; then
-  echo "ERROR: Release version in git tag do not match with version defined in Chart.yaml"
-  exit 1
-fi
-
-# Deploy to the cluster
-helm install -n build-${CHART_NAME} --namespace build-${CHART_NAME} ./
-
-# Test release
-helm test build-${CHART_NAME}
-
-# Delete
-helm delete build-${CHART_NAME} --purge
-kubectl delete namespace build-${CHART_NAME}
 
 mkdir -p ../../repo
 

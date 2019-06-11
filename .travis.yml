@@ -1,0 +1,37 @@
+dist: bionic
+sudo: required
+
+cache:
+  directories:
+    - $HOME/bin
+
+before_install:
+  - mkdir -p ~/bin
+  - if [ ! -f ~/bin/kubectl ]; then curl -Ls -o ~/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl; fi
+  - chmod +x ~/bin/*
+  - export PATH="~/bin:$PATH"
+  - pip install awscli --upgrade --user
+  - sudo snap install --channel stable --classic helm
+
+jobs:
+  include:
+    # Source branch for PR should has name of chart
+    - if: type = pull_request AND fork = false AND head_repo = clearmatics/charts-ose AND commit_message !~ /WIP/
+      env:
+        - CLUSTER=autonity-eks-prod
+        - CHART_NAME=${TRAVIS_PULL_REQUEST_BRANCH}
+      script:
+        - echo "Test "$CHART
+        - ./ci/test.sh $CLUSTER $CHART_NAME
+
+    # Tag for deploy should be like autonity-network-0.0.1
+    - if: type = push AND fork = false AND branch = master AND tag IS present AND tag =~ /^(\w|-)*[-]\d+[.]\d+[.]\d+$/
+      env:
+        - CLUSTER=autonity-eks-prod
+        - S3_BUCKET_NAME=charts-ose.clearmatics.com
+        - CHART_NAME=$(echo ${TRAVIS_TAG} | sed -E s/-[0-9]+\.[0-9]+\.[0-9]+$//g)
+        - RELEASE_VERSION=$(echo ${TRAVIS_TAG} | grep -Eo [0-9]+\.[0-9]+\.[0-9]+$)
+      script:
+        - echo "Release "$CHART_NAME"-"$RELEASE_VERSION
+        - ./ci/test.sh $CLUSTER $CHART_NAME $RELEASE_VERSION
+        - ./ci/deploy_to_repo.sh S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION
