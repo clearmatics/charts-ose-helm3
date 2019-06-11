@@ -1,5 +1,9 @@
 # Clearmatics public helm charts repo
 
+# Contributing
+
+[Contributing rules](./CONTRIBUTING.md)
+
 # Usage
 
 Add repo 

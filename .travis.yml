@@ -12,6 +12,8 @@ before_install:
   - export PATH="~/bin:$PATH"
   - pip install awscli --upgrade --user
   - sudo snap install --channel stable --classic helm
+  - mkdir -p ~/.aws
+  - printf "[default] \noutput = json \nregion = eu-west-1\n" > ~/.aws/config
 
 jobs:
   include:
@@ -21,7 +23,6 @@ jobs:
         - CLUSTER=autonity-eks-prod
         - CHART_NAME=${TRAVIS_PULL_REQUEST_BRANCH}
       script:
-        - echo "Test "$CHART
         - ./ci/test.sh $CLUSTER $CHART_NAME
 
     # Tag for deploy should be like autonity-network-0.0.1
@@ -32,6 +33,5 @@ jobs:
         - CHART_NAME=$(echo ${TRAVIS_TAG} | sed -E s/-[0-9]+\.[0-9]+\.[0-9]+$//g)
         - RELEASE_VERSION=$(echo ${TRAVIS_TAG} | grep -Eo [0-9]+\.[0-9]+\.[0-9]+$)
       script:
-        - echo "Release "$CHART_NAME"-"$RELEASE_VERSION
         - ./ci/test.sh $CLUSTER $CHART_NAME $RELEASE_VERSION
         - ./ci/deploy_to_repo.sh S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION
