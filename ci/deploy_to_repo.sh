@@ -39,13 +39,13 @@ fi
 
 echo "INFO: Commit "${CHART_NAME}-${RELEASE}" to the repo "${S3_BUCKET_NAME}
 
-aws s3 cp ./repo/${CHART_NAME}-${RELEASE}.tgz s3://${S3_BUCKET_NAME} --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate
+aws s3 cp ./repo/${CHART_NAME}-${RELEASE}.tgz s3://${S3_BUCKET_NAME}
 if [ ! $? -eq 0 ]; then
     echo "ERROR: can't copy chart to S3 bucket"
     exit 1
 fi
 
-aws s3 cp ./repo/index.yaml s3://${S3_BUCKET_NAME}
+aws s3 cp ./repo/index.yaml s3://${S3_BUCKET_NAME} --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type "text/plain"
 if [ ! $? -eq 0 ]; then
     echo "ERROR: can't update index in S3 bucket"
     exit 1
