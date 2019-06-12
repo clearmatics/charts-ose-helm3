@@ -14,8 +14,8 @@ CHART_NAME=$2
 RELEASE=$3
 
 if [ ! -d "./stable/${CHART_NAME}" ]; then
-  echo "ERROR: Chart not found"
-  exit 1
+  echo "INFO: Tests will skipped because chart not found"
+  exit 0
 fi
 
 cd ./stable/${CHART_NAME}

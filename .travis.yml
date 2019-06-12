@@ -34,4 +34,4 @@ jobs:
         - RELEASE_VERSION=$(echo ${TRAVIS_TAG} | grep -Eo [0-9]+\.[0-9]+\.[0-9]+$)
       script:
         - ./ci/test.sh $CLUSTER $CHART_NAME $RELEASE_VERSION
-        - ./ci/deploy_to_repo.sh S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION
+        - ./ci/deploy_to_repo.sh $S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION
