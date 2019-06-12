@@ -39,7 +39,7 @@ fi
 
 echo "INFO: Commit "${CHART_NAME}-${RELEASE}" to the repo "${S3_BUCKET_NAME}
 
-aws s3 cp ./repo/${CHART_NAME}-${RELEASE}.tgz s3://${S3_BUCKET_NAME}
+aws s3 cp ./repo/${CHART_NAME}-${RELEASE}.tgz s3://${S3_BUCKET_NAME} --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate
 if [ ! $? -eq 0 ]; then
     echo "ERROR: can't copy chart to S3 bucket"
     exit 1
