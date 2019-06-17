@@ -20,6 +20,10 @@ image_prometheus_exporter:
   repository: statusteam/geth_exporter
   tag: latest
 
+testFramework:
+  image: "dduportal/bats"
+  tag: "0.4.0"
+
 # Number of validators and observers
 validators: 4
 observers: 1

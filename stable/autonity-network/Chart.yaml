@@ -1,5 +1,5 @@
 name: autonity-network
-version: 0.2.8
+version: 0.2.9
 kubeVersion: ">=1.10.0-0"
 description: private Autonity network Helm chart for Kubernetes
 keywords:
