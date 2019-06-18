@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: validator-dapp
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: validator-dapp
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: validator-dapp
+spec:
+  selector:
+    app: validator-dapp
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http

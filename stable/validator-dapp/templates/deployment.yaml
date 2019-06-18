@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: validator-dapp
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: validator-dapp
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: validator-dapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: validator-dapp
+      release: {{ .Release.Name }}
+      component: validator-dapp
+  template:
+    metadata:
+      labels:
+        app: validator-dapp
+        release: {{ .Release.Name }}
+        component: validator-dapp
+    spec:
+      containers:
+      - name: validator-dapp
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        ports:
+        - name: http
+          containerPort: 3000

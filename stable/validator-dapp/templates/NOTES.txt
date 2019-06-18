@@ -1,0 +1,4 @@
+==== Validator DApp ====
+
+# Forward Validator DApp to localhost http://localhost:8081
+kubectl -n {{ .Release.Namespace }} port-forward svc/validator-dapp 8081:80
