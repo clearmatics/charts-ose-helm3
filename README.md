@@ -8,7 +8,7 @@
 
 Add repo 
 ```bash
-helm repo add clearmatics-ose https://charts-ose.clearmatics.com
+helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
 ```
 
 Search
@@ -18,7 +18,7 @@ helm search autonity
 
 Install example
 ```yaml
-helm install clearmatics-ose/autonity-network
+helm install charts-ose.clearmatics.com/autonity-demo
 ```
 
 # Tests
