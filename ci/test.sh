@@ -35,6 +35,15 @@ if [ ! $? -eq 0 ]; then
     exit 1
 fi
 
+# Helm init
+helm init --client-only
+
+# Add repo
+helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
+
+# Update dependency
+helm dependency update
+
 # Deploy to the cluster
 helm install -n build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER} --namespace build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER} ./
 

@@ -1,0 +1,21 @@
+dependencies:
+  - name: autonity-network
+    repository: "https://charts-ose.clearmatics.com"
+    version: 0.2.9
+    condition: global.autonity_network.enabled
+  - name: ethstats
+    repository: "https://charts-ose.clearmatics.com"
+    version: 0.1.1
+    condition: global.ethstats.enabled
+  - name: validator-dapp
+    repository: "https://charts-ose.clearmatics.com"
+    version: 0.0.2
+    condition: global.validator_dapp.enabled
+  - name: prometheus
+    repository: "@stable"
+    version: 8.10.0
+    condition: global.prometheus.enabled
+  - name: grafana
+    repository: "@stable"
+    version: 3.3.5
+    condition: global.grafana.enabled

@@ -1,0 +1,66 @@
+---
+
+global:
+  autonity_network:
+    enabled: true
+  ethstats:
+    enabled: false
+    webSocketSecret: 3b7Lp5BDdtpNQyFwSjbtMHVU5Xuzo4
+  validator_dapp:
+    enabled: false
+  prometheus:
+    enabled: false
+  grafana:
+    enabled: false
+  telepresence:
+    enabled: false
+
+
+autonity-network:
+  # Number of validators and observers
+  validators: 4
+  observers: 1
+  chainid: 2019
+
+prometheus:
+  server:
+    fullnameOverride: 'autonity-prometheus-server'
+    persistentVolume:
+      enabled: false
+    configMapOverrideName: 'prometheus-server-config'
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  pushgateway:
+    enabled: false
+  alertmanager:
+    enabled: false
+
+grafana:
+  adminUser: admin
+  service:
+    port: 80
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://autonity-prometheus-server:80
+        access: proxy
+        isDefault: true
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'autonity'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/autonity
+  dashboardsConfigMaps:
+    autonity: "grafana-dashboard-autonity"
