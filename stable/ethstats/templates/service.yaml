@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ethstats
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: ethstats
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: ethstats
+spec:
+  selector:
+    app: ethstats
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http

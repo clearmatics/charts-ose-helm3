@@ -1,0 +1,14 @@
+---
+
+image:
+  repository: ethereumex/eth-stats-dashboard
+  tag: v0.0.1
+
+testFramework:
+  image: "dduportal/bats"
+  tag: "0.4.0"
+
+global:
+  ethstats:
+    enabled: false
+    webSocketSecret: 3b7Lp5BDdtpNQyFwSjbtMHVU5Xuzo4

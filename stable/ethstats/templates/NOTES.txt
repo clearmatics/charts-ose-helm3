@@ -1,0 +1,4 @@
+==== Ethstats ====
+
+# Forward ethstats dashboard to localhost http://localhost:8080
+kubectl -n {{ .Release.Namespace }} port-forward svc/ethstats 8080:80
