@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.6] - 2019-06-20
+### Changed
+- Update chart description
+- Up version to autonity-network-0.2.10
+- Up version to ethstats-0.1.2
+- Up version to validator-dapp-0.0.3
 
 ## [0.4.5] - 2019-06-19
 ### Added
