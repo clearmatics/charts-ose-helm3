@@ -1,7 +1,7 @@
 name: autonity-network
-version: 0.2.9
+version: 0.2.10
 kubeVersion: ">=1.10.0-0"
-description: private Autonity network Helm chart for Kubernetes
+description: Chart for deploy full Autonity network
 keywords:
 - autonity
 - blockchain
@@ -11,4 +11,4 @@ sources:
 maintainers:
 - name: eastata
   email: aleksandr.poliakov@clearmatics.com
-appVersion: 1.8.20
+appVersion: k8s-0.0.1
