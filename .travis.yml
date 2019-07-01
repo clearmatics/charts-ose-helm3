@@ -23,7 +23,7 @@ jobs:
     - CHART_NAME=${TRAVIS_PULL_REQUEST_BRANCH}
     script:
     - "./ci/test.sh $CLUSTER $CHART_NAME"
-  - if: fork = false AND branch = master tag =~ /^(\w|-)*[-]\d+[.]\d+[.]\d+$/
+  - if: fork = false AND branch = master AND tag =~ /^(\w|-)*[-]\d+[.]\d+[.]\d+$/
     env:
     - CLUSTER=autonity-eks-prod
     - S3_BUCKET_NAME=charts-ose.clearmatics.com
