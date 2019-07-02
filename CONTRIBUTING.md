@@ -5,7 +5,16 @@ email, or any other method with the owners of this repository before making a ch
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
-## Pull Request Process
+## Pull Request from forks
+
+1. The destination branch must be `candidate`
+2. PR description should contain:
+   1. Chart name
+   2. new version
+3. One PR should contain changes only for one chart. (only files in `./stable/%CHART_NAME%/` directory)
+4. `.travis.yaml` changes prohibited
+
+## Pull Request from collaborators or Team members
 
 1. The `branch` name for release should be the same as chart.
 2. Notify the QA and Testing team when ready to release, providing the SHA-1 of the commit in master and a CHANGELOG.
@@ -17,6 +26,12 @@ Please note we have a code of conduct, please follow it in all your interactions
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Release Process
+
+Workflow for external PRs:   
+External fork `branch_name` --> `candidate` --> `chartname` --> `master` --> `release tag`
+
+Workflow for collaborators or Team members PRs:   
+`chartname` --> `master` --> `release tag`
 
 1. After new release was tested and delivered to master you should build release to the repo.
    ```bash
