@@ -16,13 +16,16 @@ before_install:
 - printf "[default] \noutput = json \nregion = eu-west-1\n" > ~/.aws/config
 jobs:
   include:
+  - if: type = pull_request AND fork = true AND branch = candidate
+    script:
+    - "./ci/test_candidate_pr.sh"
   - if: type = pull_request AND fork = false AND head_repo = clearmatics/charts-ose
       AND commit_message !~ /WIP/
     env:
     - CLUSTER=autonity-eks-prod
     - CHART_NAME=${TRAVIS_PULL_REQUEST_BRANCH}
     script:
-    - "./ci/test.sh $CLUSTER $CHART_NAME"
+    - "./ci/test_chart.sh $CLUSTER $CHART_NAME"
   - if: fork = false AND branch = master AND tag =~ /^(\w|-)*[-]\d+[.]\d+[.]\d+$/
     env:
     - CLUSTER=autonity-eks-prod
@@ -32,7 +35,7 @@ jobs:
     script:
     - aws eks update-kubeconfig --name ${CLUSTER}
     - kubectl -n kube-system get pods
-    - "./ci/test.sh $CLUSTER $CHART_NAME $RELEASE_VERSION"
+    - "./ci/test_chart.sh $CLUSTER $CHART_NAME $RELEASE_VERSION"
     - "./ci/deploy_to_repo.sh $S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION"
 env:
   global:
