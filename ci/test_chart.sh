@@ -5,9 +5,9 @@
 # aws cli instaled and configured
 #
 # Usage:
-# ./test.sh autonity-eks-dev autonity-network 0.2.8
+# ./test_chart.sh autonity-eks-dev autonity-network 0.2.8
 # or
-# ./test.sh autonity-eks-dev autonity-network
+# ./test_chart.sh autonity-eks-dev autonity-network
 
 CLUSTER=$1
 CHART_NAME=$2
