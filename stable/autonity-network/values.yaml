@@ -2,11 +2,11 @@
 
 imageAutonity:
   repository: clearmatics/autonity
-  tag: k8s-0.0.1
+  tag: v0.2.0-alpha
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
-  tag: v0.0.5
+  tag: v0.0.6
 
 image_ibft_keys_generator:
   repository: clearmatics/ibft-keys-generator
@@ -28,7 +28,10 @@ testFramework:
 validators: 4
 observers: 1
 
-chainid: 2019
+chainid: 1488
+
+# Must be: 'istanbul' or 'tendermint'
+concensus: tendermint
 
 global:
   ethstats:

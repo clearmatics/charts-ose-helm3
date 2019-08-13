@@ -21,6 +21,15 @@ data:
               "eip155Block": 0,
               "eip158Block": 0,
               "byzantinumBlock": 0,
+      {{if eq .Values.concensus "tendermint"}}
+              "tendermint": {
+                "policy": 0,
+                "epoch": 30000,
+                "contract-deployer": "0x0000000000000000000000000000000000000001",
+                "bytecode": "",
+                "abi": ""
+              },
+      {{else if eq .Values.concensus "istanbul"}}
               "istanbul": {
                   "policy": 0,
                   "epoch": 30000,
@@ -28,6 +37,7 @@ data:
                   "bytecode": "",
               "abi": ""
               },
+      {{end}}
               "chainId": {{ .Values.chainid }},
           "glienickeDeployer": "0x0000000000000000000000000000000000000001",
               "glienickeBytecode": "",
@@ -35,7 +45,7 @@ data:
           },
           "nonce": "0x0",
           "timestamp": "0x0",
-          "gasLimit": "0x5F5E100",
+          "gasLimit": "0xffffffff",
           "difficulty": "0x1",
           "coinbase": "0x0000000000000000000000000000000000000000",
           "number": "0x0",
