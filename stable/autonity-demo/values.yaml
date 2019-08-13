@@ -20,7 +20,7 @@ autonity-network:
   # Number of validators and observers
   validators: 4
   observers: 1
-  chainid: 2019
+  chainid: 1488
 
 prometheus:
   server:

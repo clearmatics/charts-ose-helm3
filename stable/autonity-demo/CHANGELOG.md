@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.7] - 2019-08-13
+### Changed
+- Up version to autonity-network-0.3.0 (Add Tendermint consensus algorithm by default)
+
 ## [0.4.6] - 2019-06-20
 ### Changed
 - Update chart description
