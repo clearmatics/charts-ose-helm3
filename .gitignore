@@ -9,3 +9,4 @@
 *.iml
 
 telepresence.log
+htpasswd

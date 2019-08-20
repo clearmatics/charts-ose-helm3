@@ -20,6 +20,10 @@ image_prometheus_exporter:
   repository: statusteam/geth_exporter
   tag: latest
 
+image_nginx:
+  repository: nginx
+  tag: alpine
+
 testFramework:
   image: "dduportal/bats"
   tag: "0.4.0"
@@ -32,6 +36,8 @@ chainid: 1488
 
 # Must be: 'istanbul' or 'tendermint'
 concensus: tendermint
+
+rpc_http_basic_auth_enabled: false
 
 global:
   ethstats:
