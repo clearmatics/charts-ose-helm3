@@ -1,5 +1,5 @@
 name: autonity-network
-version: 0.3.1
+version: 0.3.2
 kubeVersion: ">=1.10.0-0"
 description: Chart for deploy full Autonity network
 keywords:
@@ -11,4 +11,4 @@ sources:
 maintainers:
 - name: eastata
   email: aleksandr.poliakov@clearmatics.com
-appVersion: v0.2.0-alpha
+appVersion: v0.1.5

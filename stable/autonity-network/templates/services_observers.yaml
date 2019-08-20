@@ -17,9 +17,9 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      name: rpc
+      name: https-rpc
       port: 8545
-      targetPort: 8545
+      targetPort: 8080
     - protocol: TCP
       name: p2p
       port: 30303
