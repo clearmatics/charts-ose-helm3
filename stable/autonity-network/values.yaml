@@ -22,7 +22,7 @@ image_prometheus_exporter:
 
 image_nginx:
   repository: nginx
-  tag: alpine
+  tag: 1.17-alpine
 
 testFramework:
   image: "dduportal/bats"
@@ -38,6 +38,9 @@ chainid: 1488
 concensus: tendermint
 
 rpc_http_basic_auth_enabled: false
+rpc_https_enabled: false
+
+files_dir: "files"
 
 global:
   ethstats:

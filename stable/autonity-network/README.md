@@ -87,6 +87,23 @@ To enable http Basic Auth:
    ```bash
    helm install -n autonity ./charts-ose/stable/autonity-network --set rpc_http_basic_auth_enabled=true
    ```
+### HTTPS for JSON-RPC
+* Generate keys and certs
+    ```shell script
+    KEY_FILE=files/tls.key
+    CERT_FILE=files/tls.crt
+    DH_FILE=files/dhparam.pem
+    
+    cd ./charts-ose/stable/autonity-network
+    mkdir -p files
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${KEY_FILE} -out ${CERT_FILE}
+    
+    openssl dhparam -out ${DH_FILE} 4096
+   ```
+* Set variable to `rpc_https_enabled: true`
+   ```bash
+   helm install -n autonity ./ --set rpc_https_enabled=true
+   ```
 
 ## Connect to autonity network
 ```bash

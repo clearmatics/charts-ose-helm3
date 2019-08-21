@@ -7,6 +7,7 @@
 {{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
 {{- $prometheusEnabled :=  .Values.global.prometheus.enabled -}}
 {{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
+{{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
 
 {{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
 ---
@@ -114,6 +115,10 @@ spec:
           mountPath: /etc/nginx/htpasswd
           subPath: htpasswd
 {{ end }}
+{{ if $rpcHttpsEnabled }}
+        - name: nginx-proxy-ssl
+          mountPath: /etc/nginx/ssl
+{{ end }}
       volumes:
         - name: blockchain
           emptyDir: {}
@@ -136,4 +141,9 @@ spec:
         - name: nginx-proxy-config
           configMap:
             name: nginx-conf
+{{ if $rpcHttpsEnabled }}
+        - name: nginx-proxy-ssl
+          secret:
+            secretName: autonity-https
+{{ end }}
 {{- end}}

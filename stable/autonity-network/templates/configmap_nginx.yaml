@@ -37,7 +37,29 @@ data:
             auth_basic           "Protected Ethereum client";
             auth_basic_user_file /etc/nginx/htpasswd;
 {{ end }}
+{{ if .Values.rpc_https_enabled }}
+            ssl on;
+            ssl_certificate /etc/nginx/ssl/tls.crt;
+            ssl_certificate_key /etc/nginx/ssl/tls.key;
+            ssl_dhparam /etc/nginx/ssl/dhparam.pem;
 
+            ssl_protocols TLSv1.2;
+            ssl_prefer_server_ciphers on;
+            ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
+            ssl_ecdh_curve secp384r1;
+            ssl_session_timeout  10m;
+            ssl_session_cache shared:SSL:10m;
+            ssl_session_tickets off;
+            ssl_stapling on;
+            ssl_stapling_verify on;
+
+            resolver 1.1.1.1 8.8.4.4 valid=300s;
+            resolver_timeout 5s;
+
+            add_header X-Frame-Options DENY;
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection "1; mode=block";
+{{ end }}
             proxy_http_version         1.1;
             proxy_connect_timeout      360;
             proxy_read_timeout         360;
@@ -60,6 +82,6 @@ data:
         }
     }
 {{ if .Values.rpc_http_basic_auth_enabled }}
-  htpasswd: |- {{ range .Files.Lines "files/htpasswd" }}
+  htpasswd: |- {{ range .Files.Lines (printf "%s/%s" .Values.files_dir "htpasswd") }}
     {{ . }}{{ end }}
 {{ end }}
