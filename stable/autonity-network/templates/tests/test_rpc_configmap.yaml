@@ -11,3 +11,11 @@ data:
     @test "Testing JSON-RPC of observer-0 is accessible" {
       curl --retry 20 --retry-delay 5 --connect-timeout 5 --no-keepalive --max-time 10 observer-0:8545
     }
+
+    @test "Testing WS-RPC of validator-0 is accessible" {
+      curl --retry 40 --retry-delay 5 --connect-timeout 5 --no-keepalive --max-time 10 validator-0:8546
+    }
+
+    @test "Testing WS-RPC of observer-0 is accessible" {
+      curl --retry 40 --retry-delay 5 --connect-timeout 5 --no-keepalive --max-time 10 observer-0:8546
+    }

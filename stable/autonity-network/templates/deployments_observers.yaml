@@ -63,8 +63,6 @@ spec:
           - "--rpcvhosts"
           - "*"
           - "--ws"
-          - "--wsaddr"
-          - "0.0.0.0"
           - "--wsapi"
           - "eth,web3,net"
           - "--wsorigins"

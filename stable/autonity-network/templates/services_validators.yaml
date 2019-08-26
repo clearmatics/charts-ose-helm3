@@ -21,6 +21,10 @@ spec:
       port: 8545
       targetPort: 8080
     - protocol: TCP
+      name: wss
+      port: 8546
+      targetPort: 8081
+    - protocol: TCP
       name: p2p
       port: 30303
       targetPort:  30303

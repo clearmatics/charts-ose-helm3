@@ -26,7 +26,8 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
    ```
 1. Deploy it
    ```bash
-   helm install -n autonity-network ./charts-ose/stable/autonity-network
+   cd ./charts-ose/stable/autonity-network
+   helm install -n autonity-network ./
    ```
 ## Prerequisites
 
@@ -62,7 +63,7 @@ It will be removed if you delete a pod, or move it to another node. In that case
 
 - You can change number of validators or observers using helm cli-options like this:
    ```bash
-   helm install -n autonity ./charts-ose/stable/autonity-network --set validators=6,observers=2
+   helm install -n autonity ./ --set validators=6,observers=2
    ```
 - Also you can change any variables in this file [./values.yaml](values.yaml) before installation
 - Configuration of main autonity network options is available in this template [./templates/configmap_genesis_template.yaml](templates/configmap_genesis_template.yaml)   
@@ -77,15 +78,15 @@ By default: `rpc_http_basic_auth_enabled: false`
 To enable http Basic Auth:
 * generate passwd file to ./file/htpasswd using [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpasswd.html):
    ```shell script
-   mkdir ./charts-ose/stable/autonity-network/files
-   htpasswd -c ./charts-ose/stable/autonity-network/files/htpasswd user1
-   htpasswd ./charts-ose/stable/autonity-network/files/htpasswd user2
-   htpasswd ./charts-ose/stable/autonity-network/files/htpasswd user3
+   mkdir ./files
+   htpasswd -c ./files/htpasswd user1
+   htpasswd ./files/htpasswd user2
+   htpasswd ./files/htpasswd user3
    ```
 * set var `rpc_http_basic_auth_enabled: true`
    ```shell script
    ```bash
-   helm install -n autonity ./charts-ose/stable/autonity-network --set rpc_http_basic_auth_enabled=true
+   helm install -n autonity ./ --set rpc_http_basic_auth_enabled=true
    ```
 ### HTTPS for JSON-RPC
 * Generate keys and certs
@@ -94,7 +95,6 @@ To enable http Basic Auth:
     CERT_FILE=files/tls.crt
     DH_FILE=files/dhparam.pem
     
-    cd ./charts-ose/stable/autonity-network
     mkdir -p files
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${KEY_FILE} -out ${CERT_FILE}
     
@@ -105,14 +105,9 @@ To enable http Basic Auth:
    helm install -n autonity ./ --set rpc_https_enabled=true
    ```
 
-## Connect to autonity network
+## Tips (to view available commands)
 ```bash
-# Forward JSON-RPC validator-0 to localhost
-kubectl port-forward svc/validator-0 8545:8545
-
-# Example  JSON-RPC request
-curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545
-
+helm status autonity
 ```
 
 ## Delete
