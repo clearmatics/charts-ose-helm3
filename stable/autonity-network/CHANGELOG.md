@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5] - 2019-09-04
+### Updated
+- autonity to dev-v0.1.5, autonity-init to v0.0.8
+
 ## [0.3.4] - 2019-08-26
 ### Added
 - WebSockets over SSL/TLS and HTTP Basic Auth support for autonity validators and observers
