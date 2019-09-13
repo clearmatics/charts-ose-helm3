@@ -1,0 +1,60 @@
+{{- if or (eq .Values.aws_persistent_storage_enabled true) (eq .Values.gcp_persistent_storage_enabled true) }}
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: blockchain-{{ .Release.Name }}
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+{{ if eq .Values.aws_persistent_storage_enabled true }}
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
+  encrypted: "true"
+{{ else if  eq .Values.gcp_persistent_storage_enabled true}}
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+{{ end }}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+
+{{- $namespace := .Release.Namespace -}}
+{{- $releasename := .Release.Name -}}
+{{- $blockchainPersistentVolumeSize := .Values.blockchain_persistent_volume_size -}}
+
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators))) }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $releasename }}-validator-{{ $i }}-blockchain
+  namespace: {{ $namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: blockchain-{{ $releasename }}
+  resources:
+    requests:
+      storage: {{ $blockchainPersistentVolumeSize }}
+
+{{- end}}
+
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $releasename }}-observer-{{ $i }}-blockchain
+  namespace: {{ $namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: blockchain-{{ $releasename }}
+  resources:
+    requests:
+      storage: {{ $blockchainPersistentVolumeSize }}
+
+{{- end}}
+{{- end}}

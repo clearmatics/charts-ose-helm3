@@ -2,11 +2,11 @@
 
 imageAutonity:
   repository: clearmatics/autonity
-  tag: dev-v0.1.5
+  tag: dev-0.1.6-ethstats
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
-  tag: v0.0.8
+  tag: v0.0.9
 
 image_ibft_keys_generator:
   repository: clearmatics/ibft-keys-generator
@@ -39,6 +39,11 @@ concensus: tendermint
 
 rpc_http_basic_auth_enabled: false
 rpc_https_enabled: false
+
+aws_persistent_storage_enabled: false
+gcp_persistent_storage_enabled: false
+
+blockchain_persistent_volume_size: 20G
 
 files_dir: "files"
 

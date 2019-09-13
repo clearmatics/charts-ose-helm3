@@ -3,11 +3,15 @@
 {{- $imagePrometheusExporter := .Values.image_prometheus_exporter -}}
 {{- $imageNginx := .Values.image_nginx -}}
 {{- $namespace := .Release.Namespace -}}
+{{- $releasename := .Release.Name -}}
 
 {{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
 {{- $prometheusEnabled :=  .Values.global.prometheus.enabled -}}
 {{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
 {{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
+
+{{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
+{{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
 
 {{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
 ---
@@ -119,7 +123,12 @@ spec:
 {{ end }}
       volumes:
         - name: blockchain
+{{ if or (eq $awsPersistentStorageEnabled true) (eq $gcpPersistentStorageEnabled true)}}
+          persistentVolumeClaim:
+            claimName: {{ $releasename }}-observer-{{ $i }}-blockchain
+{{ else }}
           emptyDir: {}
+{{ end}}
         - name: keys
           emptyDir:
             medium: Memory
