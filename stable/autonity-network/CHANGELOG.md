@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.7] - 2019-09-16
+### Updated
+- Up docker images:
+    - autonity to v0.1.6
+    - autonity-init to v0.1.1
+
 ## [0.3.6] - 2019-09-13
 ### Updated
 - Optional persistent storage for blockchain (AWS and GCP support)
