@@ -16,10 +16,6 @@ image_ibft_genesis_configurator:
   repository: clearmatics/ibft-genesis-configurator
   tag: v0.0.4
 
-image_prometheus_exporter:
-  repository: statusteam/geth_exporter
-  tag: latest
-
 image_nginx:
   repository: nginx
   tag: 1.17-alpine
@@ -49,8 +45,6 @@ files_dir: "files"
 
 global:
   ethstats:
-    enabled: false
-  prometheus:
     enabled: false
   telepresence:
     enabled: false

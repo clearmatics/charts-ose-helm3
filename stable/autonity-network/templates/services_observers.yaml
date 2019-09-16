@@ -1,5 +1,4 @@
 {{- $namespace := .Release.Namespace -}}
-{{- $prometheusEnabled :=  .Values.global.prometheus.enabled -}}
 
 {{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
 ---
@@ -8,11 +7,10 @@ kind: Service
 metadata:
   name: observer-{{ $i }}
   namespace: {{ $namespace }}
-{{ if $prometheusEnabled }}
   annotations:
-    prometheus.io/port: "9200"
+    prometheus.io/port: "6060"
+    prometheus.io/path: "/debug/metrics/prometheus"
     prometheus.io/scrape: "true"
-{{ end }}
 spec:
   type: ClusterIP
   ports:
@@ -28,12 +26,10 @@ spec:
       name: p2p
       port: 30303
       targetPort:  30303
-{{ if $prometheusEnabled }}
     - protocol: TCP
       name: metrics
-      port: 9200
-      targetPort: 9200
-{{ end }}
+      port: 6060
+      targetPort: 6060
   selector:
     app: observer-{{ $i }}
 {{- end}}

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2019-09-16
+### Updated
+- Switch to native prometheus metrics. Option `global.prometheus.enabled` is deprecated
+    - Metrics port changed to `6060`
+    - deleted sidecar `prometheus-exporter`
+    - metrics enabled by default
 ## [0.3.7] - 2019-09-16
 ### Updated
 - Up docker images:
