@@ -23,6 +23,7 @@ data:
     - /etc/config/alerts
     scrape_configs:
     - job_name: kubernetes-service-endpoints
+      metrics_path: /debug/metrics/prometheus
       kubernetes_sd_configs:
       - role: endpoints
       relabel_configs:

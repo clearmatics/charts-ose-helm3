@@ -15,20 +15,40 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1556884101347,
-  "links": [
-    {
-      "icon": "info",
-      "tags": [],
-      "targetBlank": true,
-      "title": "Autonity Metrics description [wiki]",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://github.com/clearmatics/autonity/wiki/Metrics-and-Monitoring"
-    }
-  ],
+  "id": 2,
+  "iteration": 1568634966724,
+  "links": [],
   "panels": [
+    {
+      "content": "<center><img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"250\"/></br></br>\n<i>Autonity Network Monitoring Dashboard</i></center>\n\n",
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 122,
+      "links": [],
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 82,
+      "panels": [],
+      "title": "System",
+      "type": "row"
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -38,16 +58,18 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 24,
+        "w": 8,
         "x": 0,
-        "y": 0
+        "y": 3
       },
-      "id": 8,
+      "id": 106,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": false
@@ -56,6 +78,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -66,18 +89,35 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$metrics_list{kubernetes_name=\"$validator\"}",
+          "expr": "system_cpu_sysload{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
+          "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "system",
           "refId": "A"
+        },
+        {
+          "expr": "system_cpu_syswait{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "iowait",
+          "refId": "B"
+        },
+        {
+          "expr": "system_cpu_procload{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "autonity",
+          "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Metrics for $validator",
+      "title": "CPU",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -93,7 +133,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "percent",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -115,158 +155,74 @@
       }
     },
     {
-      "alert": {
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0.9
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "last"
-            },
-            "type": "query"
-          },
-          {
-            "evaluator": {
-              "params": [],
-              "type": "no_value"
-            },
-            "operator": {
-              "type": "or"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "last"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "30m",
-        "frequency": "15m",
-        "handler": 1,
-        "message": "Frequency of generating new blocks below than 0.9 blocks/s",
-        "name": "Low minings speed",
-        "noDataState": "alerting",
-        "notifications": [
-          {
-            "uid": "oE70ozmWz"
-          }
-        ]
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "https://github.com/clearmatics/autonity/wiki/Metrics-and-Monitoring#consensus-engine\n",
       "fill": 1,
       "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 6
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 3
       },
-      "hideTimeOverride": false,
-      "id": 2,
+      "id": 86,
       "legend": {
         "alignAsTable": false,
         "avg": false,
         "current": false,
-        "hideEmpty": false,
-        "hideZero": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": false
       },
       "lines": true,
       "linewidth": 1,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Description",
-          "type": "absolute",
-          "url": "https://github.com/clearmatics/autonity/wiki/Metrics-and-Monitoring"
-        }
-      ],
-      "maxPerRow": 2,
+      "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(geth_consensus_istanbul_core_consensus_overall{kubernetes_name=\"$validator\"}[5m])/300",
+          "expr": "rate(system_memory_allocs{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
-          "instant": false,
-          "interval": "5s",
+          "hide": true,
           "intervalFactor": 1,
-          "legendFormat": "avg 5 min",
+          "legendFormat": "alloc",
+          "refId": "A"
+        },
+        {
+          "expr": "system_memory_used{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "used",
           "refId": "B"
         },
         {
-          "expr": "increase(geth_consensus_istanbul_core_consensus_overall{kubernetes_name=\"$validator\"}[15m])/900",
+          "expr": "system_memory_held{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
-          "instant": false,
-          "interval": "",
+          "hide": true,
           "intervalFactor": 1,
-          "legendFormat": "avg 15 min",
+          "legendFormat": "held",
           "refId": "C"
-        },
-        {
-          "expr": "increase(geth_consensus_istanbul_core_consensus_overall{kubernetes_name=\"validator-0\"}[15m])/900",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "validator-0 avg 15 min",
-          "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "lt",
-          "value": 0.9
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "New finalised blocks per second $validator",
+      "title": "Memory",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -282,12 +238,11 @@
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "locale",
-          "label": "Blocks per second",
+          "format": "bytes",
+          "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -296,7 +251,7 @@
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": false
+          "show": true
         }
       ],
       "yaxis": {
@@ -305,70 +260,349 @@
       }
     },
     {
-      "columns": [],
-      "description": "geth_consensus_istanbul_core_round\n\nhttps://github.com/clearmatics/autonity/wiki/Metrics-and-Monitoring",
-      "fontSize": "100%",
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 3
+      },
+      "id": 85,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(system_disk_readbytes{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "read",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(system_disk_writebytes{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "write",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 75,
+      "panels": [],
+      "title": "Network",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 10
+      },
+      "id": 96,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(p2p_ingress{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ingress",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(p2p_egress{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "egress",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Traffic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
       "gridPos": {
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 10
       },
-      "id": 10,
-      "interval": "5m",
-      "links": [
+      "id": 77,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
         {
-          "type": "absolute"
+          "expr": "p2p_peers{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "peers",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(p2p_dials{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "dials",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(p2p_serves{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "serves",
+          "refId": "C"
         }
       ],
-      "pageSize": 5,
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Peers",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 4,
+      "panels": [],
+      "title": "Blockchain",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "columns": [],
+      "fontSize": "120%",
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 17
+      },
+      "id": 108,
+      "links": [],
+      "pageSize": null,
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 0,
-        "desc": true
+        "col": 6,
+        "desc": false
       },
       "styles": [
         {
-          "alias": "Node",
-          "colorMode": null,
+          "alias": "Time",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 2,
-          "pattern": "kubernetes_node",
-          "preserveFormat": false,
-          "type": "string",
-          "valueMaps": [
-            {
-              "text": "",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "alias": "Pod name",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "#5794F2",
-            "#5794F2"
-          ],
-          "decimals": 2,
-          "link": false,
-          "mappingType": 2,
-          "pattern": "kubernetes_name",
-          "rangeMaps": [
-            {
-              "from": "",
-              "text": "",
-              "to": ""
-            }
-          ],
-          "sanitize": false,
-          "thresholds": [
-            ""
-          ],
-          "type": "string",
-          "unit": "short"
+          "pattern": "Time",
+          "type": "hidden"
         },
         {
           "alias": "",
@@ -381,9 +615,9 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "__name__",
+          "pattern": "",
           "thresholds": [],
-          "type": "hidden",
+          "type": "number",
           "unit": "short"
         },
         {
@@ -394,10 +628,8 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "mappingType": 1,
-          "pattern": "job",
+          "pattern": "__name__",
           "thresholds": [],
           "type": "hidden",
           "unit": "short"
@@ -429,6 +661,22 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
+          "pattern": "job",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
           "pattern": "kubernetes_namespace",
           "thresholds": [],
           "type": "hidden",
@@ -445,56 +693,1497 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "Time",
+          "pattern": "kubernetes_node",
           "thresholds": [],
           "type": "hidden",
           "unit": "short"
+        },
+        {
+          "alias": "Head Header",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "Value #A",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "alias": "Head Receipt",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "Value #B",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "alias": "Head Block",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "Value #C",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
         }
       ],
       "targets": [
         {
-          "expr": "geth_consensus_istanbul_core_round_overall",
+          "expr": "chain_head_header{kubernetes_name=~\"^$Nodes\"} + 0",
           "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "headheader",
+          "refId": "A"
+        },
+        {
+          "expr": "chain_head_receipt{kubernetes_name=~\"^$Nodes\"} + 0",
+          "format": "table",
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "expr": "chain_head_block{kubernetes_name=~\"^$Nodes\"}",
+          "format": "table",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Latest header",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 9,
+        "x": 6,
+        "y": 17
+      },
+      "id": 110,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "chain_head_header{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "header",
+          "refId": "A"
+        },
+        {
+          "expr": "chain_head_receipt{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "receipt",
+          "refId": "B"
+        },
+        {
+          "expr": "chain_head_block{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "block",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Chain head",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 9,
+        "x": 15,
+        "y": 17
+      },
+      "id": 116,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "txpool_pending{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "executable",
+          "refId": "A"
+        },
+        {
+          "expr": "txpool_queued{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "gapped",
+          "refId": "B"
+        },
+        {
+          "expr": "txpool_local{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "local",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Transaction pool",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 6,
+        "y": 23
+      },
+      "id": 124,
+      "links": [],
+      "options": {
+        "maxValue": "65",
+        "minValue": 0,
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "thresholds": [
+          {
+            "color": "semi-dark-red",
+            "index": 0,
+            "value": null
+          },
+          {
+            "color": "light-yellow",
+            "index": 1,
+            "value": 20
+          },
+          {
+            "color": "semi-dark-green",
+            "index": 2,
+            "value": 45
+          }
+        ],
+        "valueMappings": [
+          {
+            "from": "",
+            "id": 1,
+            "operator": "",
+            "text": "DOWN",
+            "to": "",
+            "type": 1,
+            "value": "0"
+          }
+        ],
+        "valueOptions": {
+          "decimals": null,
+          "prefix": "",
+          "stat": "last",
+          "suffix": "",
+          "unit": "none"
+        }
+      },
+      "pluginVersion": "6.1.6",
+      "targets": [
+        {
+          "expr": "rate(chain_inserts_count{kubernetes_name=~\"^$Nodes\"}[5m])*60",
+          "format": "time_series",
+          "hide": false,
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "{{kubernetes_name}}",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Istanbul round",
-      "transform": "table",
-      "type": "table"
+      "title": "Mined Block/min",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 24
+      },
+      "id": 113,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "txpool_pending{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Executable transactions",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 3,
+        "y": 24
+      },
+      "id": 114,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "txpool_queued{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Gapped transactions",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 0,
+        "y": 26
+      },
+      "id": 115,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "txpool_local{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Local transactions",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 112,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "chain_execution{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "execution (q=$quantile)",
+          "refId": "A"
+        },
+        {
+          "expr": "chain_validation{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "validation (q=$quantile)",
+          "refId": "B"
+        },
+        {
+          "expr": "chain_write{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "commit (q=$quantile)",
+          "refId": "C"
+        },
+        {
+          "expr": "chain_account_reads{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "account read (q=$quantile)",
+          "refId": "D"
+        },
+        {
+          "expr": "chain_account_updates{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "account update (q=$quantile)",
+          "refId": "E"
+        },
+        {
+          "expr": "chain_account_hashes{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "account hashe (q=$quantile)",
+          "refId": "F"
+        },
+        {
+          "expr": "chain_account_commits{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "account commit (q=$quantile)",
+          "refId": "G"
+        },
+        {
+          "expr": "chain_storage_reads{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "storage read (q=$quantile)",
+          "refId": "H"
+        },
+        {
+          "expr": "chain_storage_updates{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "storage update (q=$quantile)",
+          "refId": "I"
+        },
+        {
+          "expr": "chain_storage_hashes{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "storage hashe (q=$quantile)",
+          "refId": "J"
+        },
+        {
+          "expr": "chain_storage_commits{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "storage commit (q=$quantile)",
+          "refId": "K"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Block processing",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "ns",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 117,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(txpool_valid{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "valid",
+          "refId": "K"
+        },
+        {
+          "expr": "rate(txpool_invalid{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "invalid",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(txpool_underpriced{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "underpriced",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(txpool_pending_discard{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "executable discard",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(txpool_pending_replace{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "executable replace",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(txpool_pending_ratelimit{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "executable ratelimit",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(txpool_pending_nofunds{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "executable nofunds",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(txpool_queued_discard{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "gapped discard",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(txpool_queued_replace{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "gapped replace",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(txpool_queued_ratelimit{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "gapped ratelimit",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(txpool_queued_nofunds{kubernetes_name=~\"^$Nodes\"}[5m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "gapped nofunds",
+          "refId": "J"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Transaction propagation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Database",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 47
+      },
+      "id": 35,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(eth_db_chaindata_disk_read{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "leveldb read",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(eth_db_chaindata_disk_write{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "leveldb write",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(eth_db_chaindata_ancient_read{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ancient read",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(eth_db_chaindata_ancient_write{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ancient write",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Data rate",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 47
+      },
+      "id": 118,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "eth_db_chaindata_disk_read{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "leveldb read",
+          "refId": "B"
+        },
+        {
+          "expr": "eth_db_chaindata_disk_write{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "leveldb write",
+          "refId": "A"
+        },
+        {
+          "expr": "eth_db_chaindata_ancient_read{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ancient read",
+          "refId": "C"
+        },
+        {
+          "expr": "eth_db_chaindata_ancient_write{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ancient write",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Session totals",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 47
+      },
+      "id": 119,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "eth_db_chaindata_disk_size{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "leveldb",
+          "refId": "B"
+        },
+        {
+          "expr": "eth_db_chaindata_ancient_size{kubernetes_name=~\"^$Nodes\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ancient",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Storage size",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 53
+      },
+      "id": 37,
+      "panels": [],
+      "title": "Trie Stats",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 54
+      },
+      "id": 120,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(trie_memcache_clean_read{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "hit",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(trie_memcache_clean_write{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "miss",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Clean cache",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 54
+      },
+      "id": 56,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(trie_memcache_gc_size{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "gc",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(trie_memcache_flush_size{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "overflow",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(trie_memcache_commit_size{kubernetes_name=~\"^$Nodes\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "commit",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Dirty cache",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": "ALL",
+        "allValue": "txpool_invalid",
         "current": {
-          "tags": [],
-          "text": "validator-0",
-          "value": "validator-0"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "",
-        "hide": 1,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "validator",
+        "definition": "{job=\"autonity\"}",
+        "hide": 2,
+        "includeAll": true,
+        "label": "TxPoolCounters",
+        "multi": true,
+        "name": "tx_pool_counters",
         "options": [],
-        "query": "geth_p2p_inboundTraffic_overall",
-        "refresh": 1,
-        "regex": "/.*kubernetes_name=\"([^\"]*).*/",
+        "query": "{job=\"autonity\"}",
+        "refresh": 2,
+        "regex": "/.*(txpool.*){.*?\".*/",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -502,24 +2191,98 @@
         "useTags": false
       },
       {
-        "allValue": "ALL",
+        "allValue": null,
         "current": {
-          "text": "geth_chain_validation_overall",
-          "value": "geth_chain_validation_overall"
+          "selected": true,
+          "text": "geth",
+          "value": "geth"
         },
-        "datasource": "Prometheus",
-        "definition": "",
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "job",
+        "options": [
+          {
+            "selected": true,
+            "text": "autonity",
+            "value": "autonity"
+          }
+        ],
+        "query": "autonity",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "0.95",
+          "value": "0.95"
+        },
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "metrics_list",
-        "options": [],
-        "query": "metrics(geth_*)",
-        "refresh": 1,
-        "regex": "",
+        "name": "quantile",
+        "options": [
+          {
+            "selected": false,
+            "text": "0.5",
+            "value": "0.5"
+          },
+          {
+            "selected": false,
+            "text": "0.75",
+            "value": "0.75"
+          },
+          {
+            "selected": false,
+            "text": "0.95",
+            "value": "0.95"
+          },
+          {
+            "selected": true,
+            "text": "0.99",
+            "value": "0.99"
+          },
+          {
+            "selected": false,
+            "text": "0.999",
+            "value": "0.999"
+          },
+          {
+            "selected": false,
+            "text": "0.9999",
+            "value": "0.9999"
+          }
+        ],
+        "query": "0.5, 0.75, 0.95, 0.99, 0.999, 0.9999",
         "skipUrlSync": false,
-        "sort": 1,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "Prometheus",
+        "definition": "chain_head_header",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Nodes",
+        "options": [],
+        "query": "chain_head_header",
+        "refresh": 1,
+        "regex": "/.*kubernetes_name=\"(.*)\",kubernetes_name/",
+        "skipUrlSync": false,
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -529,7 +2292,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -558,7 +2321,7 @@
     ]
   },
   "timezone": "",
-  "title": "Autonity",
-  "uid": "qB5LUF3mz45",
-  "version": 3
+  "title": "Autonity Prometheus",
+  "uid": "FPpjH6Hik",
+  "version": 11
 }
