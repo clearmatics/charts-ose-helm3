@@ -50,7 +50,7 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
 
 - You can change number of validators or observers using helm cli-options like this:
    ```bash
-   helm install -n autonity-demo ./ --set autonity-network.validators=6,autonity-network.observers=2
+   helm install -n autonity-demo ./ --set autonity-network.validators.num=6,autonity-network.observers.num=2
    ```
 - You can enable optional subcharts like:
    ```bash

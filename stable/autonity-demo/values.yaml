@@ -17,10 +17,13 @@ global:
 
 
 autonity-network:
-  # Number of validators and observers
-  validators: 4
-  observers: 1
-  chainid: 1488
+  chainid: 1489
+  validators:
+    num: 4
+    serviceType: "ClusterIP"
+  observers:
+    num: 1
+    serviceType: "ClusterIP"
 
 prometheus:
   server:
