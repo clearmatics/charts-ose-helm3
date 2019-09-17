@@ -1,3 +1,6 @@
+{{- $observerIps :=  .Values.observers.ips -}}
+{{- $validatorIps :=  .Values.validators.ips -}}
+
 ---
 apiVersion: batch/v1
 kind: Job
@@ -24,6 +27,7 @@ spec:
     spec:
       serviceAccountName: autonity-initiator
       restartPolicy: Never
+      
       containers:
       - name: init-job02-ibft-genesis-configurator
         image: {{ .Values.image_ibft_genesis_configurator.repository }}:{{ .Values.image_ibft_genesis_configurator.tag }}
@@ -34,6 +38,15 @@ spec:
             mountPath: /autonity/observers
           - name: genesis-template
             mountPath: /autonity
+        env:
+        {{- if $validatorIps }}
+        - name: VALIDATOR_IPS
+          value: "{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}{{index $validatorIps $i }} {{ end }}" 
+        {{- end }}
+        {{- if $validatorIps }}
+        - name: OBSERVER_IPS
+          value: "{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}{{index $observerIps $i }} {{ end }}"
+        {{- end }}
       volumes:
         - name: validators
           configMap:

@@ -1,6 +1,8 @@
 {{- $namespace := .Release.Namespace -}}
+{{- $serviceType :=  .Values.observers.serviceType -}}
+{{- $ips :=  .Values.observers.ips -}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}
 ---
 apiVersion: v1
 kind: Service
@@ -12,7 +14,10 @@ metadata:
     prometheus.io/path: "/debug/metrics/prometheus"
     prometheus.io/scrape: "true"
 spec:
-  type: ClusterIP
+  type: {{ $serviceType }}
+  {{ if eq $serviceType "LoadBalancer" }}
+  loadBalancerIP: {{index $ips $i }}
+  {{ end }}
   ports:
     - protocol: TCP
       name: https-rpc

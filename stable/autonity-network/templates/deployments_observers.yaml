@@ -8,10 +8,11 @@
 {{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
 {{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
 
+
 {{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
 {{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment

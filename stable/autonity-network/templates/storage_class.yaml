@@ -24,7 +24,7 @@ volumeBindingMode: Immediate
 {{- $releasename := .Release.Name -}}
 {{- $blockchainPersistentVolumeSize := .Values.blockchain_persistent_volume_size -}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators))) }}
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -41,7 +41,7 @@ spec:
 
 {{- end}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers))) }}
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

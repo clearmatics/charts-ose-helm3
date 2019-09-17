@@ -10,7 +10,7 @@
 {{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
 {{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators))) }}
+{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
