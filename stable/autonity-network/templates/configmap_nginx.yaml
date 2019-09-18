@@ -129,6 +129,6 @@ data:
         }
     }
 {{ if .Values.rpc_http_basic_auth_enabled }}
-  htpasswd: |- {{ range .Files.Lines (printf "%s/%s" .Values.files_dir "htpasswd") }}
-    {{ . }}{{ end }}
-{{ end }}
+  htpasswd: 
+    {{ .Values.htpasswd }}
+  {{ end }}

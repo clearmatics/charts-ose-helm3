@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2019-09-18
+### Updated
+- Change keys and passwords to be taken in as base64 encoded strings by via options: `rpc.tls_crt`, `rpc.tls_key`, `rpc.tls_dhparam`, and `htpasswd`
+
+
 ## [1.1.2] - 2019-09-17
 ### Updated
 - Add `petersburgBlock` to `genesis.json`
