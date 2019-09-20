@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2019-09-20
+### Updated
+- Enable CORS for rpc
+
+## [1.3.0] - 2019-09-20
+### Updated
+- feed genesis job with names rather than ip addresses (if defined)
+
+
 ## [1.2.0] - 2019-09-18
 ### Updated
 - Change keys and passwords to be taken in as base64 encoded strings by via options: `rpc.tls_crt`, `rpc.tls_key`, `rpc.tls_dhparam`, and `htpasswd`
