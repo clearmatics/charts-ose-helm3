@@ -18,6 +18,7 @@ global:
 
 autonity-network:
   chainid: 1489
+  networkid: 444888
   validators:
     num: 4
     serviceType: "ClusterIP"

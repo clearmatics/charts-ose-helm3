@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6] - 2019-09-23
+### Changed
+- Up version to autonity-network-1.3.2
+
 ## [1.0.5] - 2019-09-20
 ### Changed
 - Up version to autonity-network-1.3.1
