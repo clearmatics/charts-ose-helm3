@@ -34,6 +34,7 @@ observers:
 
 
 chainid: 1488
+networkid: 444888
 
 # Must be: 'istanbul' or 'tendermint'
 concensus: tendermint

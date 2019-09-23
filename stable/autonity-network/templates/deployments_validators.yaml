@@ -4,6 +4,8 @@
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
 
+{{- $networkid :=  .Values.networkid -}}
+
 {{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
 {{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
 {{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
@@ -75,6 +77,8 @@ spec:
           - "--pprof"
           - "--pprofaddr"
           - "0.0.0.0"
+          - "--networkid"
+          - "{{ $networkid }}"
           - "--mine"
           - "--minerthreads"
           - "1"
