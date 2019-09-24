@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.4] - 2019-09-24
+### Add
+- Refactoring `treasure` --> `treasury`
+
 ## [1.3.3] - 2019-09-24
 ### Add
 - `operator-governance` and `operator-treasure` to keys generation

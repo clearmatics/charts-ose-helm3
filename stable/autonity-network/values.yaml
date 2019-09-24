@@ -10,7 +10,7 @@ imageAutonity_init:
 
 image_ibft_keys_generator:
   repository: clearmatics/ibft-keys-generator
-  tag: v1.0.0
+  tag: v1.0.1
 
 image_ibft_genesis_configurator:
   repository: clearmatics/ibft-genesis-configurator

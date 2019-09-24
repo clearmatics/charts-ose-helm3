@@ -14,11 +14,11 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
-  resourceNames: ["account-pwd", "validators", "observers", "operator-governance", "operator-treasure"]
+  resourceNames: ["account-pwd", "validators", "observers", "operator-governance", "operator-treasury"]
   verbs: ["patch"]
 - apiGroups: [""]
   resources: ["configmaps"]
-  resourceNames: ["validators", "observers", "genesis", "operator-governance", "operator-treasure"]
+  resourceNames: ["validators", "observers", "genesis", "operator-governance", "operator-treasury"]
   verbs: ["patch"]
 
 ---
