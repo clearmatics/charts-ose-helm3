@@ -119,6 +119,28 @@ htpasswd: |-
       dhparam_pem: LS0tLS1CRUdJTiBESCBQQVJBTUVURVJTLS0tLS0KTUlJQ0NBS0NBZ0VBMDBCeW1HQmlHazBjWDRSTnZrcGtES2tmeFlXUnhlaGhEK2tJYVordEJ6NjZIaHhmTHhtMgpvNkxsYldjZnhqL1hiU1RVdVJaUHNWM1N0eWhnK2VPY1dKS3FUL0drWE1VaG1kbkMxSmlpbEx5ZkxGMzBhOE1pCmV1UjZ5OUczcDJQald1ZFFQUllKZWZWREJwbXZmWmYxaFI3NmVIM0RNU2dGazhpWlNjTG9YRk9WMldDd1JzdVQKdVhGVEZlVlJLTXpVSWsrLzdVOFBReVJJK1NXSkFrY2dpNDk1ak9nNVVpNjAxMEw3bXRLeWdQOTJBd2Y3ekNhbQp6UkVCNlpabXFOUkt3TFcwNXU0bk92Q09VSUN2MlJJaFV3OTRtU2dlU2ZpcXI0TzRLSW1vcHlubUxQN1lzWVRqCnhqR0NuMlR3RnQxaXpaN3g0Z0VKd1Y5ZDZodTlIYWVhdzBIVEppZEJwLzJIZnBBZ3orZVZldmVnYUxNZTBTcm0KS0dITkZMUGFwTldQQkI2KzNGVlllMXVJS29XLzRhTExoT01UM2tlbGhqYTZzYXdRM3hPazYxZDNkZ1BuZnhENwptTnZwRXRjZ1FqVE04V3c5TlFwV1E2bGdwY2NWNDltbU1UajY1MlRidVpuNVhJNkhtajdCemtoMnJCd3pWbVV3CmNPTi9qVlNYUm5NSmU3QUdGSlJKMnBjRjA2T0liM3lvaXo3Rm5nZnArVDI5ZWVGejFjN1creXV5NFcyY2dwNWgKSU9PVlphTTRMVytlbnBDZURtQlk5ZkI2dWNZWnlrVEtpNUF4dUEyR1dFdHNDVXppb2xqMXllT1pLTXVzSUU1VApwRFRpcnB5SGMwakUxUkxmRG1VNnRIOHNEUXJwa1R2ZVhOODRvOUtQcWsxYk1nNXlQWDZVbTdNQ0FRST0KLS0tLS1FTkQgREggUEFSQU1FVEVSUy0tLS0tCg==
   ```
 
+### Node selectors
+
+It is often desirable to bind specific autonity services to specific nodes in order to do this we have 2 possible ways:
+
+If you have statically labled nodes (format should be validator-$i) set node_selector to 'app' and pods will be assigned to the correct physical nodes
+
+In certain scenarios this isn't possible (for example deploying via gce node pool or AWS ASG) in this case a strategy for node/pool assignment is as follows:
+
+|                      | *europe-west-1a* | *europe-west-1b* | *europe-west-1c* |
+|----------------------|------------------|------------------|------------------|
+| *pool: validators-0* | validator-0      | validator-1      | validator-2      |
+| *pool: validators-1* | validator-3      | validator-4      | validator-5      |
+
+ we must ensure that the following conditions are met
+
+- specify node_selector: zones
+- ensure that your number of validators is divisible by your number of zones
+- label nodes pool: validators-n with n being the number of pools you will need to deploy your number of validators.
+- supply list of the availabiltiy zones you are using as array zones: in values.yaml (this is the value of failure-domain.beta.kubernetes.io/zone).
+
+
+
 ## Tips (to view available commands)
 ```bash
 helm status autonity
