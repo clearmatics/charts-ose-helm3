@@ -2,6 +2,7 @@
 {{- $imageAutonity_init := .Values.imageAutonity_init -}}
 {{- $imageNginx := .Values.image_nginx -}}
 {{- $zones := .Values.zones -}}
+{{- $zoneCount := len $zones -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
 
@@ -43,11 +44,11 @@ spec:
               - key: pool
                 operator: In
                 values:
-                - validators-{{ div $i 3 }}
+                - validators-{{ div $i $zoneCount }}
               - key: failure-domain.beta.kubernetes.io
                 operator: In
                 values:
-                  {{- $zoneNum := mod $i 3 }}
+                  {{- $zoneNum := mod $i $zoneCount }}
                   - {{ index $zones $zoneNum  }}
       {{ end }}
       {{- if eq $selectorMethod "app" }}
