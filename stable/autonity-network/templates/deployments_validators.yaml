@@ -1,6 +1,7 @@
 {{- $imageAutonity := .Values.imageAutonity -}}
 {{- $imageAutonity_init := .Values.imageAutonity_init -}}
 {{- $imageNginx := .Values.image_nginx -}}
+{{- $zones := .Values.zones -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
 
@@ -27,6 +28,20 @@ spec:
       labels:
         app: validator-{{ $i }}
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: pool
+                operator: In
+                values:
+                - validators-{{ div $i 3 }}
+              - key: failure-domain.beta.kubernetes.io/zone=europe-west2-a
+                operator: In
+                values:
+                  {{- $zoneNum := mod $i 3 }}
+                  - {{ index $zones $zoneNum  }}
       initContainers:
       - name: init
         image: {{ $imageAutonity_init.repository }}:{{ $imageAutonity_init.tag }}
@@ -147,6 +162,7 @@ spec:
         - name: nginx-proxy-config
           configMap:
             name: nginx-conf
+            
 {{ if $rpcHttpsEnabled }}
         - name: nginx-proxy-ssl
           secret:
