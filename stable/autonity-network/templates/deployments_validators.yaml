@@ -28,6 +28,11 @@ spec:
       labels:
         app: validator-{{ $i }}
     spec:
+      tolerations:
+      - key: "role"
+        operator: "Equal"
+        value: "validator"
+        effect: "NoSchedule"
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
