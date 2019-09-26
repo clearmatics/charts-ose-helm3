@@ -33,7 +33,7 @@ spec:
       tolerations:
       - key: "role"
         operator: "Equal"
-        value: "validator"
+        value: "validators"
         effect: "NoSchedule"
       {{- if eq $selectorMethod "zones" }}
       affinity:
@@ -45,7 +45,7 @@ spec:
                 operator: In
                 values:
                 - validators-{{ div $i $zoneCount }}
-              - key: failure-domain.beta.kubernetes.io
+              - key: failure-domain.beta.kubernetes.io/zone
                 operator: In
                 values:
                   {{- $zoneNum := mod $i $zoneCount }}
