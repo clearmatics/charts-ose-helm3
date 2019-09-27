@@ -1,6 +1,8 @@
 {{- $imageAutonity := .Values.imageAutonity -}}
 {{- $imageAutonity_init := .Values.imageAutonity_init -}}
 {{- $imageNginx := .Values.image_nginx -}}
+{{- $zones := .Values.zones -}}
+{{- $zoneCount := len $zones -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
 
@@ -11,6 +13,7 @@
 {{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
 {{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
 {{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
+{{- $selectorMethod :=  .Values.selector_method -}}
 
 {{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}
 ---
@@ -27,6 +30,38 @@ spec:
       labels:
         app: validator-{{ $i }}
     spec:
+      tolerations:
+      - key: "role"
+        operator: "Equal"
+        value: "validators"
+        effect: "NoSchedule"
+      {{- if eq $selectorMethod "zones" }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: pool
+                operator: In
+                values:
+                - validators-{{ div $i $zoneCount }}
+              - key: failure-domain.beta.kubernetes.io/zone
+                operator: In
+                values:
+                  {{- $zoneNum := mod $i $zoneCount }}
+                  - {{ index $zones $zoneNum  }}
+      {{ end }}
+      {{- if eq $selectorMethod "app" }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - validator-{{ $i }}
+      {{ end }}
       initContainers:
       - name: init
         image: {{ $imageAutonity_init.repository }}:{{ $imageAutonity_init.tag }}
@@ -147,6 +182,7 @@ spec:
         - name: nginx-proxy-config
           configMap:
             name: nginx-conf
+            
 {{ if $rpcHttpsEnabled }}
         - name: nginx-proxy-ssl
           secret:

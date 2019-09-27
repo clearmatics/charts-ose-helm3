@@ -1,18 +1,28 @@
+{{- $zones := .Values.zones -}}
+{{- $zoneCount := len $zones -}}
+{{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
+{{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
+{{- $selectorMethod :=  .Values.selector_method -}}
+{{- $namespace := .Release.Namespace -}}
+{{- $releasename := .Release.Name -}}
+{{- $blockchainPersistentVolumeSize := .Values.blockchain_persistent_volume_size -}}
+
+
 {{- if or (eq .Values.aws_persistent_storage_enabled true) (eq .Values.gcp_persistent_storage_enabled true) }}
 ---
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: blockchain-{{ .Release.Name }}
+  name: blockchain-{{ $releasename }}
   annotations:
     storageclass.kubernetes.io/is-default-class: "false"
-{{ if eq .Values.aws_persistent_storage_enabled true }}
+{{ if eq $awsPersistentStorageEnabled true }}
 provisioner: kubernetes.io/aws-ebs
 parameters:
   type: gp2
   fsType: ext4
   encrypted: "true"
-{{ else if  eq .Values.gcp_persistent_storage_enabled true}}
+{{ else if  eq $gcpPersistentStorageEnabled true}}
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
@@ -20,9 +30,32 @@ parameters:
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 
-{{- $namespace := .Release.Namespace -}}
-{{- $releasename := .Release.Name -}}
-{{- $blockchainPersistentVolumeSize := .Values.blockchain_persistent_volume_size -}}
+{{- if eq $selectorMethod "zones" }}
+{{- range $zones }}
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: blockchain-{{ $releasename }}-{{ . }}
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+{{- if eq $awsPersistentStorageEnabled true }}
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
+  encrypted: "true"
+  zone: {{ . }}
+{{- else if  eq $gcpPersistentStorageEnabled true}}
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  zone: {{ . }}
+{{- end }}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+{{- end }}
+{{- end }}
 
 {{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}
 ---
@@ -34,7 +67,12 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  {{- if eq $selectorMethod "zones" }}
+  {{- $zoneNum := mod $i $zoneCount }}
+  storageClassName: blockchain-{{ $releasename }}-{{index $zones $zoneNum}}
+  {{- else }}
   storageClassName: blockchain-{{ $releasename }}
+  {{- end}}
   resources:
     requests:
       storage: {{ $blockchainPersistentVolumeSize }}
