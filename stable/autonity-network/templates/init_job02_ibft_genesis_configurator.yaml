@@ -42,6 +42,10 @@ spec:
             mountPath: /autonity/validators
           - name: observers
             mountPath: /autonity/observers
+          - name: operator-governance
+            mountPath: /autonity/operator-governance
+          - name: operator-treasury
+            mountPath: /autonity/operator-treasury
           - name: genesis-template
             mountPath: /autonity
         env:
@@ -53,6 +57,15 @@ spec:
         - name: OBSERVER_IPS
           value: "{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}{{index $observerAddress $i }} {{ end }}"
         {{- end }}
+        args:
+          - "--stake"
+          - "{{ .Values.stake }}"
+          - "--mingasprice"
+          - "{{ .Values.mingasprice }}"
+          - "--gaslimit"
+          - "{{ .Values.gaslimit }}"
+          - "--balance"
+          - "{{ .Values.balance }}"
       volumes:
         - name: validators
           configMap:
@@ -60,6 +73,12 @@ spec:
         - name: observers
           configMap:
             name: observers
+        - name: operator-governance
+          configMap:
+            name: operator-governance
+        - name: operator-treasury
+          configMap:
+            name: operator-treasury
         - name: genesis-template
           configMap:
             name: genesis-template

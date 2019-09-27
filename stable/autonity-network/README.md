@@ -50,13 +50,15 @@ This chart is comprised of 4 components:
 ## Data storage
 
 1. secret `account-pwd` contain generated account password.
-1. secret `validators` or `observers` contain:
+1. secret `validators`, `observers`, `operator-governance` or `operator-treasury` contain:
    1. `0.private_key` - private key for account
-1. configmap `validators` or `observers` contain:
+1. configmap `validators`, `observers`, `operator-governance` or `operator-treasury` contain:
    1. `0.address` - address
    1. `0.pub_key` - public key
-1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) for local blockchain of `validators` and `observers`.
-It will be removed if you delete a pod, or move it to another node. In that case the pod should load keys from kubernetes secrets, and download new blockchain from other peers automatically.
+1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) (default) for local blockchain of `validators` and `observers`    
+   1. `aws_persistent_storage_enabled: true` enable AWS persistent storage for `blockchain`
+   1. `gcp_persistent_storage_enabled: true` enable GCP persistent storage for `blockchain`
+  
 
 
 ## Configure

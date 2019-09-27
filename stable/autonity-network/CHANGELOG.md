@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2019-09-27
+### Updated
+- Up `autonity` to `v0.2.0-rc`
+- New variables for `genesis.json`is avalable: `stake`, `mingasprice`, `gaslimit`, `balance`
+-  `istanbul` concensus is deprecated
+
 ## [1.4.0] - 2019-09-26
 ### Add
 - Add toleration for role: validators taint on validator nodes
