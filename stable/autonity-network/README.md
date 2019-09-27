@@ -5,9 +5,9 @@
 
 ## Introduction
 
-This chart deploys a **private** [Autonity](https://www.autonity.io/) network onto a [Kubernetes](http://kubernetes.io) 
-cluster using the [Helm](https://helm.sh) package manager.   
-Autonity is a generalization of the Ethereum protocol based on a fork of go-ethereum.   
+This chart deploys a **private** [Autonity](https://www.autonity.io/) network onto a [Kubernetes](http://kubernetes.io)
+cluster using the [Helm](https://helm.sh) package manager.
+Autonity is a generalization of the Ethereum protocol based on a fork of go-ethereum.
 [Autonity Documentation](https://docs.autonity.io)
 
 ## Quick start
@@ -35,27 +35,27 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
 * Helm 2.13
 
 ## Kubernetes objects
-This chart is comprised of 4 components:   
+This chart is comprised of 4 components:
 1. `initial jobs` that implement bootstrapping algorithm and run once as a helm hook `post-install`
    1. [init-job01-ibft-keys-generator](https://github.com/clearmatics/ibft-keys-generator) will create keys set
-   1. [init-job02-ibft-genesis-configurator](https://github.com/clearmatics/ibft-genesis-configurator) will configure `genesis.json` 
+   1. [init-job02-ibft-genesis-configurator](https://github.com/clearmatics/ibft-genesis-configurator) will configure `genesis.json`
    for autonity network initialisation
-1. [autonity init](https://github.com/clearmatics/autonity-init) container for each autonity pod that download keys, 
+1. [autonity init](https://github.com/clearmatics/autonity-init) container for each autonity pod that download keys,
    configs and prepare chain data
-1. pods `validator-X`: nodes that implement [IBFT consensus algorithms](https://docs.autonity.io/IBFT/index.html) 
+1. pods `validator-X`: nodes that implement [IBFT consensus algorithms](https://docs.autonity.io/IBFT/index.html)
    [Source](https://github.com/clearmatics/autonity/blob/master/Dockerfile)
-1. pods `observer-Y`: node that connected with another validators by p2p and expose JSON-RPC and WebSocket interface 
+1. pods `observer-Y`: node that connected with another validators by p2p and expose JSON-RPC and WebSocket interface
    [Source](https://github.com/clearmatics/autonity/blob/master/Dockerfile)
 
 ## Data storage
 
 1. secret `account-pwd` contain generated account password.
-1. secret `validators` or `observers` contain:   
+1. secret `validators` or `observers` contain:
    1. `0.private_key` - private key for account
 1. configmap `validators` or `observers` contain:
    1. `0.address` - address
    1. `0.pub_key` - public key
-1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) for local blockchain of `validators` and `observers`. 
+1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) for local blockchain of `validators` and `observers`.
 It will be removed if you delete a pod, or move it to another node. In that case the pod should load keys from kubernetes secrets, and download new blockchain from other peers automatically.
 
 
@@ -66,11 +66,11 @@ It will be removed if you delete a pod, or move it to another node. In that case
    helm install -n autonity ./ --set validators=6,observers=2
    ```
 - Also you can change any variables in this file [./values.yaml](values.yaml) before installation
-- Configuration of main autonity network options is available in this template [./templates/configmap_genesis_template.yaml](templates/configmap_genesis_template.yaml)   
-- all other options in `genesis.json` like: `validators`, `alloc`, `nodeWhiteList` will be generated automaticaly based on validators and observers list.   
-You can get result of generating any time after deploy using:   
+- Configuration of main autonity network options is available in this template [./templates/configmap_genesis_template.yaml](templates/configmap_genesis_template.yaml)
+- all other options in `genesis.json` like: `validators`, `alloc`, `nodeWhiteList` will be generated automaticaly based on validators and observers list.
+You can get result of generating any time after deploy using:
    ```bash
-   kubectl get configmap genesis -o yaml --export=true   
+   kubectl get configmap genesis -o yaml --export=true
    ```
 
 ### JSON-RPC HTTP Basic Auth
@@ -101,10 +101,10 @@ htpasswd: |-
     KEY_FILE=files/tls.key
     CERT_FILE=files/tls.crt
     DH_FILE=files/dhparam.pem
-    
+
     mkdir -p files
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${KEY_FILE} -out ${CERT_FILE}
-    
+
     openssl dhparam -out ${DH_FILE} 4096
    ```
 * Set variable to `rpc_https_enabled: true`
@@ -134,7 +134,7 @@ In certain scenarios this isn't possible (for example deploying via gce node poo
 
  we must ensure that the following conditions are met
 
-- specify node_selector: zones
+- specify selector_method: zones
 - ensure that your number of validators is divisible by your number of zones
 - label nodes pool: validators-n with n being the number of pools you will need to deploy your number of validators.
 - supply list of the availabiltiy zones you are using as array zones: in values.yaml (this is the value of failure-domain.beta.kubernetes.io/zone).
