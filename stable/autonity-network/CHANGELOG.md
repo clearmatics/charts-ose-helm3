@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] - 2019-09-30
+### Updated
+- Allow for specifying of LB source ranges
+
 ## [1.5.1] - 2019-09-30
 ### Updated
 - Up `autonity` to `v0.2.1`
@@ -90,7 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.2] - 2019-08-20
 ### Added
 - http basic auth support for autonity RPC (for observers)
-- autonity version update to v0.1.5 
+- autonity version update to v0.1.5
 
 ## [0.3.1] - 2019-08-19
 ### Added
