@@ -30,6 +30,7 @@ spec:
   {{- range $obsIps }}
   - {{ . }}/32
   {{- end }}
+  {{- end }}
   ports:
     - protocol: TCP
       name: https-rpc

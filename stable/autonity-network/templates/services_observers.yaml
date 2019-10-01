@@ -30,8 +30,8 @@ spec:
   {{- range $valIps }}
   - {{ . }}/32
   {{- end }}
-  ports:
-  {{ end }}
+  {{- end }}
+
   ports:
     - protocol: TCP
       name: https-rpc
