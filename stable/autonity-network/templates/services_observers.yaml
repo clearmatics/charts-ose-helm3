@@ -1,6 +1,9 @@
 {{- $namespace := .Release.Namespace -}}
 {{- $serviceType :=  .Values.observers.serviceType -}}
 {{- $ips :=  .Values.observers.ips -}}
+{{- $valIps :=  .Values.validators.ips -}}
+{{- $addIps :=  .Values.whitelist_ips -}}
+
 
 {{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}
 ---
@@ -17,7 +20,18 @@ spec:
   type: {{ $serviceType }}
   {{ if eq $serviceType "LoadBalancer" }}
   loadBalancerIP: {{index $ips $i }}
-  {{ end }}
+  loadBalancerSourceRanges:
+  {{- range $ips }}
+  - {{ . }}/32
+  {{- end }}
+  {{- range $addIps }}
+  - {{ . }}/32
+  {{- end }}
+  {{- range $valIps }}
+  - {{ . }}/32
+  {{- end }}
+  {{- end }}
+
   ports:
     - protocol: TCP
       name: https-rpc
