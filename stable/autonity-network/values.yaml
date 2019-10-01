@@ -76,3 +76,6 @@ zones:
 #  - europe-west2-a
 #  - europe-west2-b
 #  - europe-west2-c
+
+whitelist_ips:
+- 0.0.0.0/0 # by default allow access from everywhere
