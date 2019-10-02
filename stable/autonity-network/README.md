@@ -152,14 +152,3 @@ helm status autonity
 ```bash
 helm delete autonity --purge
 ```
-
-## Extended values configs
-
-[values_gke_persistent_storage.yaml](./values_gke_persistent_storage.yaml) will install to GKE with:
-- persistent storage for autonity validators and observers
-- persistent storage for prometheus
-- persistent storage for grafana
-
-```shell script
-helm install charts-ose.clearmatics.com/autonity-demo -f https://raw.githubusercontent.com/clearmatics/charts-ose/master/stable/autonity-demo/values_gke_persistent_storage.yaml
-```

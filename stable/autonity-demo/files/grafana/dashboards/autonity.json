@@ -15,16 +15,16 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1568634966724,
+  "id": 3,
+  "iteration": 1569928653377,
   "links": [],
   "panels": [
     {
-      "content": "<center><img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"250\"/></br></br>\n<i>Autonity Network Monitoring Dashboard</i></center>\n\n",
+      "content": "<div style=\"width:100%;height:100%;position:absolute;text-align:right\">\n<span style=\"display:block;font-size:25px;margin-right:205px;\">SystemX |</span> \n<img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"200\" style=\"margin-top:-67px\"/></div>\n",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 21,
+        "w": 8,
+        "x": 16,
         "y": 0
       },
       "id": 122,
@@ -44,12 +44,388 @@
         "x": 0,
         "y": 2
       },
+      "id": 132,
+      "panels": [],
+      "title": "Status",
+      "type": "row"
+    },
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                40
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "NETWORK OUTAGE",
+        "name": "Network status - Block insertion alert",
+        "noDataState": "alerting",
+        "notifications": [
+          {
+            "uid": "GH3xbdtZk"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 3,
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 0,
+        "y": 3
+      },
+      "id": 126,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "6.1.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "avg(rate(chain_head_block[2m])) * 60",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Inserted Blocks Per Min:",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 40
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network status - Block insertion",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "70",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "decimals": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 3
+      },
+      "id": 128,
+      "interval": null,
+      "links": [],
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "100%",
+      "prefix": "NETWORK STATUS:",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "55",
+          "text": "GOOD",
+          "to": "60"
+        },
+        {
+          "from": "5",
+          "text": "OUTAGE",
+          "to": "55"
+        },
+        {
+          "from": "0",
+          "text": "DOWN",
+          "to": "5"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(rate(chain_head_block[2m])) * 60",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "60,40",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "110%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "FULLY",
+          "value": "60"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorPostfix": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "decimals": 6,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 7
+      },
+      "id": 130,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": " Availability",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(chain_head_block) * 100 / (time()- 1568805701)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        },
+        {
+          "expr": "",
+          "format": "time_series",
+          "hide": true,
+          "intervalFactor": 1,
+          "refId": "B"
+        }
+      ],
+      "thresholds": "99,80",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
       "id": 82,
       "panels": [],
       "title": "System",
       "type": "row"
     },
     {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                90
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "D",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "keep_state",
+        "for": "3m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "HIGH CPU USAGE",
+        "name": "CPU alert",
+        "noDataState": "keep_state",
+        "notifications": [
+          {
+            "uid": "GH3xbdtZk"
+          }
+        ]
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -60,7 +436,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 3
+        "y": 12
       },
       "id": 106,
       "legend": {
@@ -111,9 +487,24 @@
           "intervalFactor": 1,
           "legendFormat": "autonity",
           "refId": "C"
+        },
+        {
+          "expr": "max(system_cpu_sysload + system_cpu_procload + system_cpu_syswait)",
+          "format": "time_series",
+          "hide": true,
+          "intervalFactor": 1,
+          "refId": "D"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 90
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -165,7 +556,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 3
+        "y": 12
       },
       "id": 86,
       "legend": {
@@ -270,7 +661,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 3
+        "y": 12
       },
       "id": 85,
       "legend": {
@@ -361,7 +752,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 18
       },
       "id": 75,
       "panels": [],
@@ -379,7 +770,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 19
       },
       "id": 96,
       "legend": {
@@ -474,7 +865,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 19
       },
       "id": 77,
       "legend": {
@@ -571,7 +962,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 25
       },
       "id": 4,
       "panels": [],
@@ -586,7 +977,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 17
+        "y": 26
       },
       "id": 108,
       "links": [],
@@ -790,7 +1181,7 @@
         "h": 6,
         "w": 9,
         "x": 6,
-        "y": 17
+        "y": 26
       },
       "id": 110,
       "legend": {
@@ -893,7 +1284,7 @@
         "h": 6,
         "w": 9,
         "x": 15,
-        "y": 17
+        "y": 26
       },
       "id": 116,
       "legend": {
@@ -989,7 +1380,7 @@
         "h": 5,
         "w": 12,
         "x": 6,
-        "y": 23
+        "y": 32
       },
       "id": 124,
       "links": [],
@@ -1038,7 +1429,7 @@
       "pluginVersion": "6.1.6",
       "targets": [
         {
-          "expr": "rate(chain_inserts_count{kubernetes_name=~\"^$Nodes\"}[5m])*60",
+          "expr": "rate(chain_head_block{kubernetes_name=~\"^$Nodes\"}[5m])*60",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -1075,7 +1466,7 @@
         "h": 2,
         "w": 3,
         "x": 0,
-        "y": 24
+        "y": 33
       },
       "id": 113,
       "interval": null,
@@ -1157,7 +1548,7 @@
         "h": 2,
         "w": 3,
         "x": 3,
-        "y": 24
+        "y": 33
       },
       "id": 114,
       "interval": null,
@@ -1239,7 +1630,7 @@
         "h": 2,
         "w": 6,
         "x": 0,
-        "y": 26
+        "y": 35
       },
       "id": 115,
       "interval": null,
@@ -1311,7 +1702,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 37
       },
       "id": 112,
       "legend": {
@@ -1472,7 +1863,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 46
       },
       "id": 117,
       "legend": {
@@ -1632,7 +2023,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 55
       },
       "id": 17,
       "panels": [],
@@ -1650,7 +2041,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 47
+        "y": 56
       },
       "id": 35,
       "legend": {
@@ -1757,7 +2148,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 47
+        "y": 56
       },
       "id": 118,
       "legend": {
@@ -1864,7 +2255,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 47
+        "y": 56
       },
       "id": 119,
       "legend": {
@@ -1954,7 +2345,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 62
       },
       "id": 37,
       "panels": [],
@@ -1972,7 +2363,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 54
+        "y": 63
       },
       "id": 120,
       "legend": {
@@ -2001,7 +2392,7 @@
         {
           "expr": "rate(trie_memcache_clean_read{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "intervalFactor": 1,
           "legendFormat": "hit",
           "refId": "C"
@@ -2010,6 +2401,7 @@
           "expr": "rate(trie_memcache_clean_write{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "hide": false,
+          "instant": false,
           "intervalFactor": 1,
           "legendFormat": "miss",
           "refId": "B"
@@ -2067,7 +2459,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 54
+        "y": 63
       },
       "id": 56,
       "legend": {
@@ -2264,7 +2656,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -2292,7 +2683,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -2321,7 +2712,7 @@
     ]
   },
   "timezone": "",
-  "title": "Autonity Prometheus",
-  "uid": "FPpjH6Hik",
-  "version": 11
+  "title": "Autonity",
+  "uid": "HQl5bOpZz",
+  "version": 14
 }
