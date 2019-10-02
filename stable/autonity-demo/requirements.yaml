@@ -13,9 +13,9 @@ dependencies:
     condition: global.validator_dapp.enabled
   - name: prometheus
     repository: "@stable"
-    version: 8.10.0
+    version: 9.1.1
     condition: global.prometheus.enabled
   - name: grafana
     repository: "@stable"
-    version: 3.3.5
+    version: 3.8.15
     condition: global.grafana.enabled

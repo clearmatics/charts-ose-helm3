@@ -1,5 +1,8 @@
 ---
-# This settings will install minimal demo(default) autonity-network
+# This settings will install autonity-network with:
+#  - persistent storage for autonity validators and observers
+#  - persistent storage for prometheus
+#  - persistent storage for grafana
 
 global:
   autonity_network:
@@ -10,14 +13,15 @@ global:
   validator_dapp:
     enabled: false
   prometheus:
-    enabled: false
+    enabled: true
   grafana:
-    enabled: false
+    enabled: true
   telepresence:
     enabled: false
 
-
 autonity-network:
+  gcp_persistent_storage_enabled: true
+  blockchain_persistent_volume_size: 20G
   chainid: 1489
   networkid: 444888
   validators:
@@ -31,7 +35,8 @@ prometheus:
   server:
     fullnameOverride: 'autonity-prometheus-server'
     persistentVolume:
-      enabled: false
+      enabled: true
+      size: 30Gi
     configMapOverrideName: 'prometheus-server-config'
   kubeStateMetrics:
     enabled: false
@@ -43,6 +48,10 @@ prometheus:
     enabled: false
 
 grafana:
+  persistence:
+    enabled: true
+    type: pvc
+    size: 30Gi
   adminUser: admin
   service:
     port: 80
