@@ -1,0 +1,128 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: validator-0
+  namespace: {{ .Release.Namespace }}
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: validator-0
+    spec:
+      initContainers:
+      - name: init
+        image: {{ .Values.imageAutonity_init.repository }}:{{ .Values.imageAutonity_init.tag }}
+        volumeMounts:
+        - name: blockchain
+          mountPath: /autonity/blockchain
+        - name: keys
+          mountPath: /autonity/keys
+        - name: cm-genesis
+          mountPath: /autonity/cm-genesis
+        - name: sec-account-pwd
+          mountPath: /autonity/sec-account-pwd
+        - name: sec-peers
+          mountPath: /autonity/sec-peers
+        args:
+          - "--debug"
+          - "true"
+      containers:
+      - name: autonity
+        image: {{ .Values.imageAutonity.repository }}:{{ .Values.imageAutonity.tag }}
+        ports:
+        - containerPort: 30303
+          name: p2p
+        args:
+          - "--datadir"
+          - "/autonity/blockchain"
+          - "--keystore"
+          - "/autonity/keys/keystore"
+          - "--nodekey"
+          - "/autonity/sec-peers/private_key"
+          - "--gcmode"
+          - "archive"
+          - "--syncmode"
+          - "full"
+          - "--cache"
+          - "1024"
+          - "--rpc"
+          - "--rpcapi"
+          - "eth,web3,net,txpool,debug"
+          - "--rpcvhosts"
+          - "*"
+          - "--ws"
+          - "--wsapi"
+          - "eth,web3,net"
+          - "--wsorigins"
+          - "*"
+          - "--metrics"
+          - "--pprof"
+          - "--pprofaddr"
+          - "0.0.0.0"
+          - "--networkid"
+          - "{{ .Values.networkid }}"
+          - "--mine"
+          - "--minerthreads"
+          - "1"
+          - "--debug"
+          - "--verbosity"
+          - "4"
+        volumeMounts:
+        - name: blockchain
+          mountPath: /autonity/blockchain
+        - name: keys
+          mountPath: /autonity/keys
+        - name: sec-peers
+          mountPath: /autonity/sec-peers
+      - name: nginx
+        image: {{ .Values.image_nginx.repository }}:{{ .Values.image_nginx.tag }}
+        ports:
+        - containerPort: 8080
+          name: https-rpc
+        volumeMounts:
+        - name: nginx-proxy-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+{{ if .Values.rpc_http_basic_auth_enabled }}
+        - name: nginx-proxy-config
+          mountPath: /etc/nginx/htpasswd
+          subPath: htpasswd
+{{ end }}
+{{ if .Values.rpc_https_enabled }}
+        - name: nginx-proxy-ssl
+          mountPath: /etc/nginx/ssl
+{{ end }}
+      volumes:
+        - name: blockchain
+          emptyDir: {}
+        - name: keys
+          emptyDir:
+            medium: Memory
+            sizeLimit: "1M"
+        - name: cm-genesis
+          configMap:
+            name: genesis
+        - name: sec-account-pwd
+          secret:
+            secretName: validator-0
+            items:
+              - key: password
+                path: account.pwd
+        - name: sec-peers
+          secret:
+            secretName: validator-0
+            items:
+              - key: private_key
+                path: private_key
+        - name: nginx-proxy-config
+          configMap:
+            name: nginx-conf
+
+{{ if .Values.rpc_https_enabled }}
+        - name: nginx-proxy-ssl
+          secret:
+            secretName: autonity-https
+{{ end }}

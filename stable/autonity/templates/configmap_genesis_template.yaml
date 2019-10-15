@@ -1,0 +1,19 @@
+{{ if .Values.genesis }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: genesis
+  namespace: {{ .Release.Namespace }}
+data: {}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: genesis-template
+  namespace: {{ .Release.Namespace }}
+data:
+  genesis.json:  |-
+  {{ toJson .Values.genesis| indent 4 }}
+{{end}}

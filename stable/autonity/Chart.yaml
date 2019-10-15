@@ -1,0 +1,14 @@
+name: autonity-network
+version: 0.0.1
+kubeVersion: ">=1.10.0-0"
+description: Deploy production autonity instances
+keywords:
+- autonity
+- blockchain
+home: https://www.autonity.io/
+sources:
+- https://github.com/clearmatics/autonity
+maintainers:
+- name: eastata
+  email: aleksandr.poliakov@clearmatics.com
+appVersion: v0.2.1

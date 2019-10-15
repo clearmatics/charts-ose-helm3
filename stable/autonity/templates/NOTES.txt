@@ -1,0 +1,30 @@
+==== Autonity ====
+
+# To get autonity validator-0 account password type:
+    kubectl -n {{ .Release.Namespace }} get secrets validator-0 -o 'go-template={{ "{{" }}index .data "password"{{ "}}" }}' | base64 --decode; echo ""
+
+# Get private key of validator-0 (id == 0)
+    kubectl -n {{ .Release.Namespace }} get secrets validator-0 -o 'go-template={{ "{{" }}index .data "private_key"{{ "}}" }}' | base64 --decode; echo ""
+
+# Get address for validator-0
+    kubectl -n {{ .Release.Namespace }} get configmap validator-0 -o yaml |grep .address
+
+# Get genesis.json
+    kubectl -n {{ .Release.Namespace }} get configmap genesis -o yaml --export=true
+
+# Forward rpcapi validator-0 to localhost
+    kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8545:8545
+# Forward wsapi validator-0 to localhost
+    kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8546:8546
+
+### Get enode:
+
+    IP=$(kubectl -n {{ .Release.Namespace }} get svc p2p-validator-0 -o jsonpath="{.status.loadBalancer.ingress[*].ip}"); \
+    PUB_KEY=$(kubectl -n {{ .Release.Namespace }} get configmap validator-0 -o jsonpath="{.data.pub_key}"); \
+    PORT=$(kubectl -n {{ .Release.Namespace }} get svc p2p-validator-0 -o jsonpath="{.spec.ports[0].targetPort}"); \
+    echo "enode://"${PUB_KEY}\@${IP}\:${PORT}
+
+###
+
+### HTTP(s)-RPC ###
+    curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
