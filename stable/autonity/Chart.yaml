@@ -1,4 +1,4 @@
-name: autonity-network
+name: autonity
 version: 0.0.1
 kubeVersion: ">=1.10.0-0"
 description: Deploy production autonity instances
