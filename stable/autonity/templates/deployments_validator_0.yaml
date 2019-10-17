@@ -12,6 +12,10 @@ spec:
       labels:
         app: validator-0
     spec:
+{{ if .Values.aws }}
+      nodeSelector:
+        ext_ip: "{{ .Values.aws.validator_0.ext_ip }}"
+{{ end }}
       initContainers:
       - name: init
         image: {{ .Values.imageAutonity_init.repository }}:{{ .Values.imageAutonity_init.tag }}

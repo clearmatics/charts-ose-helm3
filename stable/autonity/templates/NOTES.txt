@@ -18,10 +18,12 @@
     kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8546:8546
 
 ### Get enode:
-
+{{ if .Values.aws }}
+    IP={{ .Values.aws.validator_0.ext_ip }}; \
+{{ else }}
     IP=$(kubectl -n {{ .Release.Namespace }} get svc p2p-validator-0 -o jsonpath="{.status.loadBalancer.ingress[*].ip}"); \
-    PUB_KEY=$(kubectl -n {{ .Release.Namespace }} get configmap validator-0 -o jsonpath="{.data.pub_key}"); \
-    PORT=$(kubectl -n {{ .Release.Namespace }} get svc p2p-validator-0 -o jsonpath="{.spec.ports[0].targetPort}"); \
+{{ end }}    PUB_KEY=$(kubectl -n {{ .Release.Namespace }} get configmap validator-0 -o jsonpath="{.data.pub_key}"); \
+    PORT=$(kubectl -n {{ .Release.Namespace }} get svc p2p-validator-0 -o jsonpath="{.spec.ports[0].port}"); \
     echo "enode://"${PUB_KEY}\@${IP}\:${PORT}
 
 ###
