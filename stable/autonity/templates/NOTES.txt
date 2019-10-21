@@ -3,14 +3,18 @@
 # To get autonity validator-0 account password type:
     kubectl -n {{ .Release.Namespace }} get secrets validator-0 -o 'go-template={{ "{{" }}index .data "password"{{ "}}" }}' | base64 --decode; echo ""
 
-# Get private key of validator-0 (id == 0)
+# Get private key of validator-0
     kubectl -n {{ .Release.Namespace }} get secrets validator-0 -o 'go-template={{ "{{" }}index .data "private_key"{{ "}}" }}' | base64 --decode; echo ""
 
 # Get address for validator-0
-    kubectl -n {{ .Release.Namespace }} get configmap validator-0 -o yaml |grep .address
+    kubectl -n {{ .Release.Namespace }} get configmap validator-0 -o jsonpath='{.data.address}'
 
 # Get genesis.json
-    kubectl -n {{ .Release.Namespace }} get configmap genesis -o yaml --export=true
+    kubectl -n {{ .Release.Namespace }} get configmaps genesis -o jsonpath='{.data.genesis}'
+
+# Export genesis.yaml
+# sudo snap install jq yq
+    kubectl -n {{ .Release.Namespace }} get configmaps genesis -o jsonpath='{.data.genesis}' |jq '{genesis: .}' |yq r -
 
 # Forward rpcapi validator-0 to localhost
     kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8545:8545
@@ -18,6 +22,7 @@
     kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8546:8546
 
 ### Get enode:
+# It can take a time to wait until Public IP will allocated
 {{ if .Values.aws }}
     IP={{ .Values.aws.validator_0.ext_ip }}; \
 {{ else }}
@@ -29,4 +34,8 @@
 ###
 
 ### HTTP(s)-RPC ###
+# Get last block number
     curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
+
+# Get Autonity Contract Address
+    curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"tendermint_GetContractAddress","params":[],"id":1}' http://localhost:8545

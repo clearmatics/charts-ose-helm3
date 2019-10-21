@@ -35,7 +35,7 @@ spec:
           configMap:
             name: genesis-template
             items:
-              - key: genesis.json
+              - key: genesis
                 path: genesis-template.json
       restartPolicy: Never
   backoffLimit: 0

@@ -90,3 +90,7 @@ by `Network operator` in a [Step 1](##Step 1) for each `Autonity nodes`:
       hash of 1th mined block `???` 
   if all of peers from this list trust it: [list of dns names of all autonity nodes]
   ```
+
+## Step 5
+* Actor: `Network operator`
+* Actions: Get from AFNC new `genesis.yaml` with resolved `enode`s using helm helpers and replace previous `genesis.yaml` with `fqdn`

@@ -14,6 +14,6 @@ metadata:
   name: genesis-template
   namespace: {{ .Release.Namespace }}
 data:
-  genesis.json:  |-
+  genesis:  |-
   {{ toJson .Values.genesis| indent 4 }}
 {{end}}

@@ -54,7 +54,7 @@ spec:
           - "1024"
           - "--rpc"
           - "--rpcapi"
-          - "eth,web3,net,txpool,debug"
+          - "eth,web3,net,tendermint,txpool,debug"
           - "--rpcvhosts"
           - "*"
           - "--ws"
@@ -109,6 +109,9 @@ spec:
         - name: cm-genesis
           configMap:
             name: genesis
+            items:
+              - key: genesis
+                path: genesis.json
         - name: sec-account-pwd
           secret:
             secretName: validator-0
