@@ -27,6 +27,8 @@ spec:
       - name: init-job01-eth-keys-generator
         image: {{ .Values.image_eth_keys_generator.repository }}:{{ .Values.image_eth_keys_generator.tag }}
         args:
+          - "-k"
+          - "pod"
           - "--name"
           - "validator-0"
       restartPolicy: Never
