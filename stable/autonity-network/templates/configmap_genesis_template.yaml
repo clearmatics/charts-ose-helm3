@@ -43,7 +43,7 @@ data:
                 "bytecode": "",
                 "abi": "",
                 "minGasPrice": 0,
-                "governanceOperator": "???",
+                "operator": "???",
                 "users": []
             }
          },

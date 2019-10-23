@@ -5,7 +5,7 @@
 {{- $obsIps :=  .Values.observers.ips -}}
 {{- $addIps :=  .Values.whitelist_ips -}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}
+{{ range $i, $e := until (atoi (toString .Values.validators.num)) }}
 ---
 apiVersion: v1
 kind: Service

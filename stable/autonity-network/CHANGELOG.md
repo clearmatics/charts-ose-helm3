@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [1.5.3] - 2019-10-23
+### Added 
+- `tendermint` to API
+### Updated
+- Fixed wrong key for `operator` in genesis.json
+- requirements to `helm` > v2.15.0
 
 ## [1.5.2] - 2019-09-30
 ### Updated
