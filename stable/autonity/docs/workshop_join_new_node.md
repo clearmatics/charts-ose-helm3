@@ -35,7 +35,7 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
 * Actions: 
   * Get `enode` and `eth address for validator-0`:
   ```shell script
-  helm status %chartname%
+  helm status val-4
   ```
   * sent it to `Governance Operator`
  
@@ -47,7 +47,7 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
     * Create new metamask account using private key that was created at 
     [Initial ceremony workshop](./workshop_initial_ceremony.md)
     ```
-    grep "private_key:" ./Governance_Operator
+    grep "private_key:" ./Treasure_Operator
     ```
     * Add to metamask new network:
       * RPC: http://127.0.0.1:8545
@@ -55,7 +55,7 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
    * Send money to `Treasure Operator` address:
      * get address 
      ```
-     grep "address:" ./Treasure_Operator
+     grep "address:" ./Governance_Operator
      ```
      * Create and send transaction using metamask GUI
        * to: `Treasure Operator` address
@@ -76,13 +76,14 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
     ```
     git clone git@github.com:clearmatics/governance-operator.git
     cd governance-operator
-    edit config.json
     ```
+  * Edit `config.json` and replace `eth address` and `eth private_key` of Governance_Operator 
+
    * Send transaction to add new validator
     ```
     contract_addr=???
     validator_addr=???
-    stake="50000"
+    stake=50000
     enode=`???`
     
     docker run -ti --rm -v $(pwd)/config.json:/governance-operator/config.json --net=host clearmatics/governance-operator \

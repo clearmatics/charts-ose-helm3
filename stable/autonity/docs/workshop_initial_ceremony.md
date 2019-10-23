@@ -103,3 +103,8 @@ by `Network operator` in a [Step 1](##Step 1) for each `Autonity nodes`:
 ## Step 6
 * Actor:  `Alice`, `Bob`, `Network operator`
 * Actions: run `helm update` with new `genesis.yaml` with resolved `enode`s
+  ```
+  genesis="./genesis.yaml"
+  name="??" # Name for Autonity node, for example: "val-2"  
+  helm upgrade ${name} charts-ose.clearmatics.com/autonity -f ${genesis}
+  ```
