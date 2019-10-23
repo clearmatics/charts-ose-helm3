@@ -1,7 +1,7 @@
 dependencies:
   - name: autonity-network
     repository: "https://charts-ose.clearmatics.com"
-    version: 1.5.4
+    version: 1.5.5
     condition: global.autonity_network.enabled
   - name: ethstats
     repository: "https://charts-ose.clearmatics.com"
