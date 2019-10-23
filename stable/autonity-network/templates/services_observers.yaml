@@ -3,6 +3,7 @@
 {{- $ips :=  .Values.observers.ips -}}
 {{- $valIps :=  .Values.validators.ips -}}
 {{- $addIps :=  .Values.whitelist_ips -}}
+{{- $addRanges :=  .Values.whitelist_ranges -}}
 
 
 {{ range $i, $e := until (atoi (toString .Values.observers.num)) }}
@@ -26,6 +27,9 @@ spec:
   {{- end }}
   {{- range $addIps }}
   - {{ . }}/32
+  {{- end }}
+  {{- range $addRanges }}
+  - {{ . }}
   {{- end }}
   {{- range $valIps }}
   - {{ . }}/32
