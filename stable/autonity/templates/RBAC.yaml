@@ -14,11 +14,11 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
-  resourceNames: ["validator-0"]
+  resourceNames: ["autonity-node-0"]
   verbs: ["patch"]
 - apiGroups: [""]
   resources: ["configmaps"]
-  resourceNames: ["validator-0"]
+  resourceNames: ["autonity-node-0"]
   verbs: ["patch"]
 
 ---

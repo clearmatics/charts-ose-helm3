@@ -57,7 +57,7 @@ by `Network operator` in a [Step 1](##Step 1) for each `Autonity nodes`:
     name="??" # Name for Autonity node, for example: "val-2"
     ext_ip="X.X.X.X" # Public IP for Autonity node
     port="30303" # Public IP port for Autonity node. Should be different if you deploy several validator nodes to one cluster    
-    helm install --name ${name} --namespace ${name} charts-ose.clearmatics.com/autonity --set aws.validator_0.ext_ip=${ext_ip},aws.validator_0.port=${port} -f ${genesis}
+    helm install --name ${name} --namespace ${name} charts-ose.clearmatics.com/autonity --set aws.autonity_node_0.ext_ip=${ext_ip},aws.autonity_node_0.port=${port} -f ${genesis}
     ```
 
 ## For environments based on GKE

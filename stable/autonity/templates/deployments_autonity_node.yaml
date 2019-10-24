@@ -2,7 +2,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: validator-0
+  name: autonity-node-0
   namespace: {{ .Release.Namespace }}
 spec:
   strategy:
@@ -10,11 +10,11 @@ spec:
   template:
     metadata:
       labels:
-        app: validator-0
+        app: autonity-node-0
     spec:
 {{ if .Values.aws }}
       nodeSelector:
-        ext_ip: "{{ .Values.aws.validator_0.ext_ip }}"
+        ext_ip: "{{ .Values.aws.autonity_node_0.ext_ip }}"
 {{ end }}
       initContainers:
       - name: init
@@ -114,13 +114,13 @@ spec:
                 path: genesis.json
         - name: sec-account-pwd
           secret:
-            secretName: validator-0
+            secretName: autonity-node-0
             items:
               - key: password
                 path: account.pwd
         - name: sec-peers
           secret:
-            secretName: validator-0
+            secretName: autonity-node-0
             items:
               - key: private_key
                 path: private_key
