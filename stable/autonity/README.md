@@ -60,13 +60,13 @@ Actor: Each validator node
 
 ## Data storage
 
-1. secret `validator` contain:
+1. secret `autonity-node-0` contain:
    1. `private_key` - private key for account
-1. configmap `validator`, contain:
+1. configmap `autonity-node-0`, contain:
    1. `address` - address
    1. `pub_key` - public key
 1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) (default) for local blockchain 
-of `validators` and `observers`    
+of `autonity-nodes`    
    1. `aws_persistent_storage_enabled: true` enable AWS persistent storage for `blockchain`
    1. `gcp_persistent_storage_enabled: true` enable GCP persistent storage for `blockchain`
 1. configmap `genesis-template` contain list of peers, genesis options received from Operator:

@@ -30,6 +30,6 @@ spec:
           - "-k"
           - "pod"
           - "--name"
-          - "validator-0"
+          - "autonity-node-0"
       restartPolicy: Never
   backoffLimit: 0
