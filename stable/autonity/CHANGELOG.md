@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2019-10-24
 ### Updated
 - Refactoring `validator` => `autonty-node`
+- Added helm tests
 
 ## [0.0.5] - 2019-10-22
 ### Updated
