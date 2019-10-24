@@ -20,6 +20,10 @@ image_nginx:
   repository: nginx
   tag: 1.17-alpine
 
+testFramework:
+  image: "dduportal/bats"
+  tag: "0.4.0"
+
 networkid: 444888
 
 rpc_http_basic_auth_enabled: false
@@ -34,3 +38,39 @@ rpc:
 #  autonity_node_0:
 #    ext_ip: "X.X.X.X"
 #    port: "30303"
+
+default_genesis:
+  config:
+    homesteadBlock: 0
+    eip150Block: 0
+    eip150Hash: '0x0000000000000000000000000000000000000000000000000000000000000000'
+    eip155Block: 0
+    eip158Block: 0
+    petersburgBlock: 0
+    constantinopleBlock: 0
+    byzantiumBlock: 0
+    tendermint:
+      policy: 0
+      block-period: 1
+    chainId: 9999
+    autonityContract:
+      deployer: '0x0000000000000000000000000000000000000002'
+      bytecode: ''
+      abi: ''
+      minGasPrice: 10000000000000
+      operator: '0xae223655126e514C9C80096d99765A98547247D3'
+      users:
+      - enode: enode://e1780e8136a6744b4cad3d8d56fed349b72fd5617bf1443c61cafb418f7efe844aa142ad44149d3a7aa1e7410f025e1bd0fafa320213f43a0306a062f9275dc1@127.0.0.1:30302
+        type: participant
+  nonce: '0x0'
+  timestamp: '0x0'
+  gasLimit: '0x5F5E100'
+  difficulty: '0x1'
+  coinbase: '0x0000000000000000000000000000000000000000'
+  number: '0x0'
+  gasUsed: '0x0'
+  parentHash: '0x0000000000000000000000000000000000000000000000000000000000000000'
+  mixHash: '0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365'
+  alloc:
+    0x981dfa463bE3c247Fe311a05EeD4c67265204417:
+      balance: '0x200000000000000000000000000000000000000000000000000000000000000'
