@@ -1,4 +1,3 @@
-{{ if .Values.genesis }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -15,5 +14,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   genesis:  |-
-  {{ toJson .Values.genesis| indent 4 }}
+{{ if .Values.genesis }} {{ toJson .Values.genesis | indent 4 }}
+{{else}} {{ toJson .Values.default_genesis | indent 4 }}
 {{end}}
