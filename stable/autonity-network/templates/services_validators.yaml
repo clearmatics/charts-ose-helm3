@@ -4,6 +4,8 @@
 {{- $ips :=  .Values.validators.ips -}}
 {{- $obsIps :=  .Values.observers.ips -}}
 {{- $addIps :=  .Values.whitelist_ips -}}
+{{- $addRanges :=  .Values.whitelist_ranges -}}
+
 
 {{ range $i, $e := until (atoi (toString .Values.validators.num)) }}
 ---
@@ -24,11 +26,14 @@ spec:
   {{- range $ips }}
   - {{ . }}/32
   {{- end }}
+  {{- range $obsIps }}
+  - {{ . }}/32
+  {{- end }}
   {{- range $addIps }}
   - {{ . }}/32
   {{- end }}
-  {{- range $obsIps }}
-  - {{ . }}/32
+  {{- range $addRanges }}
+  - {{ . }}
   {{- end }}
   {{- end }}
   ports:

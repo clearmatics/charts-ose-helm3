@@ -78,4 +78,7 @@ zones:
 #  - europe-west2-c
 
 whitelist_ips:
+- 127.0.0.1/32 # by default allow access from localhost
+
+whitelist_ranges:
 - 0.0.0.0/0 # by default allow access from everywhere
