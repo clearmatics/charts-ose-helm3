@@ -52,15 +52,16 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
     * Add to metamask new network:
       * RPC: http://127.0.0.1:8545
       * ChainID: `1489` (you can see it in genesis config)
-   * Send money to `Treasure Operator` address:
+   * Send money from `Treasure Operator` to `Governance Operator` address:
      * get address 
      ```
      grep "address:" ./Governance_Operator
      ```
      * Create and send transaction using metamask GUI
-       * to: `Treasure Operator` address
-       * amount: `10000000000000000000000000000` eth
-       * fee::  `100000000000000` eth
+       * to: `Governance Operator` address
+       * amount: `177` eth
+       * Tx Gas Limit: `21000`
+       * Gas Price: `10000` Gwei
 
 ## Step 6
 * Actors: `Governance Operator`
