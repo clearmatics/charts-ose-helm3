@@ -15,12 +15,21 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+<<<<<<< HEAD
   "id": 4,
   "iteration": 1573590171801,
   "links": [],
   "panels": [
     {
       "content": "<div style=\"width:100%;height:100%;position:absolute;text-align:right\">\n<span style=\"display:block;font-size:25px;margin-right:205px;\">SystemX MainNet |</span> \n<img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"200\" style=\"margin-top:-67px\"/></div>\n",
+=======
+  "id": 3,
+  "iteration": 1569928653377,
+  "links": [],
+  "panels": [
+    {
+      "content": "<div style=\"width:100%;height:100%;position:absolute;text-align:right\">\n<span style=\"display:block;font-size:25px;margin-right:205px;\">SystemX |</span> \n<img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"200\" style=\"margin-top:-67px\"/></div>\n",
+>>>>>>> a01a5f4cbe44e1a9c5899e09aa80a57930b01c5e
       "gridPos": {
         "h": 2,
         "w": 8,
@@ -50,6 +59,48 @@
       "type": "row"
     },
     {
+<<<<<<< HEAD
+=======
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                40
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "NETWORK OUTAGE",
+        "name": "Network status - Block insertion alert",
+        "noDataState": "alerting",
+        "notifications": [
+          {
+            "uid": "GH3xbdtZk"
+          }
+        ]
+      },
+>>>>>>> a01a5f4cbe44e1a9c5899e09aa80a57930b01c5e
       "aliasColors": {},
       "bars": false,
       "cacheTimeout": null,
@@ -97,7 +148,19 @@
           "refId": "A"
         }
       ],
+<<<<<<< HEAD
       "thresholds": [],
+=======
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 40
+        }
+      ],
+>>>>>>> a01a5f4cbe44e1a9c5899e09aa80a57930b01c5e
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -295,7 +358,11 @@
       "tableColumn": "",
       "targets": [
         {
+<<<<<<< HEAD
           "expr": "max(chain_head_block) * 100 / (time()- 1569863390)",
+=======
+          "expr": "max(chain_head_block) * 100 / (time()- 1568805701)",
+>>>>>>> a01a5f4cbe44e1a9c5899e09aa80a57930b01c5e
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -340,6 +407,45 @@
       "type": "row"
     },
     {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                90
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "D",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "keep_state",
+        "for": "3m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "HIGH CPU USAGE",
+        "name": "CPU alert",
+        "noDataState": "keep_state",
+        "notifications": [
+          {
+            "uid": "GH3xbdtZk"
+          }
+        ]
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -407,11 +513,23 @@
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
+<<<<<<< HEAD
           "legendFormat": "",
+          "refId": "D"
+=======
           "refId": "D"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 90
+>>>>>>> a01a5f4cbe44e1a9c5899e09aa80a57930b01c5e
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -2619,7 +2737,7 @@
     ]
   },
   "timezone": "",
-  "title": "Autonity Prometheus",
-  "uid": "FPpjH6Hik",
-  "version": 11
+  "title": "Autonity",
+  "uid": "HQl5bOpZz",
+  "version": 14
 }

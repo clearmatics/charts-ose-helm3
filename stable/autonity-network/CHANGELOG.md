@@ -5,6 +5,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [1.5.6] - 2019-10-23
+### Updated
+- add the ability to whitelist ip ranges rather than individual ip addresses
+
+## [1.5.5] - 2019-10-23
+### Updated
+- update `ibft-genesis-configurator` to v1.0.4 to wait a keys generation
+
+## [1.5.4] - 2019-10-23
+### Updated
+- helm hook for init_ibft_genesis_configurator from `hook-succeeded` to `before-hook-creation`
+
+## [1.5.3] - 2019-10-23
+### Added
+- `tendermint` to API
+### Updated
+- Fixed wrong key for `operator` in genesis.json
+- requirements to `helm` > v2.15.0
+
+## [1.5.2] - 2019-09-30
+### Updated
+- Allow for specifying of LB source ranges
 
 ## [1.5.1] - 2019-09-30
 ### Updated
@@ -90,7 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.2] - 2019-08-20
 ### Added
 - http basic auth support for autonity RPC (for observers)
-- autonity version update to v0.1.5 
+- autonity version update to v0.1.5
 
 ## [0.3.1] - 2019-08-19
 ### Added

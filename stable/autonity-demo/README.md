@@ -36,7 +36,7 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
 ## Prerequisites
 
 * Kubernetes 1.11
-* Helm 2.14
+* Helm 2.15
 
 ## Subcharts
 
@@ -71,4 +71,15 @@ curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","metho
 ## Delete
 ```bash
 helm delete autonity-demo --purge
+```
+
+## Extended values configs
+
+[values_gke_persistent_storage.yaml](./values_gke_persistent_storage.yaml) will install to GKE with:
+- persistent storage for autonity validators and observers
+- persistent storage for prometheus
+- persistent storage for grafana
+
+```shell script
+helm install charts-ose.clearmatics.com/autonity-demo -f https://raw.githubusercontent.com/clearmatics/charts-ose/master/stable/autonity-demo/values_gke_persistent_storage.yaml
 ```

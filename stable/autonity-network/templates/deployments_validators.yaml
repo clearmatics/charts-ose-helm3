@@ -15,7 +15,7 @@
 {{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
 {{- $selectorMethod :=  .Values.selector_method -}}
 
-{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}
+{{ range $i, $e := until (atoi (toString .Values.validators.num)) }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -100,7 +100,7 @@ spec:
           - "1024"
           - "--rpc"
           - "--rpcapi"
-          - "eth,web3,net,txpool,debug"
+          - "eth,web3,net,tendermint,txpool,debug"
           - "--rpcvhosts"
           - "*"
           - "--ws"

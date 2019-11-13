@@ -5,6 +5,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [1.0.13] - 2019-10-24
+### Changed
+- Up version to autonity-network-1.5.6
+
+## [1.0.12] - 2019-10-23
+### Changed
+- Up version to autonity-network-1.5.5
+- Require helm > v2.15.0
+
+## [1.0.11] - 2019-10-02
+### Changed
+- Update grafana dashboard
+
+## [1.0.10] - 2019-10-01
+### Changed
+- Up version to prometheus-9.1.1
+- Update helm grafana to 3.8.15 (grafana v6.1.6 ==> v6.3.5)
+- add example file with values for GKE persistent storage installathion
 
 ## [1.0.9] - 2019-09-30
 ### Changed

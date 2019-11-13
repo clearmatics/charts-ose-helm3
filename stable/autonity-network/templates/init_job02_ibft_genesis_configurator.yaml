@@ -20,7 +20,7 @@ metadata:
   annotations:
     "helm.sh/hook": post-install
     "helm.sh/hook-weight": "2"
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook-delete-policy": before-hook-creation
 spec:
   template:
     metadata:
@@ -51,11 +51,11 @@ spec:
         env:
         {{- if $validatorAddress }}
         - name: VALIDATOR_IPS
-          value: "{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.validators.num))) }}{{index $validatorAddress $i }} {{ end }}" 
+          value: "{{ range $i, $e := until (atoi (toString .Values.validators.num)) }}{{index $validatorAddress $i }} {{ end }}"
         {{- end }}
         {{- if $observerAddress }}
         - name: OBSERVER_IPS
-          value: "{{ range $i, $e := until (atoi (printf "%d" (int64 .Values.observers.num))) }}{{index $observerAddress $i }} {{ end }}"
+          value: "{{ range $i, $e := until (atoi (toString .Values.observers.num)) }}{{index $observerAddress $i }} {{ end }}"
         {{- end }}
         args:
           - "--stake"

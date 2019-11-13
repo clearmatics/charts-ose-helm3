@@ -1,37 +1,24 @@
-{{- $imageAutonity := .Values.imageAutonity -}}
-{{- $imageAutonity_init := .Values.imageAutonity_init -}}
-{{- $imageNginx := .Values.image_nginx -}}
-{{- $namespace := .Release.Namespace -}}
-{{- $releasename := .Release.Name -}}
-
-{{- $networkid :=  .Values.networkid -}}
-
-{{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
-{{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
-{{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
-
-
-{{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
-{{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
-
-{{ range $i, $e := until (atoi (toString .Values.observers.num)) }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: observer-{{ $i }}
-  namespace: {{ $namespace }}
+  name: autonity-node-0
+  namespace: {{ .Release.Namespace }}
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: observer-{{ $i }}
+        app: autonity-node-0
     spec:
+{{ if .Values.aws }}
+      nodeSelector:
+        ext_ip: "{{ .Values.aws.autonity_node_0.ext_ip }}"
+{{ end }}
       initContainers:
       - name: init
-        image: {{ $imageAutonity_init.repository }}:{{ $imageAutonity_init.tag }}
+        image: {{ .Values.imageAutonity_init.repository }}:{{ .Values.imageAutonity_init.tag }}
         volumeMounts:
         - name: blockchain
           mountPath: /autonity/blockchain
@@ -43,9 +30,12 @@ spec:
           mountPath: /autonity/sec-account-pwd
         - name: sec-peers
           mountPath: /autonity/sec-peers
+        args:
+          - "--debug"
+          - "true"
       containers:
       - name: autonity
-        image: {{ $imageAutonity.repository }}:{{ $imageAutonity.tag }}
+        image: {{ .Values.imageAutonity.repository }}:{{ .Values.imageAutonity.tag }}
         ports:
         - containerPort: 30303
           name: p2p
@@ -77,20 +67,15 @@ spec:
           - "--pprofaddr"
           - "0.0.0.0"
           - "--networkid"
-          - "{{ $networkid }}"
+          - "{{ .Values.networkid }}"
+{{ if eq .Values.mode "validator" }}
+          - "--mine"
+          - "--minerthreads"
+          - "1"
+{{ end }}
           - "--debug"
           - "--verbosity"
           - "4"
-{{ if $ethstatsEnabled }}
-          - "--ethstats"
-          - "observer-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
-        env:
-        - name: ETHSTATS_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: ethstats
-              key: WS_SECRET
-{{ end }}
         volumeMounts:
         - name: blockchain
           mountPath: /autonity/blockchain
@@ -99,7 +84,7 @@ spec:
         - name: sec-peers
           mountPath: /autonity/sec-peers
       - name: nginx
-        image: {{ $imageNginx.repository }}:{{ $imageNginx.tag }}
+        image: {{ .Values.image_nginx.repository }}:{{ .Values.image_nginx.tag }}
         ports:
         - containerPort: 8080
           name: https-rpc
@@ -107,20 +92,20 @@ spec:
         - name: nginx-proxy-config
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
-{{ if $rpcHttpBasicAuthEnabled }}
+{{ if .Values.rpc_http_basic_auth_enabled }}
         - name: nginx-proxy-config
           mountPath: /etc/nginx/htpasswd
           subPath: htpasswd
 {{ end }}
-{{ if $rpcHttpsEnabled }}
+{{ if .Values.rpc_https_enabled }}
         - name: nginx-proxy-ssl
           mountPath: /etc/nginx/ssl
 {{ end }}
       volumes:
         - name: blockchain
-{{ if or (eq $awsPersistentStorageEnabled true) (eq $gcpPersistentStorageEnabled true)}}
+{{ if or (eq .Values.aws_persistent_storage_enabled true) (eq .Values.gcp_persistent_storage_enabled true) }}
           persistentVolumeClaim:
-            claimName: {{ $releasename }}-observer-{{ $i }}-blockchain
+            claimName: {{ .Release.Name }}-autonity-node-0-blockchain
 {{ else }}
           emptyDir: {}
 {{ end}}
@@ -131,21 +116,27 @@ spec:
         - name: cm-genesis
           configMap:
             name: genesis
+            items:
+              - key: genesis
+                path: genesis.json
         - name: sec-account-pwd
           secret:
-            secretName: account-pwd
+            secretName: autonity-node-0
+            items:
+              - key: password
+                path: account.pwd
         - name: sec-peers
           secret:
-            secretName: observers
+            secretName: autonity-node-0
             items:
-              - key: {{ $i }}.private_key
+              - key: private_key
                 path: private_key
         - name: nginx-proxy-config
           configMap:
             name: nginx-conf
-{{ if $rpcHttpsEnabled }}
+
+{{ if .Values.rpc_https_enabled }}
         - name: nginx-proxy-ssl
           secret:
             secretName: autonity-https
 {{ end }}
-{{- end}}
