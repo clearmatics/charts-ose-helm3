@@ -1,5 +1,5 @@
 name: autonity
-version: 1.0.2
+version: 1.0.4
 kubeVersion: ">=1.10.0-0"
 description: Deploy production autonity instances
 keywords:
@@ -11,4 +11,4 @@ sources:
 maintainers:
 - name: eastata
   email: aleksandr.poliakov@clearmatics.com
-appVersion: v0.2.1
+appVersion: v0.3.0

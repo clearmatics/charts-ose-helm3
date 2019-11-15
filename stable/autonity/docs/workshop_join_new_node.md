@@ -59,7 +59,7 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
      ```
      * Create and send transaction using metamask GUI
        * to: `Governance Operator` address
-       * amount: `177` eth
+       * amount: `500` eth
        * Tx Gas Limit: `21000`
        * Gas Price: `10000` Gwei
 
@@ -79,8 +79,7 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
     cd governance-operator
     ```
   * Edit `config.json` and replace `eth address` and `eth private_key` of Governance_Operator 
-
-   * Send transaction to add new validator
+  * Send transaction to add new validator (each call AddValidator will about `3` ETH)
     ```
     contract_addr=???
     validator_addr=???
@@ -90,6 +89,14 @@ by `Network operator` in a [Initial ceremony workshop](./workshop_initial_ceremo
     docker run -ti --rm -v $(pwd)/config.json:/governance-operator/config.json --net=host clearmatics/governance-operator \
           addValidator ${contract_addr} ${validator_addr} ${stake} ${enode}
     ```
+  * Check Autonity contract WhiteList
+    ```
+    docker run -ti --rm -v $(pwd)/config.json:/governance-operator/config.json --net=host clearmatics/governance-operator getWhitelist ${contract_addr}
+    ```
+  * Check Autonity contract Validators list
+    ```
+    docker run -ti --rm -v $(pwd)/config.json:/governance-operator/config.json --net=host clearmatics/governance-operator getValidators ${contract_addr}
+    ```     
 
 ## Step 7
 * Actors: `Alice`
