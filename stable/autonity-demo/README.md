@@ -35,7 +35,7 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
    ```
 ## Prerequisites
 
-* Kubernetes 1.11
+* Kubernetes 1.14
 * Helm 2.15
 
 ## Subcharts
