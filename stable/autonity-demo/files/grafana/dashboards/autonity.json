@@ -15,12 +15,12 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1569928653377,
+  "id": 4,
+  "iteration": 1573590171801,
   "links": [],
   "panels": [
     {
-      "content": "<div style=\"width:100%;height:100%;position:absolute;text-align:right\">\n<span style=\"display:block;font-size:25px;margin-right:205px;\">SystemX |</span> \n<img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"200\" style=\"margin-top:-67px\"/></div>\n",
+      "content": "<div style=\"width:100%;height:100%;position:absolute;text-align:right\">\n<span style=\"display:block;font-size:25px;margin-right:205px;\">SystemX MainNet |</span> \n<img src=\"https://www.clearmatics.com/static/logo-white-3962fb7d24bb8657bda0feba8a8fcbe9.svg\" width=\"200\" style=\"margin-top:-67px\"/></div>\n",
       "gridPos": {
         "h": 2,
         "w": 8,
@@ -469,7 +469,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "system",
+          "legendFormat": "{{kubernetes_name}}_system",
           "refId": "A"
         },
         {
@@ -477,7 +477,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "iowait",
+          "legendFormat": "{{kubernetes_name}}_iowait",
           "refId": "B"
         },
         {
@@ -485,7 +485,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "autonity",
+          "legendFormat": "{{kubernetes_name}}_autonity",
           "refId": "C"
         },
         {
@@ -589,7 +589,7 @@
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
-          "legendFormat": "alloc",
+          "legendFormat": "{{kubernetes_name}}_alloc",
           "refId": "A"
         },
         {
@@ -597,7 +597,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "used",
+          "legendFormat": "{{kubernetes_name}}_used",
           "refId": "B"
         },
         {
@@ -605,7 +605,7 @@
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
-          "legendFormat": "held",
+          "legendFormat": "{{kubernetes_name}}_held",
           "refId": "C"
         }
       ],
@@ -694,14 +694,14 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "read",
+          "legendFormat": "{{kubernetes_name}}_read",
           "refId": "A"
         },
         {
           "expr": "rate(system_disk_writebytes{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "write",
+          "legendFormat": "{{kubernetes_name}}_write",
           "refId": "B"
         }
       ],
@@ -802,14 +802,14 @@
           "expr": "rate(p2p_ingress{kubernetes_name=~\"^$Nodes\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "{{kubernetes_name}}",
           "refId": "B"
         },
         {
           "expr": "rate(p2p_egress{kubernetes_name=~\"^$Nodes\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "egress",
+          "legendFormat": "{{kubernetes_name}}",
           "refId": "C"
         }
       ],
@@ -897,21 +897,21 @@
           "expr": "p2p_peers{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "peers",
+          "legendFormat": "{{kubernetes_name}}_peers",
           "refId": "A"
         },
         {
           "expr": "rate(p2p_dials{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "dials",
+          "legendFormat": "{{kubernetes_name}}_dials",
           "refId": "B"
         },
         {
           "expr": "rate(p2p_serves{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "serves",
+          "legendFormat": "{{kubernetes_name}}_serves",
           "refId": "C"
         }
       ],
@@ -1212,7 +1212,7 @@
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "header",
+          "legendFormat": "{{kubernetes_name}}_header",
           "refId": "A"
         },
         {
@@ -1220,7 +1220,7 @@
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "receipt",
+          "legendFormat": "{{kubernetes_name}}_receipt",
           "refId": "B"
         },
         {
@@ -1228,7 +1228,7 @@
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "block",
+          "legendFormat": "{{kubernetes_name}}_block",
           "refId": "C"
         }
       ],
@@ -1314,21 +1314,21 @@
           "expr": "txpool_pending{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "executable",
+          "legendFormat": "{{kubernetes_name}}_executable",
           "refId": "A"
         },
         {
           "expr": "txpool_queued{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "gapped",
+          "legendFormat": "{{kubernetes_name}}_gapped",
           "refId": "B"
         },
         {
           "expr": "txpool_local{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "local",
+          "legendFormat": "{{kubernetes_name}}_local",
           "refId": "C"
         }
       ],
@@ -1734,7 +1734,7 @@
           "expr": "chain_execution{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "execution (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_execution (q=$quantile)",
           "refId": "A"
         },
         {
@@ -1743,7 +1743,7 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "validation (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_validation (q=$quantile)",
           "refId": "B"
         },
         {
@@ -1751,63 +1751,63 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "commit (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_commit (q=$quantile)",
           "refId": "C"
         },
         {
           "expr": "chain_account_reads{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "account read (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_account read (q=$quantile)",
           "refId": "D"
         },
         {
           "expr": "chain_account_updates{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "account update (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_account update (q=$quantile)",
           "refId": "E"
         },
         {
           "expr": "chain_account_hashes{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "account hashe (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_account hashe (q=$quantile)",
           "refId": "F"
         },
         {
           "expr": "chain_account_commits{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "account commit (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_account commit (q=$quantile)",
           "refId": "G"
         },
         {
           "expr": "chain_storage_reads{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "storage read (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_storage read (q=$quantile)",
           "refId": "H"
         },
         {
           "expr": "chain_storage_updates{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "storage update (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_storage update (q=$quantile)",
           "refId": "I"
         },
         {
           "expr": "chain_storage_hashes{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "storage hashe (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_storage hashe (q=$quantile)",
           "refId": "J"
         },
         {
           "expr": "chain_storage_commits{quantile=\"$quantile\",kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "storage commit (q=$quantile)",
+          "legendFormat": "{{kubernetes_name}}_storage commit (q=$quantile)",
           "refId": "K"
         }
       ],
@@ -1895,14 +1895,14 @@
           "expr": "rate(txpool_valid{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "valid",
+          "legendFormat": "{{kubernetes_name}}_valid",
           "refId": "K"
         },
         {
           "expr": "rate(txpool_invalid{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "invalid",
+          "legendFormat": "{{kubernetes_name}}_invalid",
           "refId": "A"
         },
         {
@@ -1948,7 +1948,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "gapped discard",
+          "legendFormat": "{{kubernetes_name}}_gapped discard",
           "refId": "G"
         },
         {
@@ -1956,7 +1956,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "gapped replace",
+          "legendFormat": "{{kubernetes_name}}_gapped replace",
           "refId": "H"
         },
         {
@@ -1964,7 +1964,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "gapped ratelimit",
+          "legendFormat": "{{kubernetes_name}}_gapped ratelimit",
           "refId": "I"
         },
         {
@@ -1972,7 +1972,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "gapped nofunds",
+          "legendFormat": "{{kubernetes_name}}_gapped nofunds",
           "refId": "J"
         }
       ],
@@ -2071,28 +2071,28 @@
           "expr": "rate(eth_db_chaindata_disk_read{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "leveldb read",
+          "legendFormat": "{{kubernetes_name}}_leveldb read",
           "refId": "B"
         },
         {
           "expr": "rate(eth_db_chaindata_disk_write{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "leveldb write",
+          "legendFormat": "{{kubernetes_name}}_leveldb write",
           "refId": "A"
         },
         {
           "expr": "rate(eth_db_chaindata_ancient_read{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ancient read",
+          "legendFormat": "{{kubernetes_name}}_ancient read",
           "refId": "C"
         },
         {
           "expr": "rate(eth_db_chaindata_ancient_write{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ancient write",
+          "legendFormat": "{{kubernetes_name}}_ancient write",
           "refId": "D"
         }
       ],
@@ -2178,28 +2178,28 @@
           "expr": "eth_db_chaindata_disk_read{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "leveldb read",
+          "legendFormat": "{{kubernetes_name}}_leveldb read",
           "refId": "B"
         },
         {
           "expr": "eth_db_chaindata_disk_write{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "leveldb write",
+          "legendFormat": "{{kubernetes_name}}_leveldb write",
           "refId": "A"
         },
         {
           "expr": "eth_db_chaindata_ancient_read{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ancient read",
+          "legendFormat": "{{kubernetes_name}}_ancient read",
           "refId": "C"
         },
         {
           "expr": "eth_db_chaindata_ancient_write{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ancient write",
+          "legendFormat": "{{kubernetes_name}}_ancient write",
           "refId": "D"
         }
       ],
@@ -2287,14 +2287,14 @@
           "expr": "eth_db_chaindata_disk_size{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "leveldb",
+          "legendFormat": "{{kubernetes_name}}_leveldb",
           "refId": "B"
         },
         {
           "expr": "eth_db_chaindata_ancient_size{kubernetes_name=~\"^$Nodes\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ancient",
+          "legendFormat": "{{kubernetes_name}}_ancient",
           "refId": "A"
         }
       ],
@@ -2394,7 +2394,7 @@
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
-          "legendFormat": "hit",
+          "legendFormat": "{{kubernetes_name}}_hit",
           "refId": "C"
         },
         {
@@ -2403,7 +2403,7 @@
           "hide": false,
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "miss",
+          "legendFormat": "{{kubernetes_name}}_miss",
           "refId": "B"
         }
       ],
@@ -2490,7 +2490,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "gc",
+          "legendFormat": "{{kubernetes_name}}_gc",
           "refId": "C"
         },
         {
@@ -2498,14 +2498,14 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "overflow",
+          "legendFormat": "{{kubernetes_name}}_overflow",
           "refId": "B"
         },
         {
           "expr": "rate(trie_memcache_commit_size{kubernetes_name=~\"^$Nodes\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "commit",
+          "legendFormat": "{{kubernetes_name}}_commit",
           "refId": "A"
         }
       ],
