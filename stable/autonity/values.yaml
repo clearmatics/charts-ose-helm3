@@ -50,6 +50,9 @@ rpc:
 #gcp:
 #  autonity_node_0:
 #    ext_ip: "X.X.X.X"
+#    node_selector:
+#       group: "example"
+#       failure-domain.beta.kubernetes.io/zone: "europe-west2-c"
 
 default_genesis:
   config:
