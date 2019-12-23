@@ -47,6 +47,10 @@ rpc:
 #    ext_ip: "X.X.X.X"
 #    port: "30303"
 
+#gcp:
+#  autonity_node_0:
+#    ext_ip: "X.X.X.X"
+
 default_genesis:
   config:
     homesteadBlock: 0

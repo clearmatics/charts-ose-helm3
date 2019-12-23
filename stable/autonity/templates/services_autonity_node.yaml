@@ -41,6 +41,10 @@ spec:
       port: {{ .Values.aws.autonity_node_0.port }}
       nodePort: {{ .Values.aws.autonity_node_0.port }}
   type: NodePort
+{{ else if .Values.gcp }}
+      port: 30303
+  type: LoadBalancer
+  loadBalancerIP: {{ .Values.gcp.autonity_node_0.ext_ip }}
 {{ else }}
       port: 30303
   type: LoadBalancer
