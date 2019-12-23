@@ -45,7 +45,7 @@ helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
 helm dependency update
 
 # Deploy to the cluster
-helm install -n build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER} --namespace build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER} ./
+helm install --name build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER} --namespace build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER} ./
 
 # Test release
 helm test --timeout 300 build-${CHART_NAME}-${TRAVIS_BUILD_NUMBER}
