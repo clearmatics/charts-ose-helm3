@@ -36,7 +36,7 @@ if [ ! $? -eq 0 ]; then
 fi
 
 # Helm init
-helm init --client-only
+helm init
 
 # Add repo
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
