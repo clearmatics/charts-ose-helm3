@@ -18,7 +18,7 @@ parameters:
   type: pd-ssd
 {{ end }}
 reclaimPolicy: Delete
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
 
 ---
 apiVersion: v1
