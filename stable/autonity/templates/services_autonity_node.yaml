@@ -51,3 +51,31 @@ spec:
 {{ end }}
   selector:
     app: autonity-node-0
+
+---
+{{ if .Values.rpc_public }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-rpc-autonity-node-0
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+    - protocol: TCP
+      name: https-rpc
+      targetPort: 8545
+      port: 8545
+    - protocol: TCP
+      name: wss
+      targetPort: 8546
+      port: 8546
+  type: LoadBalancer
+{{ if .Values.rpc_public.src_ip_whitelist }}
+  loadBalancerSourceRanges:
+  {{- range .Values.rpc_public.src_ip_whitelist }}
+    - {{ . }}
+  {{- end }}
+{{ end }}
+  selector:
+    app: autonity-node-0
+{{ end }}
