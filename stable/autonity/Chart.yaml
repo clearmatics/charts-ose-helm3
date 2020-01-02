@@ -1,5 +1,5 @@
 name: autonity
-version: 1.0.9
+version: 1.0.10
 kubeVersion: ">=1.10.0-0"
 description: Deploy production autonity instances
 keywords:

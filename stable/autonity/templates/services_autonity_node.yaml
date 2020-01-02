@@ -63,12 +63,12 @@ spec:
   ports:
     - protocol: TCP
       name: https-rpc
-      targetPort: 8545
       port: 8545
+      targetPort: 8080
     - protocol: TCP
       name: wss
-      targetPort: 8546
       port: 8546
+      targetPort: 8081
   type: LoadBalancer
 {{ if .Values.rpc_public.src_ip_whitelist }}
   loadBalancerSourceRanges:

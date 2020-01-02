@@ -39,3 +39,29 @@
 
 # Get Autonity Contract Address
     curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"tendermint_getContractAddress","params":[],"id":1}' http://localhost:8545
+
+# Example JSON-RPC requests:
+{{ if .Values.rpc_http_basic_auth_enabled }}RPC_AUTONITY_AUTH=user:password  {{ end }}
+{{ if .Values.rpc_https_enabled }}
+## Download tls.crt from k8s secret if you are using self-signed certificate
+kubectl -n {{ .Release.Namespace }} get secrets autonity-https -o 'go-template={{ "{{" }}index .data "tls.crt"{{ "}}" }}' | base64 --decode; echo ""
+CAfile=./files/tls.crt
+HOST=host.domain.example
+# echo "127.0.0.1       "${HOST} >> /etc/hosts
+{{ end }}
+
+### HTTP(s)-RPC ###
+curl -X POST -H "Content-Type: application/json" \
+   {{ if .Values.rpc_http_basic_auth_enabled }} -u $RPC_AUTONITY_AUTH {{ end }} \
+   {{ if .Values.rpc_https_enabled }} --cacert $CAfile {{ end }} \
+    --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' \
+   {{ if .Values.rpc_https_enabled }} https://$HOST:8545 {{ else }} http://localhost:8545 {{ end }}
+
+### WS(s)-RPC ###
+docker run -it --rm --net=host \
+    {{ if .Values.rpc_https_enabled }} -v $(pwd)"/files/tls.crt":"/tls.crt" {{ end }}\
+     monotykamary/wscat \
+    {{ if .Values.rpc_http_basic_auth_enabled }} --auth $RPC_AUTONITY_AUTH {{ end }}\
+    {{ if .Values.rpc_https_enabled }} --ca /tls.crt {{ end }}\
+     -c {{ if .Values.rpc_https_enabled }}wss://$HOST:8546 {{ else }}ws://127.0.0.1:8546 {{end}}\
+     -x '{"method":"eth_blockNumber","params":[],"id":1}'
