@@ -21,8 +21,8 @@ spec:
       targetPort: 8081
     - protocol: TCP
       name: metrics
-      port: 9200
-      targetPort: 9200
+      port: 6060
+      targetPort: 6060
   selector:
     app: autonity-node-0
 

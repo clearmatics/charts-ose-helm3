@@ -47,6 +47,8 @@ spec:
         ports:
         - containerPort: 30303
           name: p2p
+        - containerPort: 6060
+          name: metrics
         args:
           - "--datadir"
           - "/autonity/blockchain"

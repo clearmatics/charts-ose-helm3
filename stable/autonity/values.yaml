@@ -2,11 +2,11 @@
 
 imageAutonity:
   repository: clearmatics/autonity
-  tag: v0.3.0
+  tag: dev-0.3.0-fix
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
-  tag: v1.0.4
+  tag: v1.0.5
 
 image_eth_keys_generator:
   repository: clearmatics/eth-keys-generator
