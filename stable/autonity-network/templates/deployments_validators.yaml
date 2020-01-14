@@ -1,6 +1,7 @@
 {{- $imageAutonity := .Values.imageAutonity -}}
 {{- $imageAutonity_init := .Values.imageAutonity_init -}}
 {{- $imageNginx := .Values.image_nginx -}}
+{{- $imageTelegraf := .Values.image_telegraf -}}
 {{- $zones := .Values.zones -}}
 {{- $zoneCount := len $zones -}}
 {{- $namespace := .Release.Namespace -}}
@@ -8,12 +9,13 @@
 
 {{- $networkid :=  .Values.networkid -}}
 
-{{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
-{{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
-{{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
-{{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
-{{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
-{{- $selectorMethod :=  .Values.selector_method -}}
+{{- $ethstatsEnabled := .Values.global.ethstats.enabled -}}
+{{- $rpcHttpBasicAuthEnabled := .Values.rpc_http_basic_auth_enabled -}}
+{{- $rpcHttpsEnabled := .Values.rpc_https_enabled -}}
+{{- $awsPersistentStorageEnabled := .Values.aws_persistent_storage_enabled -}}
+{{- $gcpPersistentStorageEnabled := .Values.gcp_persistent_storage_enabled -}}
+{{- $telegraf := .Values.telegraf -}}
+{{- $selectorMethod := .Values.selector_method -}}
 
 {{ range $i, $e := until (atoi (toString .Values.validators.num)) }}
 ---
@@ -155,6 +157,19 @@ spec:
         - name: nginx-proxy-ssl
           mountPath: /etc/nginx/ssl
 {{ end }}
+{{ if $telegraf }}
+      - name: telegraf
+        image: {{ $imageTelegraf.repository }}:{{ $imageTelegraf.tag }}
+        env:
+        - name: NETWORKID
+          value: "{{ $networkid }}"
+        - name: CLIENT_NAME
+          value: "validator-{{ $i }}"
+        volumeMounts:
+        - name: telegraf-conf
+          mountPath: /etc/telegraf/telegraf.conf
+          subPath: conf
+{{ end }}
       volumes:
         - name: blockchain
 {{ if or (eq $awsPersistentStorageEnabled true) (eq $gcpPersistentStorageEnabled true)}}
@@ -179,6 +194,11 @@ spec:
             items:
               - key: {{ $i }}.private_key
                 path: private_key
+{{ if $telegraf }}
+        - name: telegraf-conf
+          configMap:
+            name: telegraf-conf
+{{ end }}
         - name: nginx-proxy-config
           configMap:
             name: nginx-conf

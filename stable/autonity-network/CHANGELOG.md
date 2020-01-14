@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [1.5.8] - 2020-01-13
+### Updated
+- Autonity to  dev-0.3.0-fix2
+- Add Telegraf and IndluxDB support
+
 ## [1.5.7] - 2019-11-15
 ### Updated
 - Autonity to v0.3.0

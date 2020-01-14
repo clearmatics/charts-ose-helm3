@@ -15,6 +15,7 @@ htpasswd
 *.crt
 *.key
 *.pem
+*_key.yaml
 
 # Build
 node_modules

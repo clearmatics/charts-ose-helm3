@@ -2,11 +2,11 @@
 
 imageAutonity:
   repository: clearmatics/autonity
-  tag: v0.3.0
+  tag: dev-0.3.0-fix2
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
-  tag: v1.0.4
+  tag: v1.0.5
 
 image_ibft_keys_generator:
   repository: clearmatics/ibft-keys-generator
@@ -20,6 +20,10 @@ image_nginx:
   repository: nginx
   tag: 1.17-alpine
 
+image_telegraf:
+  repository: telegraf
+  tag: 1.13.0-alpine
+
 testFramework:
   image: "dduportal/bats"
   tag: "0.4.0"
@@ -31,7 +35,6 @@ validators:
 observers:
   num: 1
   serviceType: "ClusterIP"
-
 
 chainid: 1488
 networkid: 444888
@@ -59,6 +62,15 @@ global:
     enabled: false
   telepresence:
     enabled: false
+
+# Create an account for https://cloud2.influxdata.com
+# Uncomment and fill vars below to receive your metrics
+#
+#telegraf:
+#  urls: "https://eu-central-1-1.aws.cloud2.influxdata.com"
+#  organization: "your-org-name"
+#  bucket: "your-bucket-name"
+#  token: "your-access-tocken"
 
 rpc:
   tls_crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURYVENDQWtXZ0F3SUJBZ0lKQU5Nc1RDTWpmRlVCTUEwR0NTcUdTSWIzRFFFQkN3VUFNRVV4Q3pBSkJnTlYKQkFZVEFrZENNUTh3RFFZRFZRUUlEQVpNYjI1a2IyNHhEekFOQmdOVkJBY01Ca3h2Ym1SdmJqRVVNQklHQTFVRQpDZ3dMUTJ4bFlYSnRZWFJwWTNNd0hoY05NVGt3T1RFM01UUXlOREl5V2hjTk1qQXdPVEUyTVRReU5ESXlXakJGCk1Rc3dDUVlEVlFRR0V3SkhRakVQTUEwR0ExVUVDQXdHVEc5dVpHOXVNUTh3RFFZRFZRUUhEQVpNYjI1a2IyNHgKRkRBU0JnTlZCQW9NQzBOc1pXRnliV0YwYVdOek1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQgpDZ0tDQVFFQXpXMTY1V1huWFBoZk0zUHJaOFFiY1ArOFJrTFdkeHpYc3pVZk1UdjMyZzg1cHlvdXlYdVNyU2M0CkRzMlJmOXpDeWIvd2V2OXVTRXdxWUFqWjVMT2RSNFk3OEJsem9NTFN2bmlRNVNVN3lLY3lZd0RCUWlmamh1VGoKQjV4ZDBUbmhQd00xS012Vkc2dHRHSnRtejVRUU5pNkg0MjIrSmVXTWVZeDE3bHpjS3pRbW52M1gzSzRycmdRZApQYWgvSlVrNjBrSlpvWkJhUmJ0ck0zOW92Q3d2VlRYeHZkSFV5Y1IvRllsZ21rdi85cmtPdmI4MXRJSDNrUVNmCk8relM5bXVOdTVJc1YveDNPVHRzMUdWMVJUdy9qbHBsVHBSRjNrYisyM3lyNzRVcExoNnpPaEZOU1hLMGRsRGEKeHVBcDl0YzNIb09BWi9zb0UzUjh4TVAzRHpRaDJ3SURBUUFCbzFBd1RqQWRCZ05WSFE0RUZnUVU0ZHFPTG14RwpnMlhMR2czcGx5OVZoYVptQW9Vd0h3WURWUjBqQkJnd0ZvQVU0ZHFPTG14R2cyWExHZzNwbHk5VmhhWm1Bb1V3CkRBWURWUjBUQkFVd0F3RUIvekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBY2p6ek9adG1OVVRGWWZCVDllL3MKZ25GT1V4VGxtelZ4dWFsZXBLVHRIeHdabnFXNkN6anlKWGNmV0lVME1OK2pUc2NsaDFxekNybU9SdVc2WjZqMwpGYmt2RlVZaUxRamZic21nUnZxK1lUaGhScVVRbUtLL3UzejlQcjFiaWRURlF5R29hc0NacGJ5Z0hKeWRXbW90CkVmaEpyNWtoMGJidnA4Y2kvWUMweSt5U1g1QnBQSHRPQW1iUFRqSXhTYnRoMGR0ZHdWclFKL1c5MnlkQ3NWU1YKdkdQRkpjSnBiSWZkNTdIM3FacmE5UnBMK1c0dEliN05DNGtHRjZmVW5HR0tqbVBaUkNoTVI0dDZOYWJIZkZSZApnc2tWeC9saCtGUStDRE96RmkzUjYvY0VlVk9mU3lMejJJT3pPQ2dsVVNxcFhOc1UrUUpod3pPRjl4OUdJZWhsCnVRPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=

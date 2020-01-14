@@ -141,7 +141,15 @@ In certain scenarios this isn't possible (for example deploying via gce node poo
 - label nodes pool: validators-n with n being the number of pools you will need to deploy your number of validators.
 - supply list of the availabiltiy zones you are using as array zones: in values.yaml (this is the value of failure-domain.beta.kubernetes.io/zone).
 
+### Metrics by InfluxDB
 
+You can send `autonity` metrics to InfluxDB cloud. (Disabled by default).
+* Create InfluxDB2 cloud account here: [cloud2.influxdata.com](https://cloud2.influxdata.com/) It is for free for limited testing usage.
+* Get your organisation name from Org Profile
+* Create bucket
+* Create token
+
+Put it to [values.yaml](./values.yaml) as a `telegraf:` values
 
 ## Tips (to view available commands)
 ```bash
