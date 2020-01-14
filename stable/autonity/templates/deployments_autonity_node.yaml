@@ -111,6 +111,19 @@ spec:
         - name: nginx-proxy-ssl
           mountPath: /etc/nginx/ssl
 {{ end }}
+{{ if .Values.telegraf }}
+      - name: telegraf
+        image: {{ .Values.telegraf.repository }}:{{ .Values.telegraf.tag }}
+        env:
+        - name: NETWORKID
+          value: "{{ .Values.networkid }}"
+        - name: CLIENT_NAME
+          value: "{{ .Values.telegraf.afnc_name }}"
+        volumeMounts:
+        - name: telegraf-conf
+          mountPath: /etc/telegraf/telegraf.conf
+          subPath: conf
+{{ end }}
       volumes:
         - name: blockchain
 {{ if or (eq .Values.aws_persistent_storage_enabled true) (eq .Values.gcp_persistent_storage_enabled true) }}
@@ -141,6 +154,11 @@ spec:
             items:
               - key: private_key
                 path: private_key
+{{ if .Values.telegraf }}
+        - name: telegraf-conf
+          configMap:
+            name: telegraf-conf
+{{ end }}
         - name: nginx-proxy-config
           configMap:
             name: nginx-conf

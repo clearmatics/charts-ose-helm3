@@ -1,0 +1,33 @@
+---
+{{ if .Values.telegraf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-conf
+  namespace: {{ .Release.Namespace }}
+data:
+  conf: |+
+    [global_tags]
+      networkid = "$NETWORKID"
+      clent_name = "$CLIENT_NAME"
+    [agent]
+      round_interval = true
+      metric_batch_size = 1000
+      metric_buffer_limit = 10000
+      collection_jitter = "0s"
+      flush_interval = "10s"
+      flush_jitter = "0s"
+      precision = ""
+      debug = false
+      quiet = false
+      logfile = ""
+      hostname = ""
+      omit_hostname = false
+    [[inputs.prometheus]]
+      urls = ["http://127.0.0.1:6060/debug/metrics/prometheus"]
+    [[outputs.influxdb_v2]]
+      urls = ["{{ .Values.telegraf.urls }}"]
+      token = "{{ .Values.telegraf.token }}"
+      organization = "{{ .Values.telegraf.organization }}"
+      bucket = "{{ .Values.telegraf.bucket }}"
+{{ end }}
