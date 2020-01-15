@@ -113,7 +113,7 @@ spec:
 {{ end }}
 {{ if .Values.telegraf }}
       - name: telegraf
-        image: {{ .Values.telegraf.repository }}:{{ .Values.telegraf.tag }}
+        image: {{ .Values.image_telegraf.repository }}:{{ .Values.image_telegraf.tag }}
         env:
         - name: NETWORKID
           value: "{{ .Values.networkid }}"
