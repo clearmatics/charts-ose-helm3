@@ -77,12 +77,10 @@ of `autonity-nodes`
 ## Metrics by InfluxDB
 
 You can send `autonity` metrics to InfluxDB cloud. (Disabled by default).
-* Create InfluxDB2 cloud account here: [cloud2.influxdata.com](https://cloud2.influxdata.com/) It is for free for limited testing usage.
-* Get your organisation name from Org Profile
-* Create bucket
-* Create token
-
-Put it to [values.yaml](./values.yaml) as a `telegraf:` values
+* Deploy InfluxDB v1.x Server
+* Create database
+* Create user with `WRITE` permissions for the database
+* Put credentials to [values.yaml](./values.yaml) as a `telegraf:` values
 
 ## Workshops
 * [Initial ceremony](./docs/workshop_initial_ceremony.md) Setup new network with validator nodes on different clouds (`EKS` and `GKE`)

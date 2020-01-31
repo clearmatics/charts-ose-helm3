@@ -22,14 +22,11 @@ image_nginx:
 
 image_telegraf:
   repository: telegraf
-  tag: 1.13.0-alpine
+  tag: 1.13.2-alpine
 
 testFramework:
   image: "dduportal/bats"
   tag: "0.4.0"
-
-# Used only for metrics tags
-afnc_name: "autonity"
 
 # Available modes: "participant" or "validator"
 mode: validator
@@ -39,15 +36,13 @@ networkid: 444888
 rpc_http_basic_auth_enabled: false
 rpc_https_enabled: false
 
-# Create an account for https://cloud2.influxdata.com
-# Uncomment and fill vars below to receive your metrics
-#
 #telegraf:
+#  # This name wil added as a tag for all metrics
 #  afnc_name: "autonity-node"
-#  urls: "https://eu-central-1-1.aws.cloud2.influxdata.com"
-#  organization: "your-org-name"
-#  bucket: "your-bucket-name"
-#  token: "your-access-tocken"
+#  urls: "https://influxdb-server:8086"
+#  database: "telegraf"
+#  username: "influxdb-user"
+#  password: "influxdb-password"
 
 #rpc_public:
 #  src_ip_whitelist:
