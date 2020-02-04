@@ -9,7 +9,7 @@ data:
   conf: |+
     [global_tags]
       networkid = "$NETWORKID"
-      clent_name = "$CLIENT_NAME"
+      afnc_name = "$AFNC_NAME"
     [agent]
       round_interval = true
       metric_batch_size = 1000

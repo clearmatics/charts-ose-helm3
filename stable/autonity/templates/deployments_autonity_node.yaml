@@ -117,7 +117,7 @@ spec:
         env:
         - name: NETWORKID
           value: "{{ .Values.networkid }}"
-        - name: CLIENT_NAME
+        - name: AFNC_NAME
           value: "{{ .Values.telegraf.afnc_name }}"
         volumeMounts:
         - name: telegraf-conf
