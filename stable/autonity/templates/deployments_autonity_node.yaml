@@ -14,7 +14,9 @@ spec:
     spec:
 {{ if .Values.aws }}
       nodeSelector:
-        ext_ip: "{{ .Values.aws.autonity_node_0.ext_ip }}"
+        {{- range $key, $value := .Values.aws.autonity_node_0.node_selector }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
 {{ end }}
 {{ if .Values.gcp }}
   {{ if .Values.gcp.autonity_node_0.node_selector }}

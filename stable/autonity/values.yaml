@@ -63,6 +63,8 @@ blockchain_persistent_volume_size: 20G
 #  autonity_node_0:
 #    ext_ip: "X.X.X.X"
 #    port: "30303"
+#    node_selector:
+#       failure-domain.beta.kubernetes.io/zone: "europe-west2-a"
 
 #gcp:
 #  autonity_node_0:
