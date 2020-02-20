@@ -12,7 +12,7 @@ spec:
       labels:
         app: autonity-node-0
     spec:
-{{ if .Values.aws.autonity_node_0.node_selector }}
+{{ if .Values.aws }}
       nodeSelector:
         {{- range $key, $value := .Values.aws.autonity_node_0.node_selector }}
         {{ $key }}: {{ $value }}
