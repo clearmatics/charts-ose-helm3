@@ -66,7 +66,7 @@ spec:
           - "1024"
           - "--rpc"
           - "--rpcapi"
-          - "eth,web3,net,tendermint,txpool,debug"
+          - "eth,web3,net,tendermint,txpool,debug,admin"
           - "--rpcvhosts"
           - "*"
           - "--ws"
