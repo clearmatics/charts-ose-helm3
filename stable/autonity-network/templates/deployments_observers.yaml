@@ -16,12 +16,15 @@
 
 {{ range $i, $e := until (atoi (toString .Values.observers.num)) }}
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: observer-{{ $i }}
   namespace: {{ $namespace }}
 spec:
+  selector:
+    matchLabels:
+        app: observer-{{ $i }}
   strategy:
     type: Recreate
   template:

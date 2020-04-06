@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [1.6.0] - 2020-04-06
+### Updated
+- Autonity to v0.4.0
+- Genesis changes
+- Fix [issue #164](https://github.com/clearmatics/charts-ose/issues/164)
+
 ## [1.5.9] - 2020-03-05
 ### Updated
 - Autonity to dev-0.3.2

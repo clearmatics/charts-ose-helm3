@@ -23,6 +23,7 @@ data:
               "petersburgBlock": 0,
               "constantinopleBlock": 0,
               "byzantiumBlock": 0,
+              "istanbulBlock": 0,
       {{if eq .Values.concensus "tendermint"}}
               "tendermint": {
                   "policy": 0,

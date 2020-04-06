@@ -1,6 +1,6 @@
 {{ if .Values.global.telepresence.enabled }}
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: telepresence
@@ -8,6 +8,9 @@ metadata:
   labels:
     app: telepresence
 spec:
+  selector:
+    matchLabels:
+        app: telepresence
   strategy:
     type: Recreate
   selector:

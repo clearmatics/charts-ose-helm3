@@ -19,12 +19,15 @@
 
 {{ range $i, $e := until (atoi (toString .Values.validators.num)) }}
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: validator-{{ $i }}
   namespace: {{ $namespace }}
 spec:
+  selector:
+    matchLabels:
+        app: validator-{{ $i }}
   strategy:
     type: Recreate
   template:
