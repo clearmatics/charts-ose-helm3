@@ -59,12 +59,6 @@ docker run -it --rm --net=host \
 # Forward ethstats dashboard to localhost http://localhost:8080
         kubectl -n {{ .Release.Namespace }} port-forward svc/ethstats 8080:80
 {{ end }}
-{{ if .Values.global.validator_dapp.enabled }}
-==== Validator DApp ====
-
-# Forward Validator DApp to localhost http://localhost:8081
-        kubectl -n {{ .Release.Namespace }} port-forward svc/validator-dapp 8081:80
-{{ end }}
 {{ if .Values.global.prometheus.enabled }}
 ==== Prometheus ====
 

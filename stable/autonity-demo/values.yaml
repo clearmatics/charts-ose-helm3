@@ -7,8 +7,6 @@ global:
   ethstats:
     enabled: false
     webSocketSecret: 3b7Lp5BDdtpNQyFwSjbtMHVU5Xuzo4
-  validator_dapp:
-    enabled: false
   prometheus:
     enabled: false
   grafana:

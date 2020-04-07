@@ -1,6 +1,6 @@
 name: autonity-demo
-version: 1.0.14
-kubeVersion: ">=1.10.0-0"
+version: 1.1.0
+kubeVersion: ">=1.15.11-0"
 description: Umbrella chart for Demo deploy autonity-network and supporting tools
 keywords:
 - autonity
@@ -11,4 +11,4 @@ sources:
 maintainers:
 - name: eastata
   email: aleksandr.poliakov@clearmatics.com
-appVersion: v0.3.0
+appVersion: v0.4.0
