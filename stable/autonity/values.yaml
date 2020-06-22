@@ -2,7 +2,7 @@
 
 imageAutonity:
   repository: clearmatics/autonity
-  tag: dev-0.3.0-fix2
+  tag: v0.4.0
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
