@@ -28,10 +28,10 @@ if [ ! -z "$3" ]
     fi
 fi
 
-aws eks update-kubeconfig --name ${CLUSTER}
+gcloud container clusters get-credentials ${CLUSTER} --region ${GCP_REGION} --project ${PROJECT}
 
 if [ ! $? -eq 0 ]; then
-    echo "ERROR: can't receive token from AWS for connection to the kubernetes cluster"
+    echo "ERROR: can't receive token from GCP for connection to the kubernetes cluster"
     exit 1
 fi
 
