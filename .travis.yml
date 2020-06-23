@@ -30,7 +30,7 @@ jobs:
     - "./ci/test_chart.sh $CLUSTER $CHART_NAME"
   - if: fork = false AND (sender = eastata OR sender = Klazomenai OR sender = scarby OR sender = raj-shekhar1) AND tag =~ /^(\w|-)*[-]\d+[.]\d+[.]\d+$/
     env:
-    - CLUSTER=autonity-eks-prod
+    - CLUSTER=tf-gke-helm
     - S3_BUCKET_NAME=charts-ose.clearmatics.com
     - CHART_NAME=$(echo ${TRAVIS_TAG} | sed -E s/-[0-9]+\.[0-9]+\.[0-9]+$//g)
     - RELEASE_VERSION=$(echo ${TRAVIS_TAG} | grep -Eo [0-9]+\.[0-9]+\.[0-9]+$)
