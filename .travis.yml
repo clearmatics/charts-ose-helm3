@@ -10,12 +10,12 @@ before_install:
   fi
 - chmod +x ~/bin/*
 - export PATH="~/bin:$PATH"
-- pip install awscli --upgrade --user
+- sudo snap install google-cloud-sdk
+- echo $BASE64_GOOGLE_CLOUD_KEYFILE_JSON | base64 -d > gcp_cred.json
+- gcloud auth activate-service-account --key-file gcp_cred.json
 - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
 - chmod 700 get_helm.sh
 - sudo ./get_helm.sh --version ${HELM_VERSION}
-- mkdir -p ~/.aws
-- printf "[default] \noutput = json \nregion = eu-west-1\n" > ~/.aws/config
 jobs:
   include:
   - if: type = pull_request AND fork = true AND branch = candidate
