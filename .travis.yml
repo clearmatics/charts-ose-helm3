@@ -24,7 +24,7 @@ jobs:
   - if: type = pull_request AND fork = false AND head_repo = clearmatics/charts-ose
       AND commit_message !~ /WIP/
     env:
-    - CLUSTER=autonity-eks-prod
+    - CLUSTER=tf-gke-helm
     - CHART_NAME=${TRAVIS_PULL_REQUEST_BRANCH}
     script:
     - "./ci/test_chart.sh $CLUSTER $CHART_NAME"
