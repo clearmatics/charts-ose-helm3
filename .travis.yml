@@ -11,6 +11,9 @@ before_install:
 - chmod +x ~/bin/*
 - export PATH="~/bin:$PATH"
 - sudo snap install google-cloud-sdk
+- echo "Echo garbage to test env var length"
+- echo $BASE64_GOOGLE_CLOUD_KEYFILE_JSON
+- base64 --version
 - echo $BASE64_GOOGLE_CLOUD_KEYFILE_JSON | base64 -d > gcp_cred.json
 - gcloud auth activate-service-account --key-file gcp_cred.json
 - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
