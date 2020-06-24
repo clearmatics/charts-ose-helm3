@@ -28,7 +28,7 @@ if [ ! -z "$3" ]
     fi
 fi
 
-gcloud container clusters get-credentials ${CLUSTER} --region ${GCP_REGION} --project ${PROJECT}
+gcloud container clusters get-credentials ${GCP_CLUSTER} --region ${GCP_REGION} --project ${GCP_PROJECT}
 
 if [ ! $? -eq 0 ]; then
     echo "ERROR: can't receive token from GCP for connection to the kubernetes cluster"
