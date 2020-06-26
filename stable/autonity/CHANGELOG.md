@@ -4,11 +4,15 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] 
+## [Unreleased]
+## [1.1.4]
+- Fix [issue #175](https://github.com/clearmatics/charts-ose/issues/175)
+
+## [Unreleased]
 ## [1.1.3] - 2020-03-26
 ### Updated
 - Added admin flag in the arguments.
- 
+
 ## [1.1.2] - 2020-02-20
 ### Updated
 - Fixed node-selector feature for aws.
@@ -106,7 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.2] - 2019-10-17
 ### Added
 - Support AWS NodePort for static IP
-- Initial ceremony Workshop 
+- Initial ceremony Workshop
 
 ## [0.0.1] - 2019-10-15
 ### Added
