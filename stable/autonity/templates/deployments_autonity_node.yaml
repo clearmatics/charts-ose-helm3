@@ -5,6 +5,9 @@ metadata:
   name: autonity-node-0
   namespace: {{ .Release.Namespace }}
 spec:
+  selector:
+    matchLabels:
+        app: autonity-node-0
   strategy:
     type: Recreate
   template:
