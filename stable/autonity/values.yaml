@@ -6,7 +6,7 @@ imageAutonity:
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
-  tag: v1.0.5
+  tag: v1.0.7
 
 image_eth_keys_generator:
   repository: clearmatics/eth-keys-generator

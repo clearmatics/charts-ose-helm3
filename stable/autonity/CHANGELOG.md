@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ## [1.1.4]
 - Fix [issue #175](https://github.com/clearmatics/charts-ose/issues/175)
+- Updated clearmatics/init-ceremony image to v1.0.7
 
 ## [Unreleased]
 ## [1.1.3] - 2020-03-26
