@@ -41,7 +41,7 @@ jobs:
     - "./ci/deploy_to_repo.sh $S3_BUCKET_NAME $CHART_NAME $RELEASE_VERSION"
 env:
   global:
-  - HELM_VERSION="v2.16.1"
+  - HELM_VERSION="v3.2.4"
 notifications:
   slack:
     rooms:
