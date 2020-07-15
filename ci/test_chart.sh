@@ -35,9 +35,6 @@ if [ ! $? -eq 0 ]; then
     exit 1
 fi
 
-# Helm init
-helm init
-
 # Add repo
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
 
