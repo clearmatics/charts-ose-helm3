@@ -4,6 +4,9 @@
 
 [Contributing rules](./CONTRIBUTING.md)
 
+# Versions
+- Helm [v2.3.4](https://github.com/helm/helm/releases/tag/v3.2.4). Note: Version hardcoded in [.travis.yml](.travis.yml)
+
 # Usage
 
 Add repo 
