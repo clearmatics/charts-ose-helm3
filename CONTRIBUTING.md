@@ -16,9 +16,9 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 ## Pull Request from collaborators or Team members
 
-1. The `branch` name for release should be the same as chart.
+1. A `branch` name which shares the same name as a `./stable/%CHART_NAME%/` will trigger tests through GitHub action. A branch name by any other name, will not.
 2. Notify the QA and Testing team when ready to release, providing the SHA-1 of the commit in master and a CHANGELOG.
-3. Update the README.md with details of changes to the interface, this includes new environment 
+3. Update the README.md with details of changes to the interface, this includes new environment
    variables, exposed ports, useful file locations and container parameters.
 4. Increase the version numbers in Chart to the new version that this
    Pull Request would represent. The versioning scheme we use is [SemVer][semver].
