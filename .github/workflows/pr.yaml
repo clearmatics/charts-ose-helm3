@@ -44,7 +44,7 @@ jobs:
 
     - name: Deploy the chart
       run: |
-        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE
+        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace default
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
         sleep 60
