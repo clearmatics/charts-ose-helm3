@@ -15,9 +15,12 @@ jobs:
     - name: git checkout
       uses: actions/checkout@v2
 
-    - name: Set useful variables
+    - name: Set chart name
       run: |
         echo '::set-env name=CHART_NAME::'$(echo ${GITHUB_REF##*/} | awk -F '-' '{print $1}')
+
+    - name: Set useful variables
+      run: |
         echo '::set-env name=CHART_PATH::stable/'$CHART_NAME
         echo '::set-env name=ACTOR_LOWERCASE::'$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')
         echo '::set-env name=SHORT_SHA::'$(echo $GITHUB_SHA|head -c 7)
