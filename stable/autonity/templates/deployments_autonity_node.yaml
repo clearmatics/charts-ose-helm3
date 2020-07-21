@@ -1,10 +1,13 @@
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: autonity-node-0
   namespace: {{ .Release.Namespace }}
 spec:
+  selector:
+    matchLabels:
+        app: autonity-node-0
   strategy:
     type: Recreate
   template:
