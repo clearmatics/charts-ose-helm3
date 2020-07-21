@@ -17,13 +17,15 @@ jobs:
 
     - name: Set useful variables
       run: |
-        echo '::set-env name=CHART_PATH::stable/'$(echo ${GITHUB_REF##*/} | awk -F '-' '{print $1}')
+        echo '::set-env name=CHART_NAME::'$(echo ${GITHUB_REF##*/} | awk -F '-' '{print $1}')
+        echo '::set-env name=CHART_PATH::stable/'$CHART_NAME
         echo '::set-env name=ACTOR_LOWERCASE::'$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')
         echo '::set-env name=SHORT_SHA::'$(echo $GITHUB_SHA|head -c 7)
         echo '::set-env name=S3_BUCKET_NAME::charts-ose.clearmatics.com'
 
     - name: Get useful variables
       run: |
+        echo 'Chart name: '$CHART_NAME
         echo 'Chart path: '$CHART_PATH
         echo 'Actor: '$GITHUB_ACTOR
         echo 'Actor Lowercase: '$ACTOR_LOWERCASE
@@ -48,12 +50,12 @@ jobs:
 
     - name: Deploy the chart
       run: |
-        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace default
+        helm install $CHART_NAME-$SHORT_SHA $CHART_PATH --namespace default
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
         sleep 60
     - name: Run the tests
-      run: helm test $GITHUB_HEAD_REF-$SHORT_SHA
+      run: helm test $CHART_NAME-$SHORT_SHA
 
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
@@ -80,4 +82,4 @@ jobs:
       run: |
         aws s3 cp ./repo/index.yaml s3://${S3_BUCKET_NAME} --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type "text/plain"
     - name: Cleanup
-      run: helm delete $GITHUB_HEAD_REF-$SHORT_SHA
+      run: helm delete $CHART_NAME-$SHORT_SHA
