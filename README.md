@@ -4,9 +4,12 @@
 
 [Contributing rules](./CONTRIBUTING.md)
 
+# Versions
+- Helm [v3.2.4](https://github.com/helm/helm/releases/tag/v3.2.4)
+
 # Usage
 
-Add repo 
+Add repository
 ```bash
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
 ```
@@ -22,7 +25,7 @@ helm install charts-ose.clearmatics.com/autonity-demo
 ```
 
 # Tests
-Each chart should contain tests in `./stable/%CHARTNAME%/templates/tests` directory.    
+Each chart should contain tests in `./stable/%CHARTNAME%/templates/tests` directory.
 The tests could be based on [Bash Automated Testing System](https://github.com/bats-core/bats-core) (and use [Bats Docker image](https://github.com/dduportal-dockerfiles/bats) )
 
 For run test
