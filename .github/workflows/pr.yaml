@@ -15,12 +15,14 @@ jobs:
     - name: Set useful variables
       run: |
         echo '::set-env name=CHART_PATH::stable/'$GITHUB_HEAD_REF
+        echo '::set-env name=ACTOR_LOWERCASE::'$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')
         echo '::set-env name=SHORT_SHA::'$(echo $GITHUB_SHA|head -c 7)
 
     - name: Get useful variables
       run: |
         echo 'Chart path: '$CHART_PATH
         echo 'Actor: '$GITHUB_ACTOR
+        echo 'Actor Lowercase: '$ACTOR_LOWERCASE
         echo 'Short SHA: '$SHORT_SHA
 
     - name: Setup gcloud environment
@@ -42,7 +44,7 @@ jobs:
 
     - name: Deploy the chart
       run: |
-        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $GITHUB_ACTOR
+        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
         sleep 60
