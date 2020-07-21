@@ -70,7 +70,7 @@ jobs:
 
     - name: Package the chart
       run: |
-        helm package ${CHART_PATH} -d "repo" --save=false --debug
+        helm package ${CHART_PATH} --destination "repo" --debug
         helm repo index ./repo
 
     - name: Publish the chart
