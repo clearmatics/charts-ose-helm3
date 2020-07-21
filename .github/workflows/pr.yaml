@@ -1,0 +1,53 @@
+name: "Integration Tests"
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  integration_tests:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: git checkout
+      uses: actions/checkout@v2
+
+    - name: Set useful variables
+      run: |
+        echo '::set-env name=CHART_PATH::stable/'$GITHUB_HEAD_REF
+        echo '::set-env name=SHORT_SHA::'$(echo $GITHUB_SHA|head -c 7)
+
+    - name: Get useful variables
+      run: |
+        echo 'Chart path: '$CHART_PATH
+        echo 'Actor: '$GITHUB_ACTOR
+        echo 'Short SHA: '$SHORT_SHA
+
+    - name: Setup gcloud environment
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.2
+      with:
+        version: '290.0.1'
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Configure the kubeconfig
+      run: gcloud container clusters get-credentials ${{ secrets.GCP_CLUSTER_NAME }} --zone ${{ secrets.GCP_PROJECT_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
+
+    - name: Install helm
+      uses: azure/setup-helm@v1
+      with:
+        version: '3.2.4'
+      id: install
+
+    - name: Deploy the chart
+      run: |
+        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $GITHUB_ACTOR
+        # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
+        # this problem another way
+        sleep 60
+    - name: Run the tests
+      run: helm test $GITHUB_HEAD_REF-$SHORT_SHA
+
+    - name: Cleanup
+      run: helm delete $GITHUB_HEAD_REF-$SHORT_SHA
