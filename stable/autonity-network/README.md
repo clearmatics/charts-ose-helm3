@@ -2,37 +2,33 @@
 
 [![Join the chat at https://gitter.im/clearmatics/autonity](https://badges.gitter.im/clearmatics/autonity.svg)](https://gitter.im/clearmatics/autonity?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-
 ## Introduction
+This chart deploys a **private** [Autonity](https://www.autonity.io/) network onto a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-This chart deploys a **private** [Autonity](https://www.autonity.io/) network onto a [Kubernetes](http://kubernetes.io)
-cluster using the [Helm](https://helm.sh) package manager.
-Autonity is a generalization of the Ethereum protocol based on a fork of go-ethereum.
-[Autonity Documentation](https://docs.autonity.io)
+"Ethereum based protocol enabling permissioned, decentralized and interoperable transacting member-mutual networks." - [Autonity](https://www.autonity.io)
 
-## Quick start
-1. Install [Kubernetes cluster](http://kubernetes.io). You can do it using one of this ways:
-   - Install minimal local kubernetes cluster out of box [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) or:
-   - Install [Amazon EKS](https://eksworkshop.com/prerequisites/self_paced/) or:
-   - Install [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
-1. Install packet manager for kubernetes using this [Helm installation guide](https://helm.sh/docs/using_helm/#installing-helm)
-1. Configure helm to your cluster
-   ```bash
-   helm init
-   ```
-1. Download `autonity-helm` chart:
-   ```bash
-   git clone https://github.com/clearmatics/charts-ose.git
-   ```
-1. Deploy it
-   ```bash
-   cd ./charts-ose/stable/autonity-network
-   helm install -n autonity-network ./
-   ```
-## Prerequisites
+## Examples
+The examples below have been tested with:
+* Helm `3.2.4`
+* [Kubernetes](http://kubernetes.io) `v1.18.4`. Basic features have been tested in both Minikube and Kind with extra functionality available in EKS and GKE:
+   - Local: [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+   - Local: [Kind](https://kind.sigs.k8s.io/docs/user/quick-start)
+   - Cloud: [Amazon EKS](https://eksworkshop.com/prerequisites/self_paced/)
+   - Cloud: [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
 
-* Kubernetes 1.10
-* Helm 2.15
+### Helm Pre-requisites
+1. [Initialise](https://helm.sh/docs/intro/quickstart/ the official) `@stable` and the Autonity Helm charts repositories:
+```bash
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com/
+helm repo update
+```
+
+### tl;dr
+```bash
+helm install autonity-network charts-ose.clearmatics.com/autonity-network --version 1.7.0
+```
+Note: `autonity-network` versions before `1.7.0` are supported by [Helm 2](https://github.com/clearmatics/charts-ose/).
 
 ## Kubernetes objects
 This chart is comprised of 4 components:
@@ -48,21 +44,17 @@ This chart is comprised of 4 components:
    [Source](https://github.com/clearmatics/autonity/blob/master/Dockerfile)
 
 ## Data storage
-
 1. secret `account-pwd` contain generated account password.
 1. secret `validators`, `observers`, `operator-governance` or `operator-treasury` contain:
    1. `0.private_key` - private key for account
 1. configmap `validators`, `observers`, `operator-governance` or `operator-treasury` contain:
    1. `0.address` - address
    1. `0.pub_key` - public key
-1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) (default) for local blockchain of `validators` and `observers`    
+1. Kubernetes [EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) (default) for local blockchain of `validators` and `observers`
    1. `aws_persistent_storage_enabled: true` enable AWS persistent storage for `blockchain`
    1. `gcp_persistent_storage_enabled: true` enable GCP persistent storage for `blockchain`
-  
-
 
 ## Configure
-
 - You can change number of validators or observers using helm cli-options like this:
    ```bash
    helm install -n autonity ./ --set validators=6,observers=2
@@ -151,12 +143,13 @@ You can send `autonity` metrics to InfluxDB cloud. (Disabled by default).
 
 Put it to [values.yaml](./values.yaml) as a `telegraf:` values
 
-## Tips (to view available commands)
+## Notes
+To view available commands:
 ```bash
 helm status autonity
 ```
 
-## Delete
+## Cleanup
 ```bash
-helm delete autonity --purge
+helm delete autonity
 ```

@@ -1,7 +1,8 @@
 name: autonity-network
-version: 1.6.0
+apiVersion: v1
+version: 1.7.0
 kubeVersion: ">=1.15.11-0"
-description: Chart for deploy full Autonity network
+description: Chart for deploying a full Autonity network
 keywords:
 - autonity
 - blockchain
@@ -11,6 +12,4 @@ sources:
 maintainers:
 - name:  eastata
   email: aleksandr.poliakov@clearmatics.com
-- name:  "scarby"
-  email: adam.scarborough@clearmatics.com
 appVersion: v0.4.0
