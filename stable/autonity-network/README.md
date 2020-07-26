@@ -8,16 +8,14 @@ This chart deploys a **private** [Autonity](https://www.autonity.io/) network on
 "Ethereum based protocol enabling permissioned, decentralized and interoperable transacting member-mutual networks." - [Autonity](https://www.autonity.io)
 
 ## Examples
-The examples below have been tested with:
-* Helm `3.2.4`
-* [Kubernetes](http://kubernetes.io) `v1.18.4`. Basic features have been tested in both Minikube and Kind with extra functionality available in EKS and GKE:
+### Prerequisites
+1. Install [Kubernetes](http://kubernetes.io) `v1.18.4`. Basic features have been tested in both Minikube and Kind with extra functionality available in EKS and GKE:
    - Local: [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
    - Local: [Kind](https://kind.sigs.k8s.io/docs/user/quick-start)
    - Cloud: [Amazon EKS](https://eksworkshop.com/prerequisites/self_paced/)
    - Cloud: [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
-
-### Helm Pre-requisites
-1. [Initialise](https://helm.sh/docs/intro/quickstart/ the official) `@stable` and the Autonity Helm charts repositories:
+1. Install Helm [3.2.4](https://github.com/helm/helm/releases/tag/v3.2.4)
+1. Initialise [the official](https://helm.sh/docs/intro/quickstart/ the official) `@stable` and the Autonity Helm charts repositories:
 ```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com/
