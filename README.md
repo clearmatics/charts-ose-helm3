@@ -17,7 +17,7 @@ helm repo update
 
 Search for the Autonity charts:
 ```bash
-helm search autonity
+helm search repo autonity
 ```
 
 Install one of the charts:
