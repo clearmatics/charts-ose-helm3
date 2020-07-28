@@ -22,13 +22,18 @@ helm search repo autonity
 
 Install one of the charts:
 ```yaml
-helm install charts-ose.clearmatics.com/autonity-network
+helm install autonity-network charts-ose.clearmatics.com/autonity-network
 ```
 
 ## Tests
-Each chart should contain tests in `./stable/%CHARTNAME%/templates/tests` directory. The tests could be based on [Bash Automated Testing System](https://github.com/bats-core/bats-core) (and use [Bats Docker image](https://github.com/dduportal-dockerfiles/bats) ).
+Each chart should contain tests in the `./stable/%CHARTNAME%/templates/tests` directory. The tests are based on [Bash Automated Testing System](https://github.com/bats-core/bats-core) (and use [Bats Docker image](https://github.com/dduportal-dockerfiles/bats) ).
 
-2. Run tests
+Run the tests:
 ```bash
-helm test --timeout 300 ${CHART_NAME}
+helm test autonity-network
+```
+
+## Cleanup
+```
+helm delete autonity-network
 ```
