@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.7.0]
 ### Updated
-- Documentation to reflect Helm 3 changes
+- Support Helm v3.2.4 [issue #5](https://github.com/clearmatics/charts-ose-helm3/issues/5)
+- Documentation update to reflect Helm 3 changes and some minor refactoring
 
 ## [Unreleased]
 ## [1.6.0] - 2020-04-06
