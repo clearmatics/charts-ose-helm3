@@ -51,7 +51,7 @@ jobs:
       id: install
 
     - name: Check if the namespace exists
-        echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
+      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
 
     - name: Deploy the chart
       run: |
