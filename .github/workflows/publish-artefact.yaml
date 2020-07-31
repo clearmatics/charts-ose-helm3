@@ -52,9 +52,13 @@ jobs:
         version: '3.2.4'
       id: install
 
+    - name: Check if the namespace exists
+      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
+
     - name: Deploy the chart
       run: |
-        kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        echo 'Namespace count: '$NAMESPACE_COUNT
+        if [ $NAMESPACE_COUNT = 0 ]; then kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
         helm install $CHART_NAME-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
@@ -87,7 +91,14 @@ jobs:
     - name: Publish the main index
       run: |
         aws s3 cp ./repo/index.yaml s3://${S3_BUCKET_NAME} --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type "text/plain"
-    - name: Cleanup
+
+    - name: Delete the chart
+      run: helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+
+    - name: Check if the namespace exists
+      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
+
+    - name: Delete the namespace
       run: |
-        helm delete $CHART_NAME-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
-        kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        echo 'Namespace count: '$NAMESPACE_COUNT
+        if [ $NAMESPACE_COUNT != 0 ]; then kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
