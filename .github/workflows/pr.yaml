@@ -50,11 +50,14 @@ jobs:
         version: '3.2.4'
       id: install
 
+    - name: Check if the namespace exists
+        echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
+
     - name: Deploy the chart
       run: |
-        kubectl get namespaces -A|grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID "; if [[ $? -eq 0 ]]; then echo "Namespace already exists"; else kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
-        kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
-        #helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        echo 'Namespace count: '$NAMESPACE_COUNT
+        if [ $NAMESPACE_COUNT = 0 ]; then kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
+        helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
         sleep 60
@@ -65,5 +68,4 @@ jobs:
     - name: Cleanup
       run: |
         helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
-        kubectl get namespaces -A|grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID " ; if [[ $? -eq 0 ]]; then kubectl deleate namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else echo "Namespace didn't exist"; fi
-        #kubectl deleate namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        kubectl get namespaces -A|grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' ; if [[ $? -eq 0 ]]; then kubectl deleate namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else echo 'Namespace did not exist'; fi
