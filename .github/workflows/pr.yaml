@@ -31,6 +31,7 @@ jobs:
         echo 'Actor: '$GITHUB_ACTOR
         echo 'Actor Lowercase: '$ACTOR_LOWERCASE
         echo 'Short SHA: '$SHORT_SHA
+        echo 'GitHub Run ID: '$GITHUB_RUN_ID
 
     - name: Setup gcloud environment
       uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.2
@@ -57,6 +58,7 @@ jobs:
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
         sleep 60
+
     - name: Run the tests
       run: helm test $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
 
