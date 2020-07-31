@@ -51,7 +51,12 @@ jobs:
 
     - name: Deploy the chart
       run: |
-        kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        kubectl get namespaces -A|grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID "; \
+          # If a namespace was not found, create it
+          if [[ $? -eq 0 ]]; then \
+            echo "Namespace already exists"; else \
+            kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; \
+          fi
         helm install $GITHUB_HEAD_REF-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
@@ -62,4 +67,9 @@ jobs:
     - name: Cleanup
       run: |
         helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
-        kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        kubectl get namespaces -A|grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID "; \
+          # If a namespace was found, delete it
+          if [[ $? -eq 0 ]]; then \
+            kubectl deleate namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else \
+            echo "Namespace didn't exist"; \
+          fi
