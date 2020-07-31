@@ -65,7 +65,11 @@ jobs:
     - name: Run the tests
       run: helm test $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
 
+    - name: Check if the namespace exists
+      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
+
     - name: Cleanup
       run: |
         helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
-        kubectl get namespaces -A|grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' ; if [[ $? -eq 0 ]]; then kubectl deleate namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else echo 'Namespace did not exist'; fi
+        echo 'Namespace count: '$NAMESPACE_COUNT
+        if [ $NAMESPACE_COUNT != 0 ]; then kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
