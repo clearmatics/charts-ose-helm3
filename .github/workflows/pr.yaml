@@ -52,7 +52,6 @@ jobs:
     - name: Deploy the chart
       run: |
         kubectl get namespaces -A|grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID "; \
-          # If a namespace was not found, create it
           if [[ $? -eq 0 ]]; then \
             echo "Namespace already exists"; else \
             kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; \
@@ -68,7 +67,6 @@ jobs:
       run: |
         helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         kubectl get namespaces -A|grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID "; \
-          # If a namespace was found, delete it
           if [[ $? -eq 0 ]]; then \
             kubectl deleate namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else \
             echo "Namespace didn't exist"; \
