@@ -62,7 +62,7 @@ jobs:
         helm install $CHART_NAME-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
-        sleep 60
+        sleep 120
 
     - name: Run the tests
       run: helm test $CHART_NAME-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
