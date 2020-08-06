@@ -1,36 +1,39 @@
 # Clearmatics public helm charts repo
 
-# Contributing
-
+## Contributing
 [Contributing rules](./CONTRIBUTING.md)
 
-# Versions
+## Versions
+- Kubernetes `>=1.15.11-0`
 - Helm [v3.2.4](https://github.com/helm/helm/releases/tag/v3.2.4)
 
-# Usage
-
-Add repository
+## Usage
+Add the relevant repository, and update:
 ```bash
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
+helm repo update
 ```
 
-Search
+Search for the Autonity charts:
 ```bash
-helm search autonity
+helm search repo autonity
 ```
 
-Install example
+Install one of the charts:
 ```yaml
-helm install charts-ose.clearmatics.com/autonity-demo
+helm install autonity-network charts-ose.clearmatics.com/autonity-network
 ```
 
-# Tests
-Each chart should contain tests in `./stable/%CHARTNAME%/templates/tests` directory.
-The tests could be based on [Bash Automated Testing System](https://github.com/bats-core/bats-core) (and use [Bats Docker image](https://github.com/dduportal-dockerfiles/bats) )
+## Tests
+Each chart should contain tests in the `./stable/%CHARTNAME%/templates/tests` directory. The tests are based on [Bash Automated Testing System](https://github.com/bats-core/bats-core) (and use [Bats Docker image](https://github.com/dduportal-dockerfiles/bats) ).
 
-For run test
-1. install chart chart to the cluster
-2. Run tests
-    ```bash
-    helm test --timeout 300 ${CHART_NAME}
-    ```
+Run the tests:
+```bash
+helm test autonity-network
+```
+
+## Cleanup
+```
+helm delete autonity-network
+```
