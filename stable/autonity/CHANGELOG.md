@@ -4,6 +4,10 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1]
+- Disable freezer functionality with deployment of autontity hotfix 0.4.1
+- Support clearmatics/autonity-init v1.0.8
+
 ## [1.2.0]
 - Support helm v3.2.4 [issue #1](https://github.com/clearmatics/charts-ose-helm3/issues/1)
 - Support clearmatics/autonity v0.4.0 [issue #2](https://github.com/clearmatics/charts-ose-helm3/issues/2)
