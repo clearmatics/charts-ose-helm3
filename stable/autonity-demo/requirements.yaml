@@ -3,10 +3,6 @@ dependencies:
     repository: "https://charts-ose.clearmatics.com"
     version: 1.6.0
     condition: global.autonity_network.enabled
-  - name: ethstats
-    repository: "https://charts-ose.clearmatics.com"
-    version: 0.1.2
-    condition: global.ethstats.enabled
   - name: prometheus
     repository: "@stable"
     version: 11.0.4

@@ -39,23 +39,21 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
 * Helm 2.15
 
 ## Subcharts
-
 * [autonity-network](../autonity-network) - **private** Autonity network with set of validators and observers (Enabled by default)
-* [Ethstats](../ethstats) - Web-dashboard for monitoring Autonity network (Optional)
-* [Validator DApp](../validator-dapp) - Validator DApp provides a WEB interface to manage the validator set of nodes.  (Optional)
 * [Prometheus](https://github.com/helm/charts/tree/master/stable/prometheus) - Metrics system
 * [Grafana](https://github.com/helm/charts/tree/master/stable/grafana) - GUI for metrics system
 
 ## Configure
-
 - You can change number of validators or observers using helm cli-options like this:
-   ```bash
-   helm install -n autonity-demo ./ --set autonity-network.validators.num=6,autonity-network.observers.num=2
-   ```
+```bash
+helm install -n autonity-demo ./ --set autonity-network.validators.num=6,autonity-network.observers.num=2
+```
+
 - You can enable optional subcharts like:
-   ```bash
-   helm install -n autonity-demo ./ --set global.ethstats.enabled=true
-   ```
+```bash
+helm install -n autonity-demo ./ --set global.grafana.enabled=true
+```
+
 - Also you can change any variables in this file [./values.yaml](values.yaml) before installation
 
 ## Connect to autonity network

@@ -53,12 +53,6 @@ docker run -it --rm --net=host \
     {{ if index .Values "autonity-network" "rpc_https_enabled" }} --ca /tls.crt {{ end }}\
      -c {{ if index .Values "autonity-network" "rpc_https_enabled" }}wss://$HOST:8546 {{ else }}ws://127.0.0.1:8546 {{end}}\
      -x '{"method":"eth_blockNumber","params":[],"id":1}'
-{{ if .Values.global.ethstats.enabled }}
-==== Ethstats ====
-
-# Forward ethstats dashboard to localhost http://localhost:8080
-        kubectl -n {{ .Release.Namespace }} port-forward svc/ethstats 8080:80
-{{ end }}
 {{ if .Values.global.prometheus.enabled }}
 ==== Prometheus ====
 
