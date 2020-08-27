@@ -38,8 +38,8 @@ helm install -n autonity-demo ./
 ```
 
 ## Prerequisites
-* Kubernetes 1.14
-* Helm 2.15
+* Kubernetes 1.18.6
+* Helm 3.2.4
 
 ## Subcharts
 * [autonity-network](../autonity-network) - **private** Autonity network with set of validators and observers (Enabled by default)
