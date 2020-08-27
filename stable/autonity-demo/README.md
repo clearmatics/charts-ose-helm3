@@ -22,7 +22,7 @@ helm dependency update
 
 1. Deploy it (using this repository)
 ```bash
-helm install -n autonity-demo ./
+helm install autonity-demo ./ --namespace autonity-demo
 ```
 
 ## Subcharts
@@ -33,15 +33,15 @@ helm install -n autonity-demo ./
 ## Configure
 - You can change number of validators or observers using helm cli-options like this:
 ```bash
-helm install -n autonity-demo ./ --set autonity-network.validators.num=6,autonity-network.observers.num=2
+helm install autonity-demo ./ --namespace autonity-demo --set autonity-network.validators.num=6,autonity-network.observers.num=2
 ```
 
 - You can enable optional subcharts like:
 ```bash
-helm install -n autonity-demo ./ --set global.grafana.enabled=true
+helm install autonity-demo ./ --namespace autonity-demo --set global.grafana.enabled=true
 ```
 
-- Also you can change any variables in this file [./values.yaml](values.yaml) before installation
+- You can change any variables in this file [./values.yaml](values.yaml) before installation
 
 ## Connect to autonity network
 Forward JSON-RPC validator-0 to localhost
@@ -50,7 +50,7 @@ kubectl port-forward svc/validator-0 8545:8545
 ```
 
 Example JSON-RPC request
-```
+```bash
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545
 ```
 
@@ -65,6 +65,6 @@ helm delete autonity-demo --purge
 - persistent storage for prometheus
 - persistent storage for grafana
 
-```shell script
-helm install charts-ose.clearmatics.com/autonity-demo -f https://raw.githubusercontent.com/clearmatics/charts-ose/master/stable/autonity-demo/values_gke_persistent_storage.yaml
+```bash
+helm install charts-ose.clearmatics.com/autonity-demo -f https://raw.githubusercontent.com/clearmatics/charts-ose/master/stable/autonity-demo/values_gke_persistent_storage.yaml --namespace autonity-demo
 ```
