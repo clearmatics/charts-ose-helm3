@@ -16,25 +16,28 @@ Autonity is a generalization of the Ethereum protocol based on a fork of go-ethe
    - Install [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
 1. Install packet manager for kubernetes using this [Helm installation guide](https://helm.sh/docs/using_helm/#installing-helm)
 1. Configure helm to your cluster
-   ```bash
-   helm init
-   ```
-1. Add Clearmatics repository if you do not have it added before
-   ```bash
-   helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
-   ```
-1. Download `autonity-demo` chart and dependencies:
-   ```bash
-   git clone https://github.com/clearmatics/charts-ose.git
-   cd ./stable/autonity-demo
-   helm dependency update
-   ```
-1. Deploy it
-   ```bash
-   helm install -n autonity-demo ./
-   ```
-## Prerequisites
+```bash
+helm init
+```
 
+1. Add Clearmatics repository if you do not have it added before
+```bash
+helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
+```
+
+1. Download `autonity-demo` chart and dependencies:
+```bash
+git clone https://github.com/clearmatics/charts-ose.git
+cd ./stable/autonity-demo
+helm dependency update
+```
+
+1. Deploy it
+```bash
+helm install -n autonity-demo ./
+```
+
+## Prerequisites
 * Kubernetes 1.14
 * Helm 2.15
 
@@ -63,7 +66,6 @@ kubectl port-forward svc/validator-0 8545:8545
 
 # Example  JSON-RPC request
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545
-
 ```
 
 ## Delete
@@ -72,7 +74,6 @@ helm delete autonity-demo --purge
 ```
 
 ## Extended values configs
-
 [values_gke_persistent_storage.yaml](./values_gke_persistent_storage.yaml) will install to GKE with:
 - persistent storage for autonity validators and observers
 - persistent storage for prometheus
