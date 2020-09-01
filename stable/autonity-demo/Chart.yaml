@@ -1,4 +1,5 @@
 name: autonity-demo
+apiVersion: v1
 version: 1.1.0
 kubeVersion: ">=1.15.11-0"
 description: Umbrella chart for Demo deploy autonity-network and supporting tools
