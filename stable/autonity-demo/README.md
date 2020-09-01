@@ -8,6 +8,11 @@ The `autonity-demo` chart extends the [autonity-network](../autonity-network/REA
 For a full list of ceremonies, versions, prerequisites and installation tips, start in the [../autonity/README.md](../autonity/README.md), then the [../autonity-network/README.md](../autonity-network/README.md).
 
 ## Installation
+1. Add the main Helm Charts `stable` repository:
+```bash
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+```
+
 1. Add the Clearmatics Helm Charts repository:
 ```bash
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
