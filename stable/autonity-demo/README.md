@@ -8,24 +8,39 @@ The `autonity-demo` chart extends the [autonity-network](../autonity-network/REA
 For a full list of ceremonies, versions, prerequisites and installation tips, start in the [../autonity/README.md](../autonity/README.md), then the [../autonity-network/README.md](../autonity-network/README.md).
 
 ## Installation
-1. Add the main Helm Charts `stable` repository:
-```bash
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
-```
-
-1. Add the Clearmatics Helm Charts repository:
+1. Add the Clearmatics and the main `stable` Helm chart repositories:
 ```bash
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+```
+1. Create the namespace
+```bash
+kubectl create namespace autonity-demo
 ```
 
-1. or download or clone this repository:
+### From Helm repositories
+To deploy the chart straight from the Helm repositories added above.
+
+1. Deploy the chart
+```bash
+helm install autonity-demo charts-ose.clearmatics.com/autonity-demo --namespace autonity-demo
+```
+
+### From GitHub repositories
+Alternatively, to deploy the chart from the this GitHub repository.
+
+1. Clone the repository
 ```bash
 git clone https://github.com/clearmatics/charts-ose.git
+```
+
+1. Install the dependencies
+```bash
 cd ./stable/autonity-demo
 helm dependency update
 ```
 
-1. Deploy it (using this repository)
+1. Deploy the chart
 ```bash
 helm install autonity-demo ./ --namespace autonity-demo
 ```
@@ -60,8 +75,14 @@ curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","metho
 ```
 
 ## Delete
+1. Delete the Helm Chart
 ```bash
-helm delete autonity-demo --purge
+helm delete autonity-demo --namespace autonity-demo
+```
+
+1. Delete the namespace
+```bash
+kubectl delete namespace autonity-demo
 ```
 
 ## Extended values configs
