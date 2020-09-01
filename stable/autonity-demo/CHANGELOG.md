@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.2.0
 - Removed legacy implementation of Ethstats
+- Set apiVersion for legacy Helm 2 support for transition period
+- Moved dependencies to the main Chart.yaml
+- Updated Documentation to reflect Helm 3 updates
 
 ## [Unreleased]
 ## [1.1.0] - 2020-04-07
