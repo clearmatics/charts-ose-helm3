@@ -8,7 +8,7 @@ jobs:
   integration_tests:
     if: |
       github.head_ref == 'autonity' ||
-      github.head_ref == 'audonity-demo' ||
+      github.head_ref == 'autonity-demo' ||
       github.head_ref == 'autonity-network'
 
     runs-on: ubuntu-20.04
