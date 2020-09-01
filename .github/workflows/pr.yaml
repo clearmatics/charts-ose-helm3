@@ -48,6 +48,16 @@ jobs:
         version: '3.2.4'
       id: install
 
+    - name: Add the external Helm chart repositories
+      run: |
+        helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+        helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
+
+    - name: List the active repositories and update the dependencies
+      run: |
+        helm repo list
+        helm dependency update
+
     - name: Check if the namespace exists
       run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
 
