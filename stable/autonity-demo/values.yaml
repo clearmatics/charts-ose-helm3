@@ -5,9 +5,9 @@ global:
   autonity_network:
     enabled: true
   prometheus:
-    enabled: false
+    enabled: true
   grafana:
-    enabled: false
+    enabled: true
   telepresence:
     enabled: false
 
