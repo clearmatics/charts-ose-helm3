@@ -56,7 +56,7 @@ jobs:
     - name: List the active repositories and update the dependencies
       run: |
         helm repo list
-        helm dependency update
+        helm dependency update $CHART_PATH
 
     - name: Check if the namespace exists
       run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)

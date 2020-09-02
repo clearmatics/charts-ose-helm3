@@ -24,7 +24,8 @@ helm repo update
 
 ### tl;dr
 ```bash
-helm install autonity-network charts-ose.clearmatics.com/autonity-network --version 1.7.0
+kubectl create namespace autonity-network
+helm install autonity-network charts-ose.clearmatics.com/autonity-network --version 1.7.1
 ```
 Note: `autonity-network` versions before `1.7.0` are supported by [Helm 2](https://github.com/clearmatics/charts-ose/).
 
@@ -52,7 +53,7 @@ This chart is comprised of 4 components:
 - You can change number of validators or observers using the `--set` options:
 ```bash
 helm install autonity-network charts-ose.clearmatics.com/autonity-network \
-  --version 1.7.0 \
+  --version 1.7.1 \
   --set validators=6,observers=2
 ```
 
@@ -151,4 +152,5 @@ helm status autonity
 ## Cleanup
 ```bash
 helm delete autonity
+kubectl delete namespace autonity-namespace
 ```
