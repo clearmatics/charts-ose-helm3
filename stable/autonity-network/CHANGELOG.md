@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.7.1]
 ### Updated
-- Support [Autonity v0.4.1](https://github.com/clearmatics/autonity/releases/tag/v0.4.1)
+- Support Autonity v0.4.1 [issue #34](https://github.com/clearmatics/charts-ose-helm3/issues/34)
+- Documentation update for version change and managing namespaces
 
 ## [1.7.0]
 ### Updated
