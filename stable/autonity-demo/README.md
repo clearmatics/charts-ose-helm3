@@ -8,12 +8,12 @@ The `autonity-demo` chart extends the [autonity-network](../autonity-network/REA
 For a full list of ceremonies, versions, prerequisites and installation tips, start in the [../autonity/README.md](../autonity/README.md), then the [../autonity-network/README.md](../autonity-network/README.md).
 
 ## Installation
-1. Add the Clearmatics and the main `stable` Helm chart repositories:
+Add the Clearmatics and the main `stable` Helm chart repositories:
 ```bash
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
 helm repo add stable https://kubernetes-charts.storage.googleapis.com
 ```
-1. Create the namespace
+Create the namespace
 ```bash
 kubectl create namespace autonity-demo
 ```
@@ -21,7 +21,7 @@ kubectl create namespace autonity-demo
 ### From Helm repositories
 To deploy the chart straight from the Helm repositories added above.
 
-1. Deploy the chart
+Deploy the chart
 ```bash
 helm install autonity-demo charts-ose.clearmatics.com/autonity-demo --namespace autonity-demo
 ```
@@ -29,18 +29,18 @@ helm install autonity-demo charts-ose.clearmatics.com/autonity-demo --namespace 
 ### From GitHub repositories
 Alternatively, to deploy the chart from the this GitHub repository.
 
-1. Clone the repository
+Clone the repository
 ```bash
 git clone https://github.com/clearmatics/charts-ose.git
 ```
 
-1. Install the dependencies
+Install the dependencies
 ```bash
 cd ./stable/autonity-demo
 helm dependency update
 ```
 
-1. Deploy the chart
+Deploy the chart
 ```bash
 helm install autonity-demo ./ --namespace autonity-demo
 ```
@@ -51,17 +51,17 @@ helm install autonity-demo ./ --namespace autonity-demo
 * [Grafana](https://github.com/helm/charts/tree/master/stable/grafana) - GUI for metrics system
 
 ## Configure
-- You can change number of validators or observers using helm cli-options like this:
+You can change number of validators or observers using helm cli-options like this:
 ```bash
 helm install autonity-demo ./ --namespace autonity-demo --set autonity-network.validators.num=6,autonity-network.observers.num=2
 ```
 
-- You can enable optional subcharts like:
+You can enable optional subcharts like:
 ```bash
 helm install autonity-demo ./ --namespace autonity-demo --set global.grafana.enabled=true
 ```
 
-- You can change any variables in this file [./values.yaml](values.yaml) before installation
+You can change any variables in this file [./values.yaml](values.yaml) before installation
 
 ## Connect to autonity network
 Forward JSON-RPC validator-0 to localhost
@@ -75,12 +75,12 @@ curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","metho
 ```
 
 ## Delete
-1. Delete the Helm Chart
+Delete the Helm Chart
 ```bash
 helm delete autonity-demo --namespace autonity-demo
 ```
 
-1. Delete the namespace
+Delete the namespace
 ```bash
 kubectl delete namespace autonity-demo
 ```
