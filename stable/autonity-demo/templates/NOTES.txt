@@ -1,41 +1,41 @@
 ==== Autonity ====
 
 # To get autonity validators account password type:
-        kubectl -n {{ .Release.Namespace }} get secrets account-pwd -o 'go-template={{ "{{" }}index .data "account.pwd"{{ "}}" }}' | base64 --decode; echo ""
+kubectl -n {{ .Release.Namespace }} get secrets account-pwd -o 'go-template={{ "{{" }}index .data "account.pwd"{{ "}}" }}' | base64 --decode; echo ""
 
 # Get private key of first observer (id == 0)
-        kubectl -n {{ .Release.Namespace }} get secrets observers -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
+kubectl -n {{ .Release.Namespace }} get secrets observers -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
 
 # Get private key of Governance Operator
-        kubectl -n {{ .Release.Namespace }} get secrets operator-governance -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
+kubectl -n {{ .Release.Namespace }} get secrets operator-governance -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
 
 # Get private key of Treasury Operator
-        kubectl -n {{ .Release.Namespace }} get secrets operator-treasury -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
+kubectl -n {{ .Release.Namespace }} get secrets operator-treasury -o 'go-template={{ "{{" }}index .data "0.private_key"{{ "}}" }}' | base64 --decode; echo ""
 
 # Get list of addresses for each validator
-        kubectl -n {{ .Release.Namespace }} get configmap validators -o yaml |grep .address
+kubectl -n {{ .Release.Namespace }} get configmap validators -o yaml |grep .address
 
 # Get genesis.json
-        kubectl -n {{ .Release.Namespace }} get configmap genesis -o yaml --export=true
+kubectl -n {{ .Release.Namespace }} get configmap genesis -o yaml --export=true
 
 # Forward rpcapi validator-0 to localhost
-        kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8545:8545
+kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8545:8545
 
 # Forward wsapi validator-0 to localhost
-        kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8546:8546
+kubectl -n {{ .Release.Namespace }} port-forward svc/validator-0 8546:8546
 
 # Example  JSON-RPC request
-        curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545
 
 # Example JSON-RPC requests:
 {{ if index .Values "autonity-network" "rpc_http_basic_auth_enabled" }}        RPC_AUTONITY_AUTH=user:password  {{ end }}
 {{ if index .Values "autonity-network" "rpc_https_enabled" }}
 ## Download tls.crt from k8s secret if you are using self-signed certificate
-        kubectl -n {{ .Release.Namespace }} get secrets autonity-https -o 'go-template={{ "{{" }}index .data "tls.crt"{{ "}}" }}' | base64 --decode; echo ""
+kubectl -n {{ .Release.Namespace }} get secrets autonity-https -o 'go-template={{ "{{" }}index .data "tls.crt"{{ "}}" }}' | base64 --decode; echo ""
 
-        CAfile=./files/tls.crt
-        HOST=host.domain.example
-        # echo "127.0.0.1       "${HOST} >> /etc/hosts
+CAfile=./files/tls.crt
+HOST=host.domain.example
+echo "127.0.0.1       "${HOST} >> /etc/hosts
 {{ end }}
 
 ### HTTP(s)-RPC ###
@@ -53,29 +53,21 @@ docker run -it --rm --net=host \
     {{ if index .Values "autonity-network" "rpc_https_enabled" }} --ca /tls.crt {{ end }}\
      -c {{ if index .Values "autonity-network" "rpc_https_enabled" }}wss://$HOST:8546 {{ else }}ws://127.0.0.1:8546 {{end}}\
      -x '{"method":"eth_blockNumber","params":[],"id":1}'
-{{ if .Values.global.ethstats.enabled }}
-==== Ethstats ====
-
-# Forward ethstats dashboard to localhost http://localhost:8080
-        kubectl -n {{ .Release.Namespace }} port-forward svc/ethstats 8080:80
-{{ end }}
 {{ if .Values.global.prometheus.enabled }}
 ==== Prometheus ====
 
 # Get the Prometheus server URL by running these commands in the same shell: http://localhost:9090
-        export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app=prometheus,component={{ .Values.prometheus.server.name }}" -o jsonpath="{.items[0].metadata.name}")
-        kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 9090
+export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app=prometheus,component={{ .Values.prometheus.server.name }}" -o jsonpath="{.items[0].metadata.name}")
+kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 9090
 {{ end }}
 {{ if .Values.global.grafana.enabled }}
 ==== Grafana ====
 
-1. Get your '{{ .Values.adminUser }}' user password by running:
+# Get your '{{ .Values.adminUser }}' user password by running:
+kubectl get secret --namespace {{ .Release.Namespace }} {{ .Release.Name }}-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
-        kubectl get secret --namespace {{ .Release.Namespace }} {{ .Release.Name }}-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-
-2. Forward Grafana dashboard to localhost http://localhost:3000
-
-        kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-grafana 3000:80
+# Forward Grafana dashboard to localhost http://localhost:3000
+kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ .Release.Name }}-grafana 3000:80
 
 3. Login with the password from step 1 and the username: {{ .Values.grafana.adminUser }}
 {{ end }}

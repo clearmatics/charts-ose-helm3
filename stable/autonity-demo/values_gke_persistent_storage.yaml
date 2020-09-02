@@ -7,11 +7,6 @@
 global:
   autonity_network:
     enabled: true
-  ethstats:
-    enabled: false
-    webSocketSecret: 3b7Lp5BDdtpNQyFwSjbtMHVU5Xuzo4
-  validator_dapp:
-    enabled: false
   prometheus:
     enabled: true
   grafana:

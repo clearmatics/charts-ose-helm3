@@ -4,13 +4,10 @@
 global:
   autonity_network:
     enabled: true
-  ethstats:
-    enabled: false
-    webSocketSecret: 3b7Lp5BDdtpNQyFwSjbtMHVU5Xuzo4
   prometheus:
-    enabled: false
+    enabled: true
   grafana:
-    enabled: false
+    enabled: true
   telepresence:
     enabled: false
 
