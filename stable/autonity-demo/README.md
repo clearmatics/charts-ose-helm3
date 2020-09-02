@@ -46,7 +46,7 @@ helm install autonity-demo ./ --namespace autonity-demo
 ```
 
 ## Subcharts
-* [autonity-network](../autonity-network) - **private** Autonity network with set of validators and observers (Enabled by default)
+* [autonity-network](../autonity-network) - **Private** Autonity network with set of validators and observers (Enabled by default)
 * [Prometheus](https://github.com/helm/charts/tree/master/stable/prometheus) - Metrics system
 * [Grafana](https://github.com/helm/charts/tree/master/stable/grafana) - GUI for metrics system
 
