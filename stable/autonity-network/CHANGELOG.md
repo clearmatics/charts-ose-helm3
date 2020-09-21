@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Updated
 - Disabling monitoring for managing USB hardware wallets for both Validators and Observers [issue #40](https://github.com/clearmatics/charts-ose-helm3/issues/40)
+- Setting the logging level as a variable in the values file for both Validators and Observers [issue #44](https://github.com/clearmatics/charts-ose-helm3/issues/44)
 
 ## [1.7.1]
 ### Updated
