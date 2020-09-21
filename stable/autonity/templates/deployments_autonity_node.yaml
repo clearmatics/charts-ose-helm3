@@ -88,7 +88,7 @@ spec:
           - "--minerthreads"
           - "1"
 {{ end }}
-{{ if eq .Values.debug_enabled "true" }}
+{{ if eq .Values.debug_enabled true }}
           - "--debug"
 {{ end }}
           - "--verbosity"
