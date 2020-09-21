@@ -4,6 +4,10 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Updated
+- Disabling monitoring for managing USB hardware wallets for both Validators and Observers [issue #40](https://github.com/clearmatics/charts-ose-helm3/issues/40)
+
 ## [1.7.1]
 ### Updated
 - Support Autonity v0.4.1 [issue #34](https://github.com/clearmatics/charts-ose-helm3/issues/34)
