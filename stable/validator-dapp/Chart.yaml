@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: "0.0.2"
-description: DApp for manage Autonity validators
-name: validator-dapp
-version: 0.0.3
