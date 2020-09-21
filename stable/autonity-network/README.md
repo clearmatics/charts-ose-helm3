@@ -147,7 +147,7 @@ Put it to [values.yaml](./values.yaml) as a `telegraf:` values
 ## Notes
 To view available commands:
 ```bash
-helm status autonity
+helm status autonity-network --namespace autonity-network
 ```
 
 ## Cleanup
