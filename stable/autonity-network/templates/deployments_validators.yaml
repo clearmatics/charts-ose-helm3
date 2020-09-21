@@ -125,6 +125,7 @@ spec:
           - "--debug"
           - "--verbosity"
           - "4"
+          - "--nousb"
 {{ if $ethstatsEnabled }}
           - "--ethstats"
           - "validator-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"

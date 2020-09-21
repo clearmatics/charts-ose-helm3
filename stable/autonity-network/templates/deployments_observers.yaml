@@ -84,6 +84,7 @@ spec:
           - "--debug"
           - "--verbosity"
           - "4"
+          - "--nousb"
 {{ if $ethstatsEnabled }}
           - "--ethstats"
           - "observer-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
