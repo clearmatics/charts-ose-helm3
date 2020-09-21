@@ -3,6 +3,7 @@
 {{- $imageNginx := .Values.image_nginx -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
+{{- $debugEnabled := .Values.debug_enabled -}}
 
 {{- $networkid :=  .Values.networkid -}}
 
@@ -81,7 +82,9 @@ spec:
           - "0.0.0.0"
           - "--networkid"
           - "{{ $networkid }}"
+{{ if eq $debugEnabled true }}
           - "--debug"
+{{ end }}
           - "--verbosity"
           - "4"
           - "--nousb"

@@ -6,6 +6,7 @@
 {{- $zoneCount := len $zones -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
+{{- $debugEnabled := .Values.debug_enabled -}}
 
 {{- $networkid :=  .Values.networkid -}}
 
@@ -122,7 +123,9 @@ spec:
           - "--mine"
           - "--minerthreads"
           - "1"
+{{ if eq $debugEnabled true }}
           - "--debug"
+{{ end }}
           - "--verbosity"
           - "4"
           - "--nousb"

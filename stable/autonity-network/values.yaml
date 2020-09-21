@@ -43,7 +43,6 @@ mingasprice: "10000000000000"
 gaslimit: "0x5F5E100"
 balance: "0x200000000000000000000000000000000000000000000000000000000000000"
 
-
 # Must be: 'istanbul' or 'tendermint'
 concensus: tendermint
 
@@ -62,6 +61,8 @@ global:
     enabled: false
   telepresence:
     enabled: false
+
+debug_enabled: false
 
 # Create an account for https://cloud2.influxdata.com
 # Uncomment and fill vars below to receive your metrics
