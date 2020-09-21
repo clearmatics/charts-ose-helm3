@@ -25,7 +25,7 @@ helm repo update
 ### tl;dr
 ```bash
 kubectl create namespace autonity-network
-helm install autonity-network charts-ose.clearmatics.com/autonity-network --version 1.7.1
+helm install autonity-network charts-ose.clearmatics.com/autonity-network --namespace autonity-network --version 1.7.1
 ```
 Note: `autonity-network` versions before `1.7.0` are supported by [Helm 2](https://github.com/clearmatics/charts-ose/).
 
@@ -53,6 +53,7 @@ This chart is comprised of 4 components:
 - You can change number of validators or observers using the `--set` options:
 ```bash
 helm install autonity-network charts-ose.clearmatics.com/autonity-network \
+  --namespace autonity-network
   --version 1.7.1 \
   --set validators=6,observers=2
 ```
@@ -81,7 +82,7 @@ htpasswd ./files/htpasswd user3
 ```
 
 ```bash
-helm install -n autonity ./ --set rpc_http_basic_auth_enabled=true
+helm install --namespace autonity-network ./ --set rpc_http_basic_auth_enabled=true
 ```
 
 * Add content to values.yaml with content of the `htpasswd` file, for example in values.yaml:
@@ -105,7 +106,7 @@ openssl dhparam -out ${DH_FILE} 4096
 
 * Set variable to `rpc_https_enabled: true`
 ```bash
-helm install -n autonity ./ --set rpc_https_enabled=true
+helm install --namespace autonity-network ./ --set rpc_https_enabled=true
 ```
 
 * Add the `base64` encoded certificate variables to the `.yaml` file - for example - with the output of `base64 $KEY_FILE`, `base64 $CERT_FILE`, `base64 $DH_FILE`:
@@ -151,6 +152,6 @@ helm status autonity
 
 ## Cleanup
 ```bash
-helm delete autonity
-kubectl delete namespace autonity-namespace
+helm delete autonity-network --namespace autonity-network
+kubectl delete namespace autonity-network
 ```
