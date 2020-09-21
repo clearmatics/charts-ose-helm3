@@ -91,6 +91,7 @@ spec:
           - "--debug"
           - "--verbosity"
           - "4"
+          - "--nousb"
         volumeMounts:
         - name: blockchain
           mountPath: /autonity/blockchain
