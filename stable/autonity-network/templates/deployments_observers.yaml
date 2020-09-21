@@ -4,6 +4,7 @@
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
 {{- $debugEnabled := .Values.debug_enabled -}}
+{{- $loggingVerbosity := .Values.logging_verbosity -}}
 
 {{- $networkid :=  .Values.networkid -}}
 
@@ -86,7 +87,7 @@ spec:
           - "--debug"
 {{ end }}
           - "--verbosity"
-          - "4"
+          - "{{ $loggingVerbosity }}"
           - "--nousb"
 {{ if $ethstatsEnabled }}
           - "--ethstats"

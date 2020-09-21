@@ -63,6 +63,7 @@ global:
     enabled: false
 
 debug_enabled: false
+logging_verbosity: 3
 
 # Create an account for https://cloud2.influxdata.com
 # Uncomment and fill vars below to receive your metrics
