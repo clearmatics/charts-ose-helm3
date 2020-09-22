@@ -91,9 +91,6 @@ default_genesis:
       block-period: 1
     chainId: 9999
     autonityContract:
-      deployer: '0x0000000000000000000000000000000000000002'
-      bytecode: ''
-      abi: ''
       minGasPrice: 10000000000000
       operator: '0x20d194B5555eB67F6F1Cb01b1fff74f921281246'
       users:
