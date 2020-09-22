@@ -40,9 +40,6 @@ data:
       {{end}}
             "chainId": {{ .Values.chainid }},
             "autonityContract": {
-                "deployer": "0x0000000000000000000000000000000000000002",
-                "bytecode": "",
-                "abi": "",
                 "minGasPrice": 0,
                 "operator": "???",
                 "users": []
