@@ -25,9 +25,9 @@ helm repo update
 ### tl;dr
 ```bash
 kubectl create namespace autonity-network
-helm install autonity-network charts-ose.clearmatics.com/autonity-network --namespace autonity-network --version 1.7.1
+helm install autonity-network charts-ose.clearmatics.com/autonity-network --namespace autonity-network --version 1.8.0
 ```
-Note: `autonity-network` versions before `1.7.0` are supported by [Helm 2](https://github.com/clearmatics/charts-ose/).
+Note: `autonity-network` versions before `1.8.0` are supported by [Helm 2](https://github.com/clearmatics/charts-ose/).
 
 ## Kubernetes objects
 This chart is comprised of 4 components:
@@ -62,7 +62,7 @@ The following table lists some of the configurable parameters of the Autonity ch
 ```bash
 helm install autonity-network charts-ose.clearmatics.com/autonity-network \
   --namespace autonity-network
-  --version 1.7.1 \
+  --version 1.8.0 \
   --set validators=6,observers=2
 ```
 
