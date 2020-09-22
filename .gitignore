@@ -22,3 +22,6 @@ node_modules
 build
 yarn-error.log
 npm-debug.log
+
+# Vim Swap files
+[._]*.swp

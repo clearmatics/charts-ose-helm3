@@ -7,7 +7,6 @@
 {{- $releasename := .Release.Name -}}
 {{- $blockchainPersistentVolumeSize := .Values.blockchain_persistent_volume_size -}}
 
-
 {{- if or (eq .Values.aws_persistent_storage_enabled true) (eq .Values.gcp_persistent_storage_enabled true) }}
 ---
 kind: StorageClass

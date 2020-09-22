@@ -49,8 +49,16 @@ This chart is comprised of 4 components:
    1. `aws_persistent_storage_enabled: true` enable AWS persistent storage for `blockchain`
    1. `gcp_persistent_storage_enabled: true` enable GCP persistent storage for `blockchain`
 
-## Configure
+## Configuration
+The following table lists some of the configurable parameters of the Autonity chart and their default values. This table needs extending fully.
+
+| Parameter                         | Description                                   | Default                               |
+|-----------------------------------|-----------------------------------------------|---------------------------------------|
+| `debug_enabled`                   | Prepends log messages with call-site location | `false`                               |
+| `logging_verbosity`               | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`         |
+
 - You can change number of validators or observers using the `--set` options:
+
 ```bash
 helm install autonity-network charts-ose.clearmatics.com/autonity-network \
   --namespace autonity-network
@@ -147,7 +155,7 @@ Put it to [values.yaml](./values.yaml) as a `telegraf:` values
 ## Notes
 To view available commands:
 ```bash
-helm status autonity
+helm status autonity-network --namespace autonity-network
 ```
 
 ## Cleanup
@@ -155,3 +163,5 @@ helm status autonity
 helm delete autonity-network --namespace autonity-network
 kubectl delete namespace autonity-network
 ```
+
+

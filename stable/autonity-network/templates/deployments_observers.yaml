@@ -3,6 +3,8 @@
 {{- $imageNginx := .Values.image_nginx -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
+{{- $debugEnabled := .Values.debug_enabled -}}
+{{- $loggingVerbosity := .Values.logging_verbosity -}}
 
 {{- $networkid :=  .Values.networkid -}}
 
@@ -81,9 +83,11 @@ spec:
           - "0.0.0.0"
           - "--networkid"
           - "{{ $networkid }}"
+{{ if eq $debugEnabled true }}
           - "--debug"
+{{ end }}
           - "--verbosity"
-          - "4"
+          - "{{ $loggingVerbosity }}"
           - "--nousb"
 {{ if $ethstatsEnabled }}
           - "--ethstats"
