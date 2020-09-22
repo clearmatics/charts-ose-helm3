@@ -1,16 +1,15 @@
 ---
-
 imageAutonity:
   repository: clearmatics/autonity
-  tag: v0.4.1
+  tag: v0.6.0
 
 imageAutonity_init:
   repository: clearmatics/autonity-init
-  tag: v1.0.8
+  tag: v1.0.9
 
 image_eth_keys_generator:
   repository: clearmatics/eth-keys-generator
-  tag: v1.0.0
+  tag: v1.0.1
 
 image_init_ceremony:
   repository: clearmatics/init-ceremony
