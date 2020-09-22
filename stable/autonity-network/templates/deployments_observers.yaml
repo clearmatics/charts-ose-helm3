@@ -74,7 +74,7 @@ spec:
           - "*"
           - "--ws"
           - "--wsapi"
-          - "eth,web3,net"
+          - "eth,web3,net,tendermint"
           - "--wsorigins"
           - "*"
           - "--metrics"
