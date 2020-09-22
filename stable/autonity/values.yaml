@@ -87,7 +87,7 @@ default_genesis:
     byzantiumBlock: 0
     istanbulBlock: 0
     tendermint:
-      policy: 0
+      policy: 1
       block-period: 1
     chainId: 9999
     autonityContract:
