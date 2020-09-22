@@ -77,6 +77,14 @@ You can send `autonity` metrics to InfluxDB cloud. (Disabled by default).
 * Create user with `WRITE` permissions for the database
 * Put credentials to [values.yaml](./values.yaml) as a `telegraf:` values
 
+## Configuration
+The following table lists some of the configurable parameters of the Autonity chart and their default values. This table needs extending fully.
+
+| Parameter                         | Description                                   | Default                               |
+|-----------------------------------|-----------------------------------------------|---------------------------------------|
+| `debug_enabled`                   | Prepends log messages with call-site location | `false`                               |
+| `logging_verbosity`               | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`         |
+
 ## Workshops
 * [Initial ceremony](./docs/workshop_initial_ceremony.md) Setup new network with validator nodes on different clouds (`EKS` and `GKE`)
 * [Join new node](./docs/workshop_join_new_node.md) Join new node to existing network

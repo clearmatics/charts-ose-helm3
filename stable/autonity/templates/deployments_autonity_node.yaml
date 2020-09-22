@@ -88,9 +88,11 @@ spec:
           - "--minerthreads"
           - "1"
 {{ end }}
+{{ if eq .Values.debug_enabled true }}
           - "--debug"
+{{ end }}
           - "--verbosity"
-          - "4"
+          - "{{ .Values.logging_verbosity }}"
           - "--nousb"
         volumeMounts:
         - name: blockchain

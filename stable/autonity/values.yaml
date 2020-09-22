@@ -36,6 +36,9 @@ networkid: 444888
 rpc_http_basic_auth_enabled: false
 rpc_https_enabled: false
 
+debug_enabled: false
+logging_verbosity: 3
+
 #telegraf:
 #  # This name wil added as a tag for all metrics
 #  afnc_name: "autonity-node"

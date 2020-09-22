@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Disabling monitoring for managing USB hardware wallets [issue #28](https://github.com/clearmatics/charts-ose-helm3/issues/28)
+- Setting the logging level as a variable in the values file [issue #27](https://github.com/clearmatics/charts-ose-helm3/issues/27)
 
 ## [1.2.1]
 - Disable freezer functionality with deployment of autontity hotfix 0.4.1
