@@ -12,13 +12,10 @@ genesis:
     byzantiumBlock: 0
     istanbulBlock: 0
     tendermint:
-      policy: 0
+      policy: 1
       block-period: 1
     chainId: 1489
     autonityContract:
-      deployer: '0x0000000000000000000000000000000000000002'
-      bytecode: ''
-      abi: ''
       minGasPrice: 10000000000000
       operator: '0xae223655126e514C9C80096d99765A98547247D3'
       users:
