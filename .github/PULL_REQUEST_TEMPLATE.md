@@ -1,9 +1,8 @@
-### Changelog:
+### Changelog
 
-### All Submissions:
-
-* [ ] Have you followed the guidelines in our [Contributing document](CONTRIBUTING.md)?
-* [ ] Is the `branch` name the same as Chart name that you will release?
-* [ ] Is your changes touch only one chart?
-* [ ] Is the version of chart incremented in `Chart.yaml`?
-* [ ] Is the [Change Log document](CHANGELOG.md) updated ?
+### Submissions
+* [ ] Have you followed the guidelines in our [contributing document](CONTRIBUTING.md)?
+* [ ] Is the `branch` name the same as the Helm chart name that you will release?
+* [ ] Has your change only affected one Helm chart?
+* [ ] Have you increased the version of the Helm chart `Chart.yaml`?
+* [ ] Have you updated the [changelog](CHANGELOG.md)?
