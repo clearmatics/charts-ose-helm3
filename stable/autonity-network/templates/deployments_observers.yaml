@@ -78,8 +78,6 @@ spec:
           - "--wsorigins"
           - "*"
           - "--metrics"
-          - "--pprof"
-          - "--pprofaddr"
           - "0.0.0.0"
           - "--networkid"
           - "{{ $networkid }}"
@@ -88,10 +86,17 @@ spec:
 {{ end }}
           - "--verbosity"
           - "{{ $loggingVerbosity }}"
-          - "--nousb"
+{{ if eq $pprofEnabled true }}
+          - "--pprof"
+          - "--pprof.addr"
+          - "{{ $pprofAddress }}"
+          - "--pprof.port"
+          - "{{ $pprofPort }}"
+{{ end }}
 {{ if $ethstatsEnabled }}
           - "--ethstats"
           - "observer-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
+          - "--nousb"
         env:
         - name: ETHSTATS_SECRET
           valueFrom:

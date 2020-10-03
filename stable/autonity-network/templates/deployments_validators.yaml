@@ -127,7 +127,6 @@ spec:
 {{ end }}
           - "--verbosity"
           - "{{ $loggingVerbosity }}"
-          - "--nousb"
 {{ if eq $pprofEnabled true }}
           - "--pprof"
           - "--pprof.addr"
@@ -138,6 +137,7 @@ spec:
 {{ if $ethstatsEnabled }}
           - "--ethstats"
           - "validator-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
+          - "--nousb"
         env:
         - name: ETHSTATS_SECRET
           valueFrom:
