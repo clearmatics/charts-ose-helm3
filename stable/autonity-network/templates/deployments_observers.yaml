@@ -92,10 +92,10 @@ spec:
           - "--pprof.port"
           - "{{ $pprofPort }}"
 {{ end }}
+          - "--nousb"
 {{ if $ethstatsEnabled }}
           - "--ethstats"
           - "observer-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
-          - "--nousb"
         env:
         - name: ETHSTATS_SECRET
           valueFrom:
