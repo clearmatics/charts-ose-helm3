@@ -77,7 +77,6 @@ spec:
           - "--wsorigins"
           - "*"
           - "--metrics"
-          - "0.0.0.0"
           - "--networkid"
           - "{{ $networkid }}"
 {{ if eq $debugEnabled true }}
