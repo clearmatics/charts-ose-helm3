@@ -5,14 +5,13 @@
 {{- $releasename := .Release.Name -}}
 {{- $debugEnabled := .Values.debug_enabled -}}
 {{- $loggingVerbosity := .Values.logging_verbosity -}}
-
+{{- $pprofEnabled := .Values.pprof.enabled -}}
+{{- $pprofAddress := .Values.pprof.address -}}
+{{- $pprofPort := .Values.pprof.port -}}
 {{- $networkid :=  .Values.networkid -}}
-
 {{- $ethstatsEnabled :=  .Values.global.ethstats.enabled -}}
 {{- $rpcHttpBasicAuthEnabled :=  .Values.rpc_http_basic_auth_enabled -}}
 {{- $rpcHttpsEnabled :=  .Values.rpc_https_enabled -}}
-
-
 {{- $awsPersistentStorageEnabled :=  .Values.aws_persistent_storage_enabled -}}
 {{- $gcpPersistentStorageEnabled :=  .Values.gcp_persistent_storage_enabled -}}
 
