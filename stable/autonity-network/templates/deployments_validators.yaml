@@ -116,9 +116,6 @@ spec:
           - "--wsorigins"
           - "*"
           - "--metrics"
-          - "--pprof"
-          - "--pprofaddr"
-          - "0.0.0.0"
           - "--networkid"
           - "{{ $networkid }}"
           - "--mine"
@@ -130,6 +127,13 @@ spec:
           - "--verbosity"
           - "{{ $loggingVerbosity }}"
           - "--nousb"
+{{ if .Values.pprof }}
+          - "--pprof"
+          - "--pprof.addr"
+          - "{{ .Values.pprof.address }}"
+          - "--pprof.port"
+          - "{{ .Values.pprof.port"
+{{ end }}
 {{ if $ethstatsEnabled }}
           - "--ethstats"
           - "validator-{{ $i }}:$(ETHSTATS_SECRET)@ethstats.{{ $namespace }}"
