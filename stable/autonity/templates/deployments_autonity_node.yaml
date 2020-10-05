@@ -78,9 +78,6 @@ spec:
           - "--wsorigins"
           - "*"
           - "--metrics"
-          - "--pprof"
-          - "--pprofaddr"
-          - "0.0.0.0"
           - "--networkid"
           - "{{ .Values.networkid }}"
 {{ if eq .Values.mode "validator" }}
@@ -93,6 +90,13 @@ spec:
 {{ end }}
           - "--verbosity"
           - "{{ .Values.logging_verbosity }}"
+{{ if eq .Values.pprof.enabled true }}
+          - "--pprof"
+          - "--pprof.addr"
+          - "{{ .Values.pprof.address }}"
+          - "--pprof.port"
+          - "{{ .Values.pprof.port }}"
+{{ end }}
           - "--nousb"
         volumeMounts:
         - name: blockchain
