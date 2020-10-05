@@ -73,7 +73,7 @@ pprof:
   # port the pprof server port to start on
   port: 6060
 
-graphql_enabled: true
+graphql_enabled: false
 
 # Create an account for https://cloud2.influxdata.com
 # Uncomment and fill vars below to receive your metrics

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.8.1]
 - Setting the pprof server and its flags as variables in the values file [issue #52](https://github.com/clearmatics/charts-ose-helm3/issues/52)
-- Enabling GraphQL query capabilities on top of HTTP RPC [issue 56](https://github.com/clearmatics/charts-ose-helm3/issues/56)
+- Enabling GraphQL query capabilities on top of HTTP RPC [issue #56](https://github.com/clearmatics/charts-ose-helm3/issues/56)
 
 ## [1.8.0]
 ### Updated
