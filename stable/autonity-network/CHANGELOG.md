@@ -4,6 +4,10 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.1]
+- Setting the pprof server and its flags as variables in the values file [issue #52](https://github.com/clearmatics/charts-ose-helm3/issues/52)
+- Enabling GraphQL query capabilities on top of HTTP RPC [issue 56](https://github.com/clearmatics/charts-ose-helm3/issues/56)
+
 ## [1.8.0]
 ### Updated
 - Disabling monitoring for managing USB hardware wallets for both Validators and Observers [issue #40](https://github.com/clearmatics/charts-ose-helm3/issues/40)

@@ -54,11 +54,12 @@ The following table lists some of the configurable parameters of the Autonity ch
 
 | Parameter                         | Description                                   | Default                               |
 |-----------------------------------|-----------------------------------------------|---------------------------------------|
-| `debug_enabled`                   | Prepends log messages with call-site location | `false`                               |
-| `logging_verbosity`               | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`         |
-| `pprof.enabled`                   | HTTP server for visualization and analysis of profiling data | `false`                |
-| `pprof.address`                   | The address the pprof server will listen on   | `127.0.0.1`                           |
-| `pprof.port`                      | The port the pprof server will start on       | `6060`                                |
+| `debug_enabled`     | Prepends log messages with call-site location                           | `false`                   |
+| `logging_verbosity` | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`                       |
+| `pprof.enabled`     | HTTP server for visualization and analysis of profiling data            | `false`                   |
+| `pprof.address`     | The address the pprof server will listen on                             | `127.0.0.1`               |
+| `pprof.port`        | The port the pprof server will start on                                 | `6060`                    |
+| `graphql`           | graphql is for enabling GraphQL query capabilities on top of HTTP RPC   | `false`                   |
 
 - You can change number of validators or observers using the `--set` options:
 
