@@ -64,6 +64,15 @@ global:
 debug_enabled: false
 logging_verbosity: 3
 
+# pprof is for enabling the pprof HTTP server for visualization and analysis of profiling data
+pprof:
+  # enabled is setting the pprof server as enabled
+  enabled: true
+  # address the pprof server address to listen on
+  address: 127.0.0.1
+  # port the pprof server port to start on
+  port: 6060
+
 # Create an account for https://cloud2.influxdata.com
 # Uncomment and fill vars below to receive your metrics
 #

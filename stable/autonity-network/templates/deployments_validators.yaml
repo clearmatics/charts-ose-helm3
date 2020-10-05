@@ -8,9 +8,10 @@
 {{- $releasename := .Release.Name -}}
 {{- $debugEnabled := .Values.debug_enabled -}}
 {{- $loggingVerbosity := .Values.logging_verbosity -}}
-
+{{- $pprofEnabled := .Values.pprof.enabled -}}
+{{- $pprofAddress := .Values.pprof.address -}}
+{{- $pprofPort := .Values.pprof.port -}}
 {{- $networkid :=  .Values.networkid -}}
-
 {{- $ethstatsEnabled := .Values.global.ethstats.enabled -}}
 {{- $rpcHttpBasicAuthEnabled := .Values.rpc_http_basic_auth_enabled -}}
 {{- $rpcHttpsEnabled := .Values.rpc_https_enabled -}}
@@ -116,9 +117,6 @@ spec:
           - "--wsorigins"
           - "*"
           - "--metrics"
-          - "--pprof"
-          - "--pprofaddr"
-          - "0.0.0.0"
           - "--networkid"
           - "{{ $networkid }}"
           - "--mine"
@@ -129,6 +127,13 @@ spec:
 {{ end }}
           - "--verbosity"
           - "{{ $loggingVerbosity }}"
+{{ if eq $pprofEnabled true }}
+          - "--pprof"
+          - "--pprof.addr"
+          - "{{ $pprofAddress }}"
+          - "--pprof.port"
+          - "{{ $pprofPort }}"
+{{ end }}
           - "--nousb"
 {{ if $ethstatsEnabled }}
           - "--ethstats"
