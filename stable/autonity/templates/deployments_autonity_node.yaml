@@ -97,6 +97,9 @@ spec:
           - "--pprof.port"
           - "{{ .Values.pprof.port }}"
 {{ end }}
+{{ if eq .Values.graphql_enabled true }}
+          - "--graphql"
+{{ end }}
           - "--nousb"
         volumeMounts:
         - name: blockchain

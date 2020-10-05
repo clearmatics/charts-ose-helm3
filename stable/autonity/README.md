@@ -80,13 +80,14 @@ You can send `autonity` metrics to InfluxDB cloud. (Disabled by default).
 ## Configuration
 The following table lists some of the configurable parameters of the Autonity chart and their default values. This table needs extending fully.
 
-| Parameter                         | Description                                   | Default                               |
-|-----------------------------------|-----------------------------------------------|---------------------------------------|
-| `debug_enabled`                   | Prepends log messages with call-site location | `false`                               |
-| `logging_verbosity`               | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`         |
-| `pprof.enabled`                   | HTTP server for visualization and analysis of profiling data | `true`                 |
-| `pprof.address`                   | The address the pprof server will listen on   | `127.0.0.1`                           |
-| `pprof.port`                      | The port the pprof server will start on       | `6060`                                |
+| Parameter           | Description                                                             | Default     |
+|---------------------|-------------------------------------------------------------------------|-------------|
+| `debug_enabled`     | Prepends log messages with call-site location                           | `false`     |
+| `logging_verbosity` | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`         |
+| `pprof.enabled`     | HTTP server for visualization and analysis of profiling data            | `true`      |
+| `pprof.address`     | The address the pprof server will listen on                             | `127.0.0.1` |
+| `pprof.port`        | The port the pprof server will start on                                 | `6060`      |
+| `graphql_enabled`   | graphql is for enabling GraphQL query capabilities on top of HTTP RPC   | `false`     |
 
 ## Workshops
 * [Initial ceremony](./docs/workshop_initial_ceremony.md) Setup new network with validator nodes on different clouds (`EKS` and `GKE`)
