@@ -52,14 +52,19 @@ This chart is comprised of 4 components:
 ## Configuration
 The following table lists some of the configurable parameters of the Autonity chart and their default values. This table needs extending fully.
 
-| Parameter                         | Description                                   | Default                               |
-|-----------------------------------|-----------------------------------------------|---------------------------------------|
-| `debug_enabled`     | Prepends log messages with call-site location                           | `false`                   |
-| `logging_verbosity` | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail | `3`                       |
-| `pprof.enabled`     | HTTP server for visualization and analysis of profiling data            | `false`                   |
-| `pprof.address`     | The address the pprof server will listen on                             | `127.0.0.1`               |
-| `pprof.port`        | The port the pprof server will start on                                 | `6060`                    |
-| `graphql_enabled`   | graphql is for enabling GraphQL query capabilities on top of HTTP RPC   | `false`                   |
+| Parameter           | Description                                                                    | Default                                |
+|---------------------|--------------------------------------------------------------------------------|----------------------------------------|
+| `debug_enabled`     | Prepends log messages with call-site location                                  | `false`                                |
+| `graphql_enabled`   | Enabling GraphQL query capabilities on top of HTTP RPC                         | `false`                                |
+| `http_rpc.enabled   | Enabling the HTTP-RPC server                                                   | `true`                                 |
+| `http_rpc.address`  | Setting the HTTP-RPC server listening interface                                | `127.0.0.1`                            |
+| `http_rpc.port`     | Setting the HTTP-RPC server listening port                                     | `8545`                                 |
+| `http_rpc.api`      | A list of API's offered over the HTTP-RPC interface                            | `eth,web3,net,tendermint,txpool,debug` |
+| `http_rpc.vhosts`   | A comma separated list of virtual hostnames from which to accept requests from | `\*`                                   |
+| `logging_verbosity` | Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail        | `3`                                    |
+| `pprof.enabled`     | HTTP server for visualization and analysis of profiling data                   | `false`                                |
+| `pprof.address`     | The address the pprof server will listen on                                    | `127.0.0.1`                            |
+| `pprof.port`        | The port the pprof server will start on                                        | `6060`                                 |
 
 - You can change number of validators or observers using the `--set` options:
 

@@ -48,6 +48,19 @@ concensus: tendermint
 rpc_http_basic_auth_enabled: false
 rpc_https_enabled: false
 
+# http-rpc is for enabling and configuring the HTTP-RPC server
+http_rpc:
+  # enabled is setting the HTTP-RPC server as enabled
+  enabled: false
+  # address for the HTTP-RPC listening interface
+  address: 127.0.0.1
+  # port for the HTTP-RPC listening port
+  port: 8545
+  # apis offered over the HTTP-RPC interface
+  api: "eth,web3,net,tendermint,txpool,debug"
+  # vhosts is a comma separated list of virtual hostnames from which to accept requests
+  vhosts: "*"
+
 aws_persistent_storage_enabled: false
 gcp_persistent_storage_enabled: false
 
