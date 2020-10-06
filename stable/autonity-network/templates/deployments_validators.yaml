@@ -6,6 +6,11 @@
 {{- $zoneCount := len $zones -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $releasename := .Release.Name -}}
+{{- $httpRpcEnabled := .Values.http_rpc.enabled -}}
+{{- $httpRpcAddress := .Values.http_rpc.address -}}
+{{- $httpRpcPort := .Values.http_rpc.port -}}
+{{- $httpRpcApi := .Values.http_rpc.api -}}
+{{- $httpRpcVhosts := .Values.http_rpc.vhosts -}}
 {{- $debugEnabled := .Values.debug_enabled -}}
 {{- $loggingVerbosity := .Values.logging_verbosity -}}
 {{- $pprofEnabled := .Values.pprof.enabled -}}
@@ -107,11 +112,17 @@ spec:
           - "full"
           - "--cache"
           - "1024"
-          - "--rpc"
-          - "--rpcapi"
-          - "eth,web3,net,tendermint,txpool,debug"
-          - "--rpcvhosts"
-          - "*"
+{{ if eq $httpRpcEnabled true }}
+          - "--http"
+          - "--http.addr"
+          - "{{ $httpRpcAddress }}"
+          - "--http.port"
+          - "{{ $httpRpcPort }}"
+          - "--http.api"
+          - "{{ $httpRpcApi }}"
+          - "--http.vhosts"
+          - "{{ $httpRpcVhosts }}"
+{{ end }}
           - "--ws"
           - "--wsapi"
           - "eth,web3,net,tendermint"
