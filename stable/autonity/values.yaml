@@ -38,6 +38,19 @@ rpc_https_enabled: false
 debug_enabled: false
 logging_verbosity: 3
 
+# http_rpc is for enabling and configuring the HTTP-RPC server
+http_rpc:
+  # enabled is setting the HTTP-RPC server as enabled
+  enabled: true
+  # address for the HTTP-RPC listening interface
+  address: 127.0.0.1
+  # port for the HTTP-RPC listening port
+  port: 8545
+  # apis offered over the HTTP-RPC interface
+  api: "eth,web3,net,tendermint,txpool,debug"
+  # vhosts is a comma separated list of virtual hostnames from which to accept requests
+  vhosts: "*"
+
 # pprof is for enabling the pprof HTTP server for visualization and analysis of profiling data
 pprof:
   # enabled is setting the pprof server as enabled
