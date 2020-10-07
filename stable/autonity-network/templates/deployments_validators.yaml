@@ -11,6 +11,11 @@
 {{- $httpRpcPort := .Values.http_rpc.port -}}
 {{- $httpRpcApi := .Values.http_rpc.api -}}
 {{- $httpRpcVhosts := .Values.http_rpc.vhosts -}}
+{{- $wsRpcEnabled := .Values.ws_rpc.enabled -}}
+{{- $wsRpcAddress := .Values.ws_rpc.address -}}
+{{- $wsRpcPort := .Values.ws_rpc.port -}}
+{{- $wsRpcApi := .Values.ws_rpc.api -}}
+{{- $wsRpcOrigins := .Values.ws_rpc.origins -}}
 {{- $debugEnabled := .Values.debug_enabled -}}
 {{- $loggingVerbosity := .Values.logging_verbosity -}}
 {{- $pprofEnabled := .Values.pprof.enabled -}}
@@ -123,11 +128,17 @@ spec:
           - "--http.vhosts"
           - "{{ $httpRpcVhosts }}"
 {{ end }}
+{{ if eq $wsRpcEnabled true }}
           - "--ws"
-          - "--wsapi"
-          - "eth,web3,net,tendermint"
-          - "--wsorigins"
-          - "*"
+          - "--ws.addr"
+          - "{{ $wsRpcAddress }}"
+          - "--ws.port"
+          - "{{ $wsRpcPort }}"
+          - "--ws.api"
+          - "{{ $wsRpcApi }}"
+          - "--ws.origins"
+          - "{{ $wsRpcOrigins }}"
+{{ end }}
           - "--metrics"
           - "--networkid"
           - "{{ $networkid }}"
