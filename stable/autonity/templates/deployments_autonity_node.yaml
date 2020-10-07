@@ -78,11 +78,17 @@ spec:
           - "--http.vhosts"
           - "{{ .Values.http_rpc.vhosts }}"
 {{ end }}
+{{ if eq .Values.ws_rpc.enabled true }}
           - "--ws"
-          - "--wsapi"
-          - "eth,web3,net,tendermint"
-          - "--wsorigins"
-          - "*"
+          - "--ws.addr"
+          - "{{ .Values.ws_rpc.address }}"
+          - "--ws.port"
+          - "{{ .Values.ws_rpc.port }}"
+          - "--ws.api"
+          - "{{ .Values.ws_rpc.api }}"
+          - "--ws.origins"
+          - "{{ .Values.ws_rpc.origins }}"
+{{ end }}
           - "--metrics"
           - "--networkid"
           - "{{ .Values.networkid }}"

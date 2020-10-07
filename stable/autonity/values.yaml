@@ -51,6 +51,19 @@ http_rpc:
   # vhosts is a comma separated list of virtual hostnames from which to accept requests
   vhosts: "*"
 
+# ws_rpc is for enabling and configuring the WS-RPC server
+ws_rpc:
+  # enabled is setting the WS-RPC server as enabled
+  enabled: false
+  # address for the WS-RPC listening interface
+  address: 127.0.0.1
+  # port for the WS-RPC listening port
+  port: 8546
+  # apis offered over the HTTP-RPC interface
+  api: "eth,web3,net,tendermint"
+  # origins from which to accept websockets requests
+  origins: "*"
+
 # pprof is for enabling the pprof HTTP server for visualization and analysis of profiling data
 pprof:
   # enabled is setting the pprof server as enabled
