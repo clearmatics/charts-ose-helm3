@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.3.3]
 - Incorrect default value for WS-RPC [issue #69](https://github.com/clearmatics/charts-ose-helm3/issues/69)
 
-## [1.3.1]
-- Enabling the WS-RPC server via variables [issue #62](Enable the WS-RPC server via variables #62)
+## [1.3.2]
+- Enabling the WS-RPC server via variables [issue #62](https://github.com/clearmatics/charts-ose-helm3/issues/62)
 - Enabling the HTTP-RPC server via variables [issue #60](https://github.com/clearmatics/charts-ose-helm3/issues/60)
 - Enabling GraphQL query capabilities on top of HTTP RPC [issue #57](https://github.com/clearmatics/charts-ose-helm3/issues/57)
 - Setting the pprof server and its flags as variables in the values file [issue #52](https://github.com/clearmatics/charts-ose-helm3/issues/52)
