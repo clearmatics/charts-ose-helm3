@@ -77,7 +77,7 @@ jobs:
       run: helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
 
     - name: Check if the namespace exists
-      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
+      run: echo "NAMESPACE_COUNT=$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)" >> $GITHUB_ENV
 
     - name: Delete the namespace
       run: |
