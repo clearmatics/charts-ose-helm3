@@ -62,13 +62,9 @@ jobs:
         helm repo list
         helm dependency update $CHART_PATH
 
-    - name: Check if the namespace exists
-      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
-
     - name: Deploy the chart
       run: |
-        echo 'Namespace count: '$NAMESPACE_COUNT
-        if [ $NAMESPACE_COUNT = 0 ]; then kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
+        kubectl create namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         helm install $CHART_NAME-$SHORT_SHA $CHART_PATH --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         # Sadly --wait fails, so have to sleep, look to maybe pull in mock test to solve
         # this problem another way
@@ -105,10 +101,13 @@ jobs:
     - name: Delete the chart
       run: helm delete $CHART_NAME-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
 
-    - name: Check if the namespace exists
-      run: echo '::set-env name=NAMESPACE_COUNT::'$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)
-
     - name: Delete the namespace
       run: |
-        echo 'Namespace count: '$NAMESPACE_COUNT
-        if [ $NAMESPACE_COUNT != 0 ]; then kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
+        if [ $(kubectl get namespaces -A | grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID " | wc -l) -ne 0 ]
+        then
+          kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID;
+        else
+          echo "Namespace does not exist"
+          # Helm does not manage namespaces, so exit with error
+          exit 1
+        fi
