@@ -78,4 +78,9 @@ jobs:
 
     - name: Delete the namespace
       run: |
-        if [ $(kubectl get namespaces -A | grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID " | wc -l) -ne 0 ]; then kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else echo "Namespace does not exist"; fi
+        if [ $(kubectl get namespaces -A | grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID " | wc -l) -ne 0 ]
+        then
+          kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID;
+        else
+          echo "Namespace does not exist"
+        fi
