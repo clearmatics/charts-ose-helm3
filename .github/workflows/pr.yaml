@@ -76,10 +76,6 @@ jobs:
     - name: Delete the chart
       run: helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
 
-    - name: Check if the namespace exists
-      run: echo "NAMESPACE_COUNT=$(kubectl get namespaces -A | grep '$ACTOR_LOWERCASE-$GITHUB_RUN_ID ' | wc -l)" >> $GITHUB_ENV
-
     - name: Delete the namespace
       run: |
-        echo 'Namespace count: '$NAMESPACE_COUNT
-        if [ $NAMESPACE_COUNT != 0 ]; then kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; fi
+        if [ $(kubectl get namespaces -A | grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID " | wc -l) -ne 0 ]; then kubectl delete namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID; else echo "Namespace does not exist"; fi
