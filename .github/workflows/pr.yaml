@@ -71,7 +71,7 @@ jobs:
 
     - name: Delete the chart
       run: |
-        if helm status $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID &> /dev/null
+        if helm status $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID &> /dev/null;
         then
           helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
       if: ${{ always() }}
