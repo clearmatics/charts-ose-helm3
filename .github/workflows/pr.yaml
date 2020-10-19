@@ -72,7 +72,7 @@ jobs:
     - name: Delete the chart
       if: ${{ always() }}
       run: |
-        if [ $ (helm status $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID | grep "STATUS: deployed" | wc -l) -ne 0 ]
+        if [ $(helm status $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID | grep "STATUS: deployed" | wc -l) -ne 0 ]
         then
           helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
         else
