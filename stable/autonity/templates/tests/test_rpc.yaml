@@ -9,7 +9,7 @@ metadata:
     helm_tests: "true"
   annotations:
     "helm.sh/hook": test-success
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
 spec:
   initContainers:
     - name: "test-framework"
