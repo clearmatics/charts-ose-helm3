@@ -6,7 +6,6 @@
 {{- if .Values.validators.names -}}
 {{-   $validatorAddress = .Values.validators.names -}}
 {{- end -}}
-
 ---
 apiVersion: batch/v1
 kind: Job
@@ -20,7 +19,7 @@ metadata:
   annotations:
     "helm.sh/hook": post-install
     "helm.sh/hook-weight": "2"
-    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   template:
     metadata:
@@ -33,7 +32,6 @@ spec:
     spec:
       serviceAccountName: autonity-initiator
       restartPolicy: Never
-      
       containers:
       - name: init-job02-ibft-genesis-configurator
         image: {{ .Values.image_ibft_genesis_configurator.repository }}:{{ .Values.image_ibft_genesis_configurator.tag }}
@@ -85,5 +83,4 @@ spec:
             items:
               - key: genesis.json
                 path: genesis-template.json
-
   backoffLimit: 0

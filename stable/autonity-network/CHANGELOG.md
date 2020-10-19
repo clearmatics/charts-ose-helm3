@@ -4,6 +4,9 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+- Cleanup of old resources from potentially failed installs [issue #11](https://github.com/clearmatics/charts-ose-helm3/issues/11)
+
 ## [1.8.1]
 - Enabling the WS-RPC server via variables [issue #63](https://github.com/clearmatics/charts-ose-helm3/issues/63)
 - Enabling the HTTP-RPC server via variables [issue #61](https://github.com/clearmatics/charts-ose-helm3/issues/61)
