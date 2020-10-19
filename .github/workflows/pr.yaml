@@ -70,7 +70,11 @@ jobs:
       run: helm test $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
 
     - name: Delete the chart
-      run: helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+      run: |
+        if helm status $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID &> /dev/null
+        then
+          helm delete $GITHUB_HEAD_REF-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+      if: ${{ always() }}
 
     - name: Delete the namespace
       run: |
