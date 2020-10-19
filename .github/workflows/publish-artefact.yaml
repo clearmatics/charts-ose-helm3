@@ -99,9 +99,18 @@ jobs:
         aws s3 cp ./repo/index.yaml s3://${S3_BUCKET_NAME} --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type "text/plain"
 
     - name: Delete the chart
-      run: helm delete $CHART_NAME-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+      if: ${{ always() }}
+      run: |
+        if [ $(helm ls -A | grep "$CHART_NAME-$SHORT_SHA" | grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID" | wc -l) -ne 0 ]
+        then
+          helm delete $CHART_NAME-$SHORT_SHA --namespace $ACTOR_LOWERCASE-$GITHUB_RUN_ID
+        else
+          echo "Error: release not found"
+          exit 1
+        fi
 
     - name: Delete the namespace
+      if: ${{ always() }}
       run: |
         if [ $(kubectl get namespaces -A | grep "$ACTOR_LOWERCASE-$GITHUB_RUN_ID " | wc -l) -ne 0 ]
         then
