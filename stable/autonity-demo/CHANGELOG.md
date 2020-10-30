@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Autonity to 0.4.1
 
 ## [Unreleased]
+- Migrated to Helm 3
+- Up autonity-network to 1.8.1
+- Up prometheus to 11.12.1
+- Up grafana to 5.5.7
+
 ## [1.1.0] - 2020-04-07
 ### Changed
 - Update dashboard to include new metrics
