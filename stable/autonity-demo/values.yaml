@@ -11,10 +11,11 @@ global:
   telepresence:
     enabled: false
 
-
 autonity-network:
   chainid: 1489
   networkid: 444888
+  pprof:
+    address: "0.0.0.0"
   validators:
     num: 4
     serviceType: "ClusterIP"
