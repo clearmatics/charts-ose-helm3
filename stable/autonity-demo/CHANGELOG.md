@@ -4,14 +4,22 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.2.1
+## [Unreleased]
+
+#' [1.2.2] - 2020-11-03
+- Migrated to Helm 3
+- Up autonity-network to 1.8.1
+- Up prometheus to 11.12.1
+- Up grafana to 5.5.7
+- Added default value for `autonity-network.pprof.address`: `0.0.0.0` to fix prometheus metrics
+
+## [1.2.1] - 2020-09-02
 - Removed legacy implementation of Ethstats
 - Set apiVersion for legacy Helm 2 support for transition period
 - Moved dependencies to the main Chart.yaml
 - Updated Documentation to reflect Helm 3 updates
 - Autonity to 0.4.1
 
-## [Unreleased]
 ## [1.1.0] - 2020-04-07
 ### Changed
 - Update dashboard to include new metrics

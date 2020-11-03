@@ -1,6 +1,6 @@
 name: autonity-demo
 apiVersion: v1
-version: 1.2.1
+version: 1.2.2
 kubeVersion: ">=1.15.11-0"
 description: Umbrella chart for Demo deploy autonity-network and supporting tools
 keywords:
@@ -12,17 +12,17 @@ sources:
 maintainers:
 - name: eastata
   email: aleksandr.poliakov@clearmatics.com
-appVersion: v0.4.1
+appVersion: v0.6.0
 dependencies:
   - name: autonity-network
     repository: "https://charts-ose.clearmatics.com"
-    version: 1.7.1
+    version: 1.8.1
     condition: global.autonity_network.enabled
   - name: prometheus
     repository: "@stable"
-    version: 11.0.4
+    version: 11.12.1
     condition: global.prometheus.enabled
   - name: grafana
     repository: "@stable"
-    version: 5.0.11
+    version: 5.5.7
     condition: global.grafana.enabled
