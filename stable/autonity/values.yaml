@@ -75,6 +75,13 @@ pprof:
 
 graphql_enabled: false
 
+# nat is for enabling the port mapping mechanism
+nat:
+  # enabled is used for enablind or disabling the NAT mapping
+  enabled: true
+  # value defines the type of mapping
+  value: extip:1.2.3.4
+
 #telegraf:
 #  # This name wil added as a tag for all metrics
 #  afnc_name: "autonity-node"

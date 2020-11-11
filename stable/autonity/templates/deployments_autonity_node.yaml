@@ -112,6 +112,10 @@ spec:
 {{ if eq .Values.graphql_enabled true }}
           - "--graphql"
 {{ end }}
+{{ if eq .Values.nat.enabled true }}
+          - "--nat"
+          - "{{ .Values.nat.value }}"
+{{ end }}
           - "--nousb"
         volumeMounts:
         - name: blockchain
