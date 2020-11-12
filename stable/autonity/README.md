@@ -98,6 +98,8 @@ The following table lists some of the configurable parameters of the Autonity ch
 | `ws_rpc.port`       | Setting the WS-RPC server listening port                                       | `8546`                                 |
 | `ws_rpc.api`        | A list of APIs offered over the HTTP-RPC interface                             | `eth,web3,net,tendermint`              |
 | `ws_rpc.origins`    | A comma separated list of origins from which to accept websockets requests     | `\*`                                   |
+| `nat.enabled`       | Enabling NAT port mapping mechanism                                            | `false`                                |
+| `nat.value`         | Type of port mapping: (any|none|upnp|pmp|extip:<IP>)                           | `any`                                  |
 
 ## Workshops
 * [Initial ceremony](./docs/workshop_initial_ceremony.md) Setup new network with validator nodes on different clouds (`EKS` and `GKE`)

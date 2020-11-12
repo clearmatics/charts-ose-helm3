@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Cleaning up old resources from potentially failed installs [issue #74](https://github.com/clearmatics/charts-ose-helm3/issues/74)
+- Enabling port mapping mechanism [issue #71](https://github.com/clearmatics/charts-ose-helm3/issues/71)
 
 ## [1.3.3]
 - Incorrect default value for WS-RPC [issue #69](https://github.com/clearmatics/charts-ose-helm3/issues/69)
