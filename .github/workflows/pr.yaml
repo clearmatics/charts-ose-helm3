@@ -32,7 +32,7 @@ jobs:
         echo 'GitHub Run ID: '$GITHUB_RUN_ID
 
     - name: Setup gcloud environment
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.2.0
+      uses: google-github-actions/setup-gcloud@0.2.0
       with:
         version: '290.0.1'
         project_id: ${{ secrets.GCP_PROJECT_ID }}
