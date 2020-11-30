@@ -19,9 +19,9 @@ jobs:
 
     - name: Set useful variables
       run: |
-        echo '::set-env name=CHART_PATH::stable/'$GITHUB_HEAD_REF
-        echo '::set-env name=ACTOR_LOWERCASE::'$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')
-        echo '::set-env name=SHORT_SHA::'$(echo $GITHUB_SHA|head -c 7)
+        echo "{CHART_PATH}={stable/$GITHUB_HEAD_REF}" >> $GITHUB_ENV
+        echo "{ACTOR_LOWERCASE}={$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')}" >> $GITHUB_ENV
+        echo "{SHORT_SHA}={$(echo $GITHUB_SHA|head -c 7)}" >> $GITHUB_REF
 
     - name: Get useful variables
       run: |
