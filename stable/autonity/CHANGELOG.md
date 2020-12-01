@@ -4,8 +4,12 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.4.0] 2020-12-1
+### Changed
+- Configuration changes for the coming Autonity 0.7 release [issue #90](https://github.com/clearmatics/charts-ose-helm3/issues/90)
+### Fixed
 - Cleaning up old resources from potentially failed installs [issue #74](https://github.com/clearmatics/charts-ose-helm3/issues/74)
+### Added
 - Enabling port mapping mechanism [issue #71](https://github.com/clearmatics/charts-ose-helm3/issues/71)
 
 ## [1.3.3]
