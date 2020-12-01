@@ -56,7 +56,7 @@ The following table lists some of the configurable parameters of the Autonity ch
 |---------------------|--------------------------------------------------------------------------------|----------------------------------------|
 | `debug_enabled`     | Prepends log messages with call-site location                                  | `false`                                |
 | `graphql_enabled`   | Enabling GraphQL query capabilities on top of HTTP RPC                         | `false`                                |
-| `http_rpc.enabled   | Enabling the HTTP-RPC server                                                   | `true`                                 |
+| `http_rpc.enabled`  | Enabling the HTTP-RPC server                                                   | `true`                                 |
 | `http_rpc.address`  | Setting the HTTP-RPC server listening interface                                | `127.0.0.1`                            |
 | `http_rpc.port`     | Setting the HTTP-RPC server listening port                                     | `8545`                                 |
 | `http_rpc.api`      | A list of APIs offered over the HTTP-RPC interface                             | `eth,web3,net,tendermint,txpool,debug` |

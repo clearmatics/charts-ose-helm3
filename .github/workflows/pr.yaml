@@ -19,9 +19,9 @@ jobs:
 
     - name: Set useful variables
       run: |
-        echo '::set-env name=CHART_PATH::stable/'$GITHUB_HEAD_REF
-        echo '::set-env name=ACTOR_LOWERCASE::'$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')
-        echo '::set-env name=SHORT_SHA::'$(echo $GITHUB_SHA|head -c 7)
+        echo "CHART_PATH=stable/$GITHUB_HEAD_REF" >> $GITHUB_ENV
+        echo "ACTOR_LOWERCASE=$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        echo "SHORT_SHA=$(echo $GITHUB_SHA|head -c 7)" >> $GITHUB_ENV
 
     - name: Get useful variables
       run: |
@@ -32,7 +32,7 @@ jobs:
         echo 'GitHub Run ID: '$GITHUB_RUN_ID
 
     - name: Setup gcloud environment
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.2
+      uses: google-github-actions/setup-gcloud@v0.2.0
       with:
         version: '290.0.1'
         project_id: ${{ secrets.GCP_PROJECT_ID }}
@@ -50,7 +50,7 @@ jobs:
 
     - name: Add the external Helm chart repositories
       run: |
-        helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+        helm repo add stable https://charts.helm.sh/stable
         helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com
 
     - name: List the active repositories and update the dependencies

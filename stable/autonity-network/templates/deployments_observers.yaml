@@ -58,6 +58,11 @@ spec:
           mountPath: /autonity/sec-account-pwd
         - name: sec-peers
           mountPath: /autonity/sec-peers
+        args:
+          - "--debug"
+          - "true"
+          - "--account-import-only"
+          - "true"
       containers:
       - name: autonity
         image: {{ $imageAutonity.repository }}:{{ $imageAutonity.tag }}
@@ -67,6 +72,8 @@ spec:
         args:
           - "--datadir"
           - "/autonity/blockchain"
+          - "--genesis"
+          - "/autonity/genesis/genesis.json"
           - "--keystore"
           - "/autonity/keys/keystore"
           - "--nodekey"
@@ -131,6 +138,8 @@ spec:
         volumeMounts:
         - name: blockchain
           mountPath: /autonity/blockchain
+        - name: cm-genesis
+          mountPath: /autonity/genesis
         - name: keys
           mountPath: /autonity/keys
         - name: sec-peers
