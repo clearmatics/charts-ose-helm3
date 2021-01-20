@@ -25,10 +25,10 @@ data:
       omit_hostname = false
     [[inputs.prometheus]]
       urls = ["http://127.0.0.1:6060/debug/metrics/prometheus"]
-    [[outputs.influxdb]]
+    [[outputs.influxdb_v2]]
       urls = ["{{ .Values.telegraf.urls }}"]
-      database = "{{ .Values.telegraf.database }}"
-      username = "{{ .Values.telegraf.username }}"
-      password = "{{ .Values.telegraf.password }}"
+      organization = "{{ .Values.telegraf.org }}"
+      bucket = "{{ .Values.telegraf.bucket }}"
+      token = "{{ .Values.telegraf.gcp_token }}"
 
 {{ end }}
