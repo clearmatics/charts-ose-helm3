@@ -72,9 +72,9 @@ of `autonity-nodes`
 
 ## Metrics by InfluxDB
 You can send `autonity` metrics to InfluxDB cloud. (Disabled by default).
-* Deploy InfluxDB v1.x Server
-* Create database
-* Create user with `WRITE` permissions for the database
+* Deploy InfluxDB v2.x Server
+* Create bucket
+* Create token with `WRITE` permissions for the bucket 
 * Put credentials to [values.yaml](./values.yaml) as a `telegraf:` values
 
 ## Configuration
