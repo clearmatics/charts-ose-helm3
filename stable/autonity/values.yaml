@@ -85,10 +85,10 @@ nat:
 #telegraf:
 #  # This name wil added as a tag for all metrics
 #  afnc_name: "autonity-node"
-#  urls: "https://influxdb-server:8086"
-#  database: "telegraf"
-#  username: "influxdb-user"
-#  password: "influxdb-password"
+#  urls: "https://influxdb-server"
+#  bucket: "default"
+#  org: "influxdb-org"
+#  token: "influxdb-token"
 
 #rpc_public:
 #  src_ip_whitelist:

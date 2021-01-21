@@ -4,6 +4,11 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] 2021-1-20
+### Changed
+- Changed outputs fields in the telegraf configs to support influxdb-v2 [issue #95](https://github.com/clearmatics/charts-ose-helm3/issues/95).
+- Updated values file with telegraf values specific to influxdb-v2.
+
 ## [1.4.0] 2020-12-1
 ### Changed
 - Configuration changes for the coming Autonity 0.7 release [issue #90](https://github.com/clearmatics/charts-ose-helm3/issues/90)
