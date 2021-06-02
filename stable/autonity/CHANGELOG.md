@@ -4,6 +4,11 @@ All notable changes to this chart will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] 2021-6-2
+### Changed
+- Added http_response input plugin in the telegraf config, which will allow us to get the uptime for the node.
+- Update telegraf token key name [issue #97](https://github.com/clearmatics/charts-ose-helm3/issues/97).
+
 ## [1.4.1] 2021-1-20
 ### Changed
 - Changed outputs fields in the telegraf configs to support influxdb-v2 [issue #95](https://github.com/clearmatics/charts-ose-helm3/issues/95).
