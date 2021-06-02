@@ -90,6 +90,14 @@ nat:
 #  org: "influxdb-org"
 #  token: "influxdb-token"
 
+# telegraf http_response input
+# used to check if the autonity node is accepting rpc connections. Used to get the uptime in grafana
+# [[inputs.http_response]]
+#       address = "http://127.0.0.1:8545"
+#       response_timeout = "10s"
+#       method = "GET"
+#       follow_redirects = false
+
 #rpc_public:
 #  src_ip_whitelist:
 #    - 0.0.0.0/0
