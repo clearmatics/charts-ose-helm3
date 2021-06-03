@@ -25,10 +25,15 @@ data:
       omit_hostname = false
     [[inputs.prometheus]]
       urls = ["http://127.0.0.1:6060/debug/metrics/prometheus"]
+    [[inputs.http_response]]
+      address = "http://127.0.0.1:8545"
+      response_timeout = "10s"
+      method = "GET"
+      follow_redirects = false
     [[outputs.influxdb_v2]]
       urls = ["{{ .Values.telegraf.urls }}"]
       organization = "{{ .Values.telegraf.org }}"
       bucket = "{{ .Values.telegraf.bucket }}"
-      token = "{{ .Values.telegraf.gcp_token }}"
+      token = "{{ .Values.telegraf.token }}"
 
 {{ end }}

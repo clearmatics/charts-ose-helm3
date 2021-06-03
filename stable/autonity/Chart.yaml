@@ -1,6 +1,6 @@
 name: autonity
 apiVersion: v1
-version: 1.4.1
+version: 1.4.2
 kubeVersion: ">=1.15.11-0"
 description: Deploy a single Autonity instance
 keywords:
