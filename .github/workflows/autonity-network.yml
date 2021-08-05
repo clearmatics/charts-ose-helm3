@@ -1,0 +1,60 @@
+name: Test autonity-network with Kind
+
+on:
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      ### INSTALL DEPENDENCIES ###
+      - name: Install Kubectl
+        uses: Azure/setup-kubectl@v1
+        with:
+          # Version of kubectl
+          version: v1.18.4
+        
+      - name: Install Helm
+        uses: Azure/setup-helm@v1
+        with:
+          # Version of helm
+          version: v3.2.4
+          token: ${{ github.token }}
+        
+      - name: Install Kind & Create cluster
+        uses: engineerd/setup-kind@v0.5.0
+        with:
+          version: v0.11.1
+          name: autonity-network
+          wait: 60s
+          skipClusterCreation: false
+
+      ### TEST INSTALLATIONS ###
+      - name: Test Helm install
+        run: helm version
+        
+      - name: Test Kind install
+        run: kind version
+        
+      - name: Test Kind cluster creation
+        run: kind get clusters
+        
+      - name: Test Kuberctl install
+        run: kubectl version
+      
+      ### CREATE AUTONITY ###
+      - name: Create Autonity namespace
+        run: kubectl create namespace autonity-network
+        
+      - name: Install Helm chart
+        run: helm install autonity-network stable/autonity-network --namespace autonity-network --version 1.8.0
+        
+      - name: Check Autonity is running
+        run: |
+          sleep 30s
+          kubectl get pods --namespace autonity-network
