@@ -15,9 +15,9 @@ This chart deploys a **private** [Autonity](https://www.autonity.io/) network on
    - Cloud: [Amazon EKS](https://eksworkshop.com/prerequisites/self_paced/)
    - Cloud: [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
 1. Install Helm [3.2.4](https://github.com/helm/helm/releases/tag/v3.2.4)
-1. Initialise [the official](https://helm.sh/docs/intro/quickstart/ the official) `@stable` and the Autonity Helm charts repositories:
+1. Initialise [the official](https://helm.sh/docs/intro/quickstart/) `@stable` and the Autonity Helm charts repositories:
 ```bash
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add stable https://charts.helm.sh/stable
 helm repo add charts-ose.clearmatics.com https://charts-ose.clearmatics.com/
 helm repo update
 ```
